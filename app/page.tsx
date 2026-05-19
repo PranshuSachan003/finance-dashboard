@@ -34,8 +34,8 @@ const calculatorCards = [
     description: "Estimate dividend income from stocks.",
   },
   {
-    title: "Compare Scenarios",
-    href: "/compare-scenarios",
+    title: "Compare Sip Scenarios",
+    href: "/compare",
     description: "Compare multiple investment strategies.",
   },
   {
@@ -45,7 +45,7 @@ const calculatorCards = [
   },
   {
     title: "Asset Allocation",
-    href: "/asset-allocation",
+    href: "/rebalancer",
     description: "Rebalance investment allocation intelligently.",
   },
   {
@@ -60,7 +60,7 @@ const calculatorCards = [
   },
   {
     title: "Stock CAGR",
-    href: "/stock-cagr",
+    href: "/cagr",
     description: "Calculate long-term stock growth rate.",
   },
   {
