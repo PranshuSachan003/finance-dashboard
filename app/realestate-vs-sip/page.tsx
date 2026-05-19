@@ -38,6 +38,7 @@ export default function RealEstateVsSipPage() {
   const [sipReturn, setSipReturn] =
     useState(12);
 
+  // INFLATION
   const [inflation, setInflation] =
     useState(6);
 
@@ -61,11 +62,20 @@ export default function RealEstateVsSipPage() {
     futurePropertyValue +
     totalRentalIncome;
 
+  // ✅ INFLATION ADJUSTED REAL ESTATE
+  const inflationAdjustedRealEstate =
+    realEstateTotal /
+    Math.pow(
+      1 + inflation / 100,
+      years
+    );
+
   // SIP CALCULATION
   const monthlyRate =
     sipReturn / 12 / 100;
 
-  const totalMonths = years * 12;
+  const totalMonths =
+    years * 12;
 
   const futureSipValue =
     monthlySip *
@@ -79,7 +89,7 @@ export default function RealEstateVsSipPage() {
     ) *
     (1 + monthlyRate);
 
-  // INFLATION ADJUSTED SIP
+  // SIP INFLATION ADJUSTED
   const inflationAdjustedSip =
     futureSipValue /
     Math.pow(
@@ -96,6 +106,7 @@ export default function RealEstateVsSipPage() {
     year++
   ) {
 
+    // PROPERTY VALUE
     const propertyValue =
       propertyPrice *
       Math.pow(
@@ -103,6 +114,26 @@ export default function RealEstateVsSipPage() {
         year
       );
 
+    // RENTAL INCOME
+    const rentalIncome =
+      propertyPrice *
+      (rentalYield / 100) *
+      year;
+
+    // TOTAL REAL ESTATE VALUE
+    const realEstateNominal =
+      propertyValue +
+      rentalIncome;
+
+    // ✅ REAL ESTATE INFLATION ADJUSTED
+    const realEstateAdjusted =
+      realEstateNominal /
+      Math.pow(
+        1 + inflation / 100,
+        year
+      );
+
+    // SIP VALUE
     const sipValue =
       monthlySip *
       (
@@ -115,6 +146,7 @@ export default function RealEstateVsSipPage() {
       ) *
       (1 + monthlyRate);
 
+    // SIP INFLATION ADJUSTED
     const adjustedSip =
       sipValue /
       Math.pow(
@@ -124,12 +156,27 @@ export default function RealEstateVsSipPage() {
 
     chartData.push({
       year,
+
       RealEstate:
-        Math.round(propertyValue),
+        Math.round(
+          realEstateNominal
+        ),
+
       SIP:
-        Math.round(sipValue),
+        Math.round(
+          sipValue
+        ),
+
       InflationAdjusted:
-        Math.round(adjustedSip),
+        Math.round(
+          adjustedSip
+        ),
+
+      // ✅ NEW CHART LINE
+      RealEstateInflationAdjusted:
+        Math.round(
+          realEstateAdjusted
+        ),
     });
   }
 
@@ -155,6 +202,7 @@ export default function RealEstateVsSipPage() {
             <div className="space-y-5">
 
               <div>
+
                 <label className="block mb-2 text-slate-300">
                   Property Price (₹)
                 </label>
@@ -171,9 +219,11 @@ export default function RealEstateVsSipPage() {
                   }
                   className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-xl outline-none"
                 />
+
               </div>
 
               <div>
+
                 <label className="block mb-2 text-slate-300">
                   Annual Growth (%)
                 </label>
@@ -190,9 +240,11 @@ export default function RealEstateVsSipPage() {
                   }
                   className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-xl outline-none"
                 />
+
               </div>
 
               <div>
+
                 <label className="block mb-2 text-slate-300">
                   Rental Yield (%)
                 </label>
@@ -209,6 +261,7 @@ export default function RealEstateVsSipPage() {
                   }
                   className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-xl outline-none"
                 />
+
               </div>
 
             </div>
@@ -225,6 +278,7 @@ export default function RealEstateVsSipPage() {
             <div className="space-y-5">
 
               <div>
+
                 <label className="block mb-2 text-slate-300">
                   Monthly SIP (₹)
                 </label>
@@ -241,9 +295,11 @@ export default function RealEstateVsSipPage() {
                   }
                   className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-xl outline-none"
                 />
+
               </div>
 
               <div>
+
                 <label className="block mb-2 text-slate-300">
                   Expected Return (%)
                 </label>
@@ -260,25 +316,7 @@ export default function RealEstateVsSipPage() {
                   }
                   className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-xl outline-none"
                 />
-              </div>
 
-              <div>
-                <label className="block mb-2 text-slate-300">
-                  Inflation Rate (%)
-                </label>
-
-                <input
-                  type="number"
-                  value={inflation}
-                  onChange={(e) =>
-                    setInflation(
-                      Number(
-                        e.target.value
-                      )
-                    )
-                  }
-                  className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-xl outline-none"
-                />
               </div>
 
             </div>
@@ -289,8 +327,27 @@ export default function RealEstateVsSipPage() {
 
         {/* YEARS */}
         <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 mb-10">
+          <div>
 
-          <label className="block mb-3 text-xl text-slate-300">
+            <label className="block mb-2 text-slate-300">
+              Inflation Rate (%)
+            </label>
+
+            <input
+              type="number"
+              value={inflation}
+              onChange={(e) =>
+                setInflation(
+                  Number(
+                    e.target.value
+                  )
+                )
+              }
+              className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-xl outline-none"
+            />
+
+          </div>
+          <label className="block mb-2 text-slate-300">
             Investment Duration (Years)
           </label>
 
@@ -320,6 +377,7 @@ export default function RealEstateVsSipPage() {
             <div className="space-y-8">
 
               <div>
+
                 <p className="text-xl text-slate-700">
                   Future Property Value
                 </p>
@@ -332,9 +390,11 @@ export default function RealEstateVsSipPage() {
                     )
                   }
                 </p>
+
               </div>
 
               <div>
+
                 <p className="text-xl text-slate-700">
                   Rental Income
                 </p>
@@ -347,9 +407,11 @@ export default function RealEstateVsSipPage() {
                     )
                   }
                 </p>
+
               </div>
 
               <div>
+
                 <p className="text-xl text-slate-700">
                   Total Wealth
                 </p>
@@ -362,6 +424,25 @@ export default function RealEstateVsSipPage() {
                     )
                   }
                 </p>
+
+              </div>
+
+              {/* ✅ NEW */}
+              <div>
+
+                <p className="text-xl text-slate-700">
+                  Inflation Adjusted Value
+                </p>
+
+                <p className="text-5xl font-bold text-purple-700 mt-2 break-words">
+                  ₹
+                  {
+                    formatIndianCurrency(
+                      inflationAdjustedRealEstate
+                    )
+                  }
+                </p>
+
               </div>
 
             </div>
@@ -378,6 +459,7 @@ export default function RealEstateVsSipPage() {
             <div className="space-y-8">
 
               <div>
+
                 <p className="text-xl text-slate-700">
                   Future SIP Corpus
                 </p>
@@ -390,9 +472,11 @@ export default function RealEstateVsSipPage() {
                     )
                   }
                 </p>
+
               </div>
 
               <div>
+
                 <p className="text-xl text-slate-700">
                   Inflation Adjusted Corpus
                 </p>
@@ -405,6 +489,7 @@ export default function RealEstateVsSipPage() {
                     )
                   }
                 </p>
+
               </div>
 
             </div>
@@ -458,24 +543,39 @@ export default function RealEstateVsSipPage() {
 
                 <Legend />
 
+                {/* REAL ESTATE */}
                 <Line
                   type="monotone"
                   dataKey="RealEstate"
+                  name="Real Estate"
                   stroke="#3B82F6"
                   strokeWidth={3}
                 />
 
+                {/* SIP */}
                 <Line
                   type="monotone"
                   dataKey="SIP"
+                  name="SIP"
                   stroke="#22C55E"
                   strokeWidth={3}
                 />
 
+                {/* SIP ADJUSTED */}
                 <Line
                   type="monotone"
                   dataKey="InflationAdjusted"
+                  name="SIP Inflation Adjusted"
                   stroke="#F97316"
+                  strokeWidth={3}
+                />
+
+                {/* ✅ NEW REAL ESTATE ADJUSTED */}
+                <Line
+                  type="monotone"
+                  dataKey="RealEstateInflationAdjusted"
+                  name="Real Estate Inflation Adjusted"
+                  stroke="#A855F7"
                   strokeWidth={3}
                 />
 

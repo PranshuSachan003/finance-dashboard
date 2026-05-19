@@ -231,6 +231,8 @@ dark:border-gray-700
           <InvestmentPieChart
             invested={loanAmount}
             wealth={totalInterest}
+            investedLabel={"Loan Amount"}
+            wealthLabel={"Interest Amount"}
           />
 
         </div>

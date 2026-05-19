@@ -3,9 +3,7 @@
 import { useState } from "react";
 
 import ReturnPhases from "../../components/ReturnPhases";
-
 import InvestmentPieChart from "../../components/InvestmentPieChart";
-
 import CompoundingCurveChart from "../../components/CompoundingChart";
 
 import {
@@ -24,68 +22,52 @@ import {
 export default function SipPage() {
 
   // MONTHLY SIP
-  const [
-    monthlyInvestment,
-    setMonthlyInvestment,
-  ] = useState(10000);
+  const [monthlyInvestment, setMonthlyInvestment] = useState(10000);
 
   // STEP UP %
-  const [stepUp, setStepUp] =
-    useState(10);
+  const [stepUp, setStepUp] = useState(10);
 
   // INFLATION %
-  const [
-    inflation,
-    setInflation,
-  ] = useState(6);
+  const [inflation, setInflation] = useState(6);
 
   // RETURN PHASES
-  const [
-    returnPhases,
-    setReturnPhases,
-  ] = useState([
-    {
-      years: 15,
-      returnRate: 12,
-    },
-    {
-      years: 10,
-      returnRate: 10,
-    },
+  const [returnPhases, setReturnPhases] = useState([
+    { years: 15, returnRate: 12 },
+    { years: 10, returnRate: 10 },
   ]);
 
   // TOTAL YEARS
-  const totalYears =
-    returnPhases.reduce(
-      (sum, phase) =>
-        sum + phase.years,
-      0
-    );
+  const totalYears = returnPhases.reduce(
+    (sum, phase) => sum + phase.years,
+    0
+  );
 
   // SIP SUMMARY
-  const sipData =
-    calculateSip(
-      monthlyInvestment,
-      stepUp,
-      returnPhases
-    );
+  const sipData = calculateSip(
+    monthlyInvestment,
+    stepUp,
+    returnPhases
+  );
 
   // YEARLY DATA FOR CHARTS
-  const yearlyData =
-    generateSipYearlyData(
-      monthlyInvestment,
-      stepUp,
-      inflation,
-      returnPhases
-    );
+  const yearlyData = generateSipYearlyData(
+    monthlyInvestment,
+    stepUp,
+    inflation,
+    returnPhases
+  );
+
+  // ==========================================
+  // ✅ NEW: Inflation Adjusted Future Value
+  // ==========================================
+  const inflationAdjustedValue =
+    sipData.totalValue /
+    Math.pow(1 + inflation / 100, totalYears);
 
   return (
     <main className="min-h-screen bg-[#020817] text-white p-6">
 
-      <div
-        id="sip-report"
-        className="max-w-7xl mx-auto"
-      >
+      <div id="sip-report" className="max-w-7xl mx-auto">
 
         {/* PAGE TITLE */}
         <h1 className="text-5xl font-bold mb-10">
@@ -112,11 +94,7 @@ export default function SipPage() {
                 type="number"
                 value={monthlyInvestment}
                 onChange={(e) =>
-                  setMonthlyInvestment(
-                    Number(
-                      e.target.value
-                    )
-                  )
+                  setMonthlyInvestment(Number(e.target.value))
                 }
                 className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
               />
@@ -134,11 +112,7 @@ export default function SipPage() {
                 type="number"
                 value={stepUp}
                 onChange={(e) =>
-                  setStepUp(
-                    Number(
-                      e.target.value
-                    )
-                  )
+                  setStepUp(Number(e.target.value))
                 }
                 className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
               />
@@ -156,11 +130,7 @@ export default function SipPage() {
                 type="number"
                 value={inflation}
                 onChange={(e) =>
-                  setInflation(
-                    Number(
-                      e.target.value
-                    )
-                  )
+                  setInflation(Number(e.target.value))
                 }
                 className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
               />
@@ -175,9 +145,7 @@ export default function SipPage() {
               </label>
 
               <div className="bg-slate-800 border border-slate-600 p-4 rounded-2xl text-xl font-semibold">
-
                 {totalYears} Years
-
               </div>
 
             </div>
@@ -194,18 +162,14 @@ export default function SipPage() {
           </h2>
 
           <ReturnPhases
-            returnPhases={
-              returnPhases
-            }
-            setReturnPhases={
-              setReturnPhases
-            }
+            returnPhases={returnPhases}
+            setReturnPhases={setReturnPhases}
           />
 
         </div>
 
         {/* RESULT SECTION */}
-        <div className="grid md:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
 
           {/* TOTAL INVESTED */}
           <div className="bg-blue-100 text-slate-900 rounded-3xl p-8 shadow-xl">
@@ -215,14 +179,7 @@ export default function SipPage() {
             </h2>
 
             <p className="text-4xl font-bold break-words">
-
-              ₹
-              {
-                formatIndianCurrency(
-                  sipData.totalInvested
-                )
-              }
-
+              ₹{formatIndianCurrency(sipData.totalInvested)}
             </p>
 
           </div>
@@ -235,14 +192,7 @@ export default function SipPage() {
             </h2>
 
             <p className="text-4xl font-bold text-green-700 break-words">
-
-              ₹
-              {
-                formatIndianCurrency(
-                  sipData.wealthGained
-                )
-              }
-
+              ₹{formatIndianCurrency(sipData.wealthGained)}
             </p>
 
           </div>
@@ -255,14 +205,24 @@ export default function SipPage() {
             </h2>
 
             <p className="text-4xl font-bold break-words">
+              ₹{formatIndianCurrency(sipData.totalValue)}
+            </p>
 
-              ₹
-              {
-                formatIndianCurrency(
-                  sipData.totalValue
-                )
-              }
+          </div>
 
+          {/* ✅ NEW: INFLATION ADJUSTED VALUE */}
+          <div className="bg-purple-100 text-slate-900 rounded-3xl p-8 shadow-xl">
+
+            <h2 className="text-xl font-semibold mb-4">
+              Inflation Adjusted Value
+            </h2>
+
+            <p className="text-4xl font-bold text-purple-700 break-words">
+              ₹{formatIndianCurrency(inflationAdjustedValue)}
+            </p>
+
+            <p className="text-sm mt-3 text-slate-700">
+              (Today's purchasing power)
             </p>
 
           </div>
@@ -277,12 +237,8 @@ export default function SipPage() {
           </h2>
 
           <InvestmentPieChart
-            invested={
-              sipData.totalInvested
-            }
-            wealth={
-              sipData.wealthGained
-            }
+            invested={sipData.totalInvested}
+            wealth={sipData.wealthGained}
           />
 
         </div>
@@ -294,9 +250,7 @@ export default function SipPage() {
             Compounding Curve
           </h2>
 
-          <CompoundingCurveChart
-            data={yearlyData}
-          />
+          <CompoundingCurveChart data={yearlyData} />
 
         </div>
 
@@ -309,117 +263,57 @@ export default function SipPage() {
 
           <div className="space-y-8 text-slate-300 leading-8">
 
-            {/* WHAT IS SIP */}
             <div>
-
               <h3 className="text-2xl font-semibold text-white mb-3">
                 What is SIP?
               </h3>
-
               <p>
                 SIP (Systematic Investment Plan)
                 allows you to invest a fixed amount
-                regularly into mutual funds or
-                market-linked investments.
+                regularly into mutual funds or market-linked investments.
               </p>
-
             </div>
 
-            {/* WHY SIP */}
             <div>
-
               <h3 className="text-2xl font-semibold text-white mb-3">
                 Why SIP Works Well
               </h3>
 
               <ul className="list-disc ml-8 space-y-3">
-
-                <li>
-                  Benefits from long-term compounding
-                </li>
-
-                <li>
-                  Reduces timing risk
-                </li>
-
-                <li>
-                  Builds investment discipline
-                </li>
-
-                <li>
-                  Affordable for salaried investors
-                </li>
-
-                <li>
-                  Can create large corpus over time
-                </li>
-
+                <li>Benefits from long-term compounding</li>
+                <li>Reduces timing risk</li>
+                <li>Builds investment discipline</li>
+                <li>Affordable for salaried investors</li>
+                <li>Creates large corpus over time</li>
               </ul>
 
             </div>
 
-            {/* STEP UP */}
             <div className="bg-blue-500/10 p-6 rounded-2xl">
-
               <h3 className="text-2xl font-semibold text-white mb-3">
-                Why Step-Up SIP is Powerful
+                Step-Up SIP Power
               </h3>
-
               <p>
-                Increasing SIP amount every year
-                through salary growth can dramatically
-                increase long-term wealth creation.
+                Increasing SIP annually significantly boosts long-term wealth.
               </p>
-
             </div>
 
-            {/* INFLATION */}
             <div className="bg-orange-500/10 p-6 rounded-2xl">
-
               <h3 className="text-2xl font-semibold text-white mb-3">
-                Importance of Inflation
+                Inflation Impact
               </h3>
-
               <p>
-                Inflation reduces purchasing power
-                over time. Inflation-adjusted returns
-                help estimate the real value of
-                future money.
+                Inflation reduces purchasing power over time, making real returns important.
               </p>
-
             </div>
 
-            {/* IMPORTANT TIP */}
-            <div className="bg-green-500/10 p-6 rounded-2xl">
-
-              <h3 className="text-2xl font-semibold text-white mb-3">
-                Important Insight
-              </h3>
-
-              <p>
-                Time in the market matters more
-                than timing the market. Long
-                investment duration is the biggest
-                wealth creation factor.
-              </p>
-
-            </div>
-
-            {/* DISCLAIMER */}
             <div className="bg-yellow-500/10 p-6 rounded-2xl">
-
               <h3 className="text-2xl font-semibold text-white mb-3">
                 Disclaimer
               </h3>
-
               <p>
-                Investment returns are estimates
-                based on assumed return rates.
-                Actual market returns may vary
-                significantly depending on market
-                conditions.
+                Returns are assumptions and may vary with market conditions.
               </p>
-
             </div>
 
           </div>
