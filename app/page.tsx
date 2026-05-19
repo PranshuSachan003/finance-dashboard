@@ -167,7 +167,7 @@ export default function HomePage() {
         {/* HERO SECTION */}
         <div className="mb-12">
 
-          <h1 className="text-6xl font-bold mb-5">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-5">
 
             Finance Dashboard
 
@@ -184,7 +184,7 @@ export default function HomePage() {
         </div>
 
         {/* MAIN GRID */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid lg:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
 
           {/* LEFT SECTION */}
           <div className="lg:col-span-2">

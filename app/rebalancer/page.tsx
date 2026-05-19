@@ -122,7 +122,7 @@ dark:text-white
 
                 <div
                   key={index}
-                  className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                  className="grid grid-cols-1 md:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
                 >
 
                   {/* NAME */}
@@ -263,7 +263,7 @@ dark:border-gray-700
           </div>
 
           {/* TABLE */}
-          <div className="overflow-auto">
+          <div className="overflow-full md:w-auto">
 
             <table className="w-full border-collapse">
 

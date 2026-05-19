@@ -206,7 +206,7 @@ export default function XirrPage() {
               CSV Format:
             </p>
 
-            <pre className="bg-slate-950 p-4 rounded-xl overflow-auto text-sm">
+            <pre className="bg-slate-950 p-4 rounded-xl overflow-full md:w-auto text-sm">
 {`amount,date
 -10000,2020-01-01
 -15000,2021-01-01
@@ -224,7 +224,7 @@ export default function XirrPage() {
             Manual Cashflow Entry
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
             <div>
 
@@ -283,7 +283,7 @@ export default function XirrPage() {
         </div>
 
         {/* CASHFLOW TABLE */}
-        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 mb-8 overflow-auto">
+        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 mb-8 overflow-full md:w-auto">
 
           <h2 className="text-3xl font-bold mb-6">
             Cashflow Entries
@@ -388,7 +388,7 @@ export default function XirrPage() {
         </div>
 
         {/* XIRR RESULT */}
-        <div className="bg-green-100 text-slate-900 rounded-3xl p-10 mb-10">
+        <div className="bg-green-100 text-slate-900 rounded-3xl p-5 md:p-10 mb-10">
 
           <h2 className="text-3xl font-bold mb-5">
             Portfolio XIRR

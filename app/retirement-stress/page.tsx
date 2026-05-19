@@ -58,26 +58,52 @@ export default function RetirementStressPage() {
             years,
             cashBucketYears,
             debtBucketYears
-        )
+        );
 
     return (
-        <main className="page-container">
 
-            <div className="max-w-5xl mx-auto">
+        <main className="min-h-screen bg-[#020817] text-white p-5 md:p-10">
 
-                <div className="card">
+            <div className="max-w-7xl mx-auto">
 
-                    <h1 className="text-5xl font-bold mb-8">
+                {/* PAGE HEADER */}
+                <div className="mb-12">
+
+                    <h1 className="text-3xl md:text-5xl font-bold mb-5">
+
                         Retirement Withdrawal Stress Test
+
                     </h1>
 
-                    {/* INPUTS */}
+                    <p className="text-slate-400 text-lg leading-8 max-w-4xl">
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                        Analyze whether your retirement corpus
+                        can survive long-term withdrawals while
+                        accounting for inflation, healthcare costs,
+                        and bucket strategy allocation.
 
+                    </p>
+
+                </div>
+
+                {/* INPUT SECTION */}
+                <div className="bg-slate-900 border border-slate-700 rounded-3xl p-6 md:p-10 mb-10">
+
+                    <h2 className="text-2xl md:text-3xl font-bold mb-10">
+
+                        Retirement Inputs
+
+                    </h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+
+                        {/* RETIREMENT CORPUS */}
                         <div>
-                            <label className="label">
+
+                            <label className="block text-sm font-semibold text-slate-300 mb-3">
+
                                 Retirement Corpus (₹)
+
                             </label>
 
                             <input
@@ -88,13 +114,32 @@ export default function RetirementStressPage() {
                                         Number(e.target.value)
                                     )
                                 }
-                                className="input"
+                                className="
+                w-full
+                bg-slate-950
+                border border-slate-700
+                rounded-2xl
+                px-5
+                py-4
+                text-white
+                text-lg
+                outline-none
+                focus:ring-2
+                focus:ring-blue-500
+                focus:border-blue-500
+                transition-all
+                "
                             />
+
                         </div>
 
+                        {/* MONTHLY EXPENSE */}
                         <div>
-                            <label className="label">
+
+                            <label className="block text-sm font-semibold text-slate-300 mb-3">
+
                                 Monthly Expense (₹)
+
                             </label>
 
                             <input
@@ -105,13 +150,32 @@ export default function RetirementStressPage() {
                                         Number(e.target.value)
                                     )
                                 }
-                                className="input"
+                                className="
+                w-full
+                bg-slate-950
+                border border-slate-700
+                rounded-2xl
+                px-5
+                py-4
+                text-white
+                text-lg
+                outline-none
+                focus:ring-2
+                focus:ring-blue-500
+                focus:border-blue-500
+                transition-all
+                "
                             />
+
                         </div>
 
+                        {/* RETURN RATE */}
                         <div>
-                            <label className="label">
+
+                            <label className="block text-sm font-semibold text-slate-300 mb-3">
+
                                 Expected Return (%)
+
                             </label>
 
                             <input
@@ -122,13 +186,32 @@ export default function RetirementStressPage() {
                                         Number(e.target.value)
                                     )
                                 }
-                                className="input"
+                                className="
+                w-full
+                bg-slate-950
+                border border-slate-700
+                rounded-2xl
+                px-5
+                py-4
+                text-white
+                text-lg
+                outline-none
+                focus:ring-2
+                focus:ring-blue-500
+                focus:border-blue-500
+                transition-all
+                "
                             />
+
                         </div>
 
+                        {/* INFLATION */}
                         <div>
-                            <label className="label">
+
+                            <label className="block text-sm font-semibold text-slate-300 mb-3">
+
                                 Inflation (%)
+
                             </label>
 
                             <input
@@ -139,13 +222,32 @@ export default function RetirementStressPage() {
                                         Number(e.target.value)
                                     )
                                 }
-                                className="input"
+                                className="
+                w-full
+                bg-slate-950
+                border border-slate-700
+                rounded-2xl
+                px-5
+                py-4
+                text-white
+                text-lg
+                outline-none
+                focus:ring-2
+                focus:ring-blue-500
+                focus:border-blue-500
+                transition-all
+                "
                             />
+
                         </div>
 
+                        {/* YEARS */}
                         <div>
-                            <label className="label">
+
+                            <label className="block text-sm font-semibold text-slate-300 mb-3">
+
                                 Retirement Years
+
                             </label>
 
                             <input
@@ -156,13 +258,32 @@ export default function RetirementStressPage() {
                                         Number(e.target.value)
                                     )
                                 }
-                                className="input"
+                                className="
+                w-full
+                bg-slate-950
+                border border-slate-700
+                rounded-2xl
+                px-5
+                py-4
+                text-white
+                text-lg
+                outline-none
+                focus:ring-2
+                focus:ring-blue-500
+                focus:border-blue-500
+                transition-all
+                "
                             />
+
                         </div>
 
+                        {/* HEALTHCARE */}
                         <div>
-                            <label className="label">
+
+                            <label className="block text-sm font-semibold text-slate-300 mb-3">
+
                                 Monthly Healthcare Expense (₹)
+
                             </label>
 
                             <input
@@ -173,13 +294,32 @@ export default function RetirementStressPage() {
                                         Number(e.target.value)
                                     )
                                 }
-                                className="input"
+                                className="
+                w-full
+                bg-slate-950
+                border border-slate-700
+                rounded-2xl
+                px-5
+                py-4
+                text-white
+                text-lg
+                outline-none
+                focus:ring-2
+                focus:ring-blue-500
+                focus:border-blue-500
+                transition-all
+                "
                             />
+
                         </div>
 
+                        {/* HEALTHCARE INFLATION */}
                         <div>
-                            <label className="label">
+
+                            <label className="block text-sm font-semibold text-slate-300 mb-3">
+
                                 Healthcare Inflation (%)
+
                             </label>
 
                             <input
@@ -190,13 +330,32 @@ export default function RetirementStressPage() {
                                         Number(e.target.value)
                                     )
                                 }
-                                className="input"
+                                className="
+                w-full
+                bg-slate-950
+                border border-slate-700
+                rounded-2xl
+                px-5
+                py-4
+                text-white
+                text-lg
+                outline-none
+                focus:ring-2
+                focus:ring-blue-500
+                focus:border-blue-500
+                transition-all
+                "
                             />
+
                         </div>
 
+                        {/* CASH BUCKET */}
                         <div>
-                            <label className="label">
+
+                            <label className="block text-sm font-semibold text-slate-300 mb-3">
+
                                 Cash Bucket Years
+
                             </label>
 
                             <input
@@ -207,13 +366,32 @@ export default function RetirementStressPage() {
                                         Number(e.target.value)
                                     )
                                 }
-                                className="input"
+                                className="
+                w-full
+                bg-slate-950
+                border border-slate-700
+                rounded-2xl
+                px-5
+                py-4
+                text-white
+                text-lg
+                outline-none
+                focus:ring-2
+                focus:ring-blue-500
+                focus:border-blue-500
+                transition-all
+                "
                             />
+
                         </div>
 
+                        {/* DEBT BUCKET */}
                         <div>
-                            <label className="label">
+
+                            <label className="block text-sm font-semibold text-slate-300 mb-3">
+
                                 Debt Bucket Years
+
                             </label>
 
                             <input
@@ -224,261 +402,300 @@ export default function RetirementStressPage() {
                                         Number(e.target.value)
                                     )
                                 }
-                                className="input"
+                                className="
+                w-full
+                bg-slate-950
+                border border-slate-700
+                rounded-2xl
+                px-5
+                py-4
+                text-white
+                text-lg
+                outline-none
+                focus:ring-2
+                focus:ring-blue-500
+                focus:border-blue-500
+                transition-all
+                "
                             />
-                        </div>
-                    </div>
 
-                    {/* RESULTS */}
-
-                    <div className="mt-10 grid md:grid-cols-3 gap-6">
-
-                        <div className="bg-blue-500/10 rounded-2xl p-6">
-                            <h2 className="text-xl mb-3">
-                                Retirement Status
-                            </h2>
-
-                            <p className="text-3xl font-bold">
-                                {
-                                    result.survived
-                                        ? "✅ Survives"
-                                        : "❌ Exhausted"
-                                }
-                            </p>
-                        </div>
-
-                        <div className="bg-green-500/10 rounded-2xl p-6">
-                            <h2 className="text-xl mb-3">
-                                Remaining Corpus
-                            </h2>
-
-                            <p className="text-3xl font-bold text-green-400">
-                                ₹{
-                                    formatIndianCurrency(
-                                        result.remainingCorpus
-                                    )
-                                }
-                            </p>
-                        </div>
-
-                        <div className="bg-red-500/10 rounded-2xl p-6">
-                            <h2 className="text-xl mb-3">
-                                Exhaustion Year
-                            </h2>
-
-                            <p className="text-3xl font-bold text-red-400">
-                                {
-                                    result.exhaustedYear
-                                    ?? "Safe"
-                                }
-                            </p>
                         </div>
 
                     </div>
-                    {/* INFO SECTION */}
 
-                    <div className="mt-14 card">
+                </div>
 
-                        <h2 className="text-4xl font-bold mb-8">
-                            Understanding Retirement Stress Test
+                {/* RESULT SECTION */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
+                    {/* STATUS */}
+                    <div className="bg-blue-500/10 border border-blue-500/20 rounded-3xl p-6">
+
+                        <h2 className="text-lg text-slate-300 mb-3">
+
+                            Retirement Status
+
                         </h2>
 
-                        <div className="space-y-8">
+                        <p className="text-3xl font-bold">
 
-                            {/* PURPOSE */}
+                            {
+                                result.survived
+                                    ? "✅ Survives"
+                                    : "❌ Exhausted"
+                            }
 
-                            <div>
+                        </p>
 
-                                <h3 className="text-2xl font-semibold mb-3">
-                                    What does this calculator do?
-                                </h3>
+                    </div>
 
-                                <p className="text-gray-700 dark:text-gray-300 leading-8">
-                                    This calculator checks whether your retirement
-                                    corpus can survive throughout retirement after
-                                    accounting for inflation, healthcare costs,
-                                    and yearly withdrawals.
-                                </p>
+                    {/* REMAINING CORPUS */}
+                    <div className="bg-green-500/10 border border-green-500/20 rounded-3xl p-6">
 
-                            </div>
+                        <h2 className="text-lg text-slate-300 mb-3">
 
-                            {/* CORPUS */}
+                            Remaining Corpus
 
-                            <div>
+                        </h2>
 
-                                <h3 className="text-2xl font-semibold mb-3">
-                                    Retirement Corpus
-                                </h3>
+                        <p className="text-3xl font-bold text-green-400">
 
-                                <p className="text-gray-700 dark:text-gray-300 leading-8">
-                                    Total money available at retirement including
-                                    investments, savings, EPF, mutual funds,
-                                    stocks, etc.
-                                </p>
+                            ₹{
+                                formatIndianCurrency(
+                                    result.remainingCorpus
+                                )
+                            }
 
-                            </div>
+                        </p>
 
-                            {/* MONTHLY EXPENSE */}
+                    </div>
 
-                            <div>
+                    {/* EXHAUSTION YEAR */}
+                    <div className="bg-red-500/10 border border-red-500/20 rounded-3xl p-6">
 
-                                <h3 className="text-2xl font-semibold mb-3">
-                                    Monthly Expense
-                                </h3>
+                        <h2 className="text-lg text-slate-300 mb-3">
 
-                                <p className="text-gray-700 dark:text-gray-300 leading-8">
-                                    Your regular living expenses after retirement
-                                    such as food, utilities, travel, insurance,
-                                    maintenance, and lifestyle spending.
-                                </p>
+                            Exhaustion Year
 
-                            </div>
+                        </h2>
 
-                            {/* HEALTHCARE */}
+                        <p className="text-3xl font-bold text-red-400">
 
-                            <div>
+                            {
+                                result.exhaustedYear
+                                ?? "Safe"
+                            }
 
-                                <h3 className="text-2xl font-semibold mb-3">
-                                    Monthly Healthcare Expense
-                                </h3>
+                        </p>
 
-                                <p className="text-gray-700 dark:text-gray-300 leading-8">
-                                    Expected healthcare and medical expenses during
-                                    retirement. Healthcare inflation is usually
-                                    much higher than normal inflation.
-                                </p>
+                    </div>
 
-                            </div>
+                </div>
 
-                            {/* RETURN */}
+                {/* INFORMATION SECTION */}
+                {/* INFO SECTION */}
 
-                            <div>
+                <div className="mt-14 card">
 
-                                <h3 className="text-2xl font-semibold mb-3">
-                                    Expected Return
-                                </h3>
+                    <h2 className="text-4xl font-bold mb-8">
+                        Understanding Retirement Stress Test
+                    </h2>
 
-                                <p className="text-gray-700 dark:text-gray-300 leading-8">
-                                    Estimated annual return generated by your
-                                    retirement portfolio after retirement.
-                                </p>
+                    <div className="space-y-8">
 
-                            </div>
+                        {/* PURPOSE */}
 
-                            {/* INFLATION */}
+                        <div>
 
-                            <div>
+                            <h3 className="text-2xl font-semibold mb-4">
+                                What does this calculator do?
+                            </h3>
 
-                                <h3 className="text-2xl font-semibold mb-3">
-                                    Inflation
-                                </h3>
+                            <p className="text-slate-300 leading-8 text-lg">
+                                This calculator checks whether your retirement
+                                corpus can survive throughout retirement after
+                                accounting for inflation, healthcare costs,
+                                and yearly withdrawals.
+                            </p>
 
-                                <p className="text-gray-700 dark:text-gray-300 leading-8">
-                                    Inflation increases your living expenses every
-                                    year. Long retirement periods are heavily
-                                    impacted by inflation.
-                                </p>
+                        </div>
 
-                            </div>
+                        {/* CORPUS */}
 
-                            {/* HEALTHCARE INFLATION */}
+                        <div>
 
-                            <div>
+                            <h3 className="text-2xl font-semibold mb-3">
+                                Retirement Corpus
+                            </h3>
 
-                                <h3 className="text-2xl font-semibold mb-3">
-                                    Healthcare Inflation
-                                </h3>
+                            <p className="text-white-700 dark:text-gray-300 leading-8">
+                                Total money available at retirement including
+                                investments, savings, EPF, mutual funds,
+                                stocks, etc.
+                            </p>
 
-                                <p className="text-gray-700 dark:text-gray-300 leading-8">
-                                    Medical costs usually rise faster than normal
-                                    inflation. In India healthcare inflation can
-                                    often be between 10% to 15%.
-                                </p>
+                        </div>
 
-                            </div>
+                        {/* MONTHLY EXPENSE */}
 
-                            {/* BUCKET STRATEGY */}
+                        <div>
 
-                            <div>
+                            <h3 className="text-2xl font-semibold mb-3">
+                                Monthly Expense
+                            </h3>
 
-                                <h3 className="text-2xl font-semibold mb-3">
-                                    Bucket Strategy
-                                </h3>
+                            <p className="text-white-700 dark:text-gray-300 leading-8">
+                                Your regular living expenses after retirement
+                                such as food, utilities, travel, insurance,
+                                maintenance, and lifestyle spending.
+                            </p>
 
-                                <p className="text-gray-700 dark:text-gray-300 leading-8">
-                                    Bucket strategy divides retirement corpus into
-                                    multiple buckets:
-                                </p>
+                        </div>
 
-                                <ul className="list-disc ml-8 mt-4 space-y-3 text-gray-700 dark:text-gray-300">
+                        {/* HEALTHCARE */}
 
-                                    <li>
-                                        Cash Bucket → short-term expenses
-                                    </li>
+                        <div>
 
-                                    <li>
-                                        Debt Bucket → medium-term stability
-                                    </li>
+                            <h3 className="text-2xl font-semibold mb-3">
+                                Monthly Healthcare Expense
+                            </h3>
 
-                                    <li>
-                                        Equity Bucket → long-term growth
-                                    </li>
+                            <p className="text-white-700 dark:text-gray-300 leading-8">
+                                Expected healthcare and medical expenses during
+                                retirement. Healthcare inflation is usually
+                                much higher than normal inflation.
+                            </p>
 
-                                </ul>
+                        </div>
 
-                            </div>
+                        {/* RETURN */}
 
-                            {/* CASH BUCKET */}
+                        <div>
 
-                            <div>
+                            <h3 className="text-2xl font-semibold mb-3">
+                                Expected Return
+                            </h3>
 
-                                <h3 className="text-2xl font-semibold mb-3">
-                                    Cash Bucket Years
-                                </h3>
+                            <p className="text-white-700 dark:text-gray-300 leading-8">
+                                Estimated annual return generated by your
+                                retirement portfolio after retirement.
+                            </p>
 
-                                <p className="text-gray-700 dark:text-gray-300 leading-8">
-                                    Number of years of expenses kept in cash or
-                                    liquid funds for stability and emergency usage.
-                                </p>
+                        </div>
 
-                            </div>
+                        {/* INFLATION */}
 
-                            {/* DEBT BUCKET */}
+                        <div>
 
-                            <div>
+                            <h3 className="text-2xl font-semibold mb-3">
+                                Inflation
+                            </h3>
 
-                                <h3 className="text-2xl font-semibold mb-3">
-                                    Debt Bucket Years
-                                </h3>
+                            <p className="text-white-700 dark:text-gray-300 leading-8">
+                                Inflation increases your living expenses every
+                                year. Long retirement periods are heavily
+                                impacted by inflation.
+                            </p>
 
-                                <p className="text-gray-700 dark:text-gray-300 leading-8">
-                                    Number of years of expenses allocated to debt
-                                    instruments such as bonds or fixed-income
-                                    investments.
-                                </p>
+                        </div>
 
-                            </div>
+                        {/* HEALTHCARE INFLATION */}
 
-                            {/* FINAL NOTE */}
+                        <div>
 
-                            <div className="bg-blue-500/10 rounded-2xl p-6">
+                            <h3 className="text-2xl font-semibold mb-3">
+                                Healthcare Inflation
+                            </h3>
 
-                                <h3 className="text-2xl font-semibold mb-3">
-                                    Important Note
-                                </h3>
+                            <p className="text-white-700 dark:text-gray-300 leading-8">
+                                Medical costs usually rise faster than normal
+                                inflation. In India healthcare inflation can
+                                often be between 10% to 15%.
+                            </p>
 
-                                <p className="text-gray-700 dark:text-gray-300 leading-8">
-                                    This calculator provides an estimation based on
-                                    assumed returns and inflation. Actual market
-                                    returns, taxes, healthcare expenses, and life
-                                    events may differ significantly.
-                                </p>
+                        </div>
 
-                            </div>
+                        {/* BUCKET STRATEGY */}
+
+                        <div>
+
+                            <h3 className="text-2xl font-semibold mb-3">
+                                Bucket Strategy
+                            </h3>
+
+                            <p className="text-white-700 dark:text-gray-300 leading-8">
+                                Bucket strategy divides retirement corpus into
+                                multiple buckets:
+                            </p>
+
+                            <ul className="list-disc ml-8 mt-4 space-y-3 text-white-700 dark:text-gray-300">
+
+                                <li>
+                                    Cash Bucket → short-term expenses
+                                </li>
+
+                                <li>
+                                    Debt Bucket → medium-term stability
+                                </li>
+
+                                <li>
+                                    Equity Bucket → long-term growth
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                        {/* CASH BUCKET */}
+
+                        <div>
+
+                            <h3 className="text-2xl font-semibold mb-3">
+                                Cash Bucket Years
+                            </h3>
+
+                            <p className="text-white-700 dark:text-gray-300 leading-8">
+                                Number of years of expenses kept in cash or
+                                liquid funds for stability and emergency usage.
+                            </p>
+
+                        </div>
+
+                        {/* DEBT BUCKET */}
+
+                        <div>
+
+                            <h3 className="text-2xl font-semibold mb-3">
+                                Debt Bucket Years
+                            </h3>
+
+                            <p className="text-white-700 dark:text-gray-300 leading-8">
+                                Number of years of expenses allocated to debt
+                                instruments such as bonds or fixed-income
+                                investments.
+                            </p>
+
+                        </div>
+
+                        {/* FINAL NOTE */}
+
+                        <div className="bg-blue-500/10 rounded-2xl p-6">
+
+                            <h3 className="text-2xl font-semibold mb-3">
+                                Important Note
+                            </h3>
+
+                            <p className="text-white-700 dark:text-gray-300 leading-8">
+                                This calculator provides an estimation based on
+                                assumed returns and inflation. Actual market
+                                returns, taxes, healthcare expenses, and life
+                                events may differ significantly.
+                            </p>
 
                         </div>
 
                     </div>
+
                 </div>
 
             </div>

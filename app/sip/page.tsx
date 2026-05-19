@@ -205,7 +205,7 @@ export default function SipPage() {
         </div>
 
         {/* RESULT SECTION */}
-        <div className="grid md:grid-cols-3 gap-8 mb-10">
+        <div className="grid md:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
 
           {/* TOTAL INVESTED */}
           <div className="bg-blue-100 text-slate-900 rounded-3xl p-8 shadow-xl">
@@ -297,15 +297,6 @@ export default function SipPage() {
           <CompoundingCurveChart
             data={yearlyData}
           />
-
-        </div>
-
-        {/* INFLATION ADJUSTED CURVE */}
-        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 mb-10 shadow-xl">
-
-          <h2 className="text-3xl font-bold mb-8">
-            Inflation Adjusted Growth
-          </h2>
 
         </div>
 

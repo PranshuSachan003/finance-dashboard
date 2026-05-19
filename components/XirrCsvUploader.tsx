@@ -64,7 +64,7 @@ export default function XirrCsvUploader({
         Example:
       </p>
 
-      <pre className="bg-slate-900 p-3 rounded mt-2 text-sm overflow-auto">
+      <pre className="bg-slate-900 p-3 rounded mt-2 text-sm overflow-full md:w-auto">
 {`amount,date
 -10000,2020-01-01
 -15000,2021-01-01
