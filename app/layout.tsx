@@ -1,11 +1,9 @@
 import "./globals.css";
-
 import Sidebar from "../components/Sidebar";
 
 export const metadata = {
   title: "Finance Calculator Suite",
-  description:
-    "Investment and retirement calculators",
+  description: "Investment and retirement calculators",
 };
 
 export default function RootLayout({
@@ -13,10 +11,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en">
-
       <body className="bg-[#020817]">
 
         <div className="flex">
@@ -25,16 +21,13 @@ export default function RootLayout({
           <Sidebar />
 
           {/* PAGE CONTENT */}
-          <main className="ml-72 w-full min-h-screen">
-
+          <main className="w-full min-h-screen md:ml-72">
             {children}
-
           </main>
 
         </div>
 
       </body>
-
     </html>
   );
 }
