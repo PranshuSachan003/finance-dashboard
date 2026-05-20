@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import {
-  calculateSwp,
-} from "../../utils/calculations";
+  Wallet,
+  TrendingUp,
+  ShieldCheck,
+  AlertTriangle,
+  PiggyBank,
+} from "lucide-react";
 
 import {
   formatIndianCurrency,
@@ -43,16 +47,106 @@ export default function SwpCalculator() {
     setYears,
   ] = useState(30);
 
-  const swpData =
-    calculateSwp(
-      initialCorpus,
-      monthlyWithdrawal,
-      expectedReturn,
-      inflation,
-      years
-    );
+  // -------------------------
+  // SWP CALCULATION
+  // -------------------------
 
-  // ✅ Inflation Adjusted Remaining Corpus
+  const swpData = useMemo(() => {
+
+    let corpus =
+      initialCorpus;
+
+    const monthlyRate =
+      expectedReturn /
+      12 /
+      100;
+
+    const yearlyData = [];
+
+    let totalMonths =
+      0;
+
+    let depleted =
+      false;
+
+    for (
+      let month = 1;
+      month <= years * 12;
+      month++
+    ) {
+
+      // MONTHLY GROWTH
+      corpus =
+        corpus *
+        (1 + monthlyRate);
+
+      // WITHDRAWAL
+      corpus =
+        corpus -
+        monthlyWithdrawal;
+
+      // STOP IF CORPUS FINISHED
+      if (corpus <= 0) {
+
+        corpus = 0;
+
+        totalMonths =
+          month;
+
+        depleted =
+          true;
+
+        break;
+      }
+
+      // STORE YEARLY DATA
+      if (month % 12 === 0) {
+
+        yearlyData.push({
+          year:
+            month / 12,
+
+          corpus:
+            Math.round(
+              corpus
+            ),
+        });
+      }
+
+      totalMonths =
+        month;
+    }
+
+    return {
+      corpusLeft:
+        Math.round(
+          corpus
+        ),
+
+      survivedMonths:
+        totalMonths,
+
+      survivedYears:
+        (
+          totalMonths / 12
+        ).toFixed(1),
+
+      depleted,
+
+      yearlyData,
+    };
+
+  }, [
+    initialCorpus,
+    monthlyWithdrawal,
+    expectedReturn,
+    years,
+  ]);
+
+  // -------------------------
+  // INFLATION ADJUSTED
+  // -------------------------
+
   const inflationAdjustedCorpus =
     swpData.corpusLeft /
     Math.pow(
@@ -61,73 +155,368 @@ export default function SwpCalculator() {
     );
 
   return (
-    <main className="min-h-screen bg-[#020817] text-white p-6">
 
-      <div className="max-w-7xl mx-auto">
+    <main className="
+min-h-screen
+bg-[#020817]
+text-white
+p-6
+">
 
-        {/* PAGE TITLE */}
-        <h1 className="text-5xl font-bold mb-10">
-          SWP Calculator
-        </h1>
+      <div className="
+max-w-7xl
+mx-auto
+">
 
-        {/* INPUT SECTION */}
-        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 mb-10 shadow-xl">
+        {/* HERO */}
+        <div className="
+relative
+overflow-hidden
+rounded-[32px]
+border
+border-slate-800
+bg-gradient-to-br
+from-slate-950
+via-blue-950
+to-slate-950
+p-8
+mb-10
+">
 
-          <h2 className="text-3xl font-bold mb-8">
-            Withdrawal Details
+          <div className="
+absolute
+top-0
+right-0
+w-96
+h-96
+bg-blue-500/10
+blur-3xl
+rounded-full
+" />
+
+          <div className="
+relative
+z-10
+flex
+flex-col
+lg:flex-row
+lg:items-center
+lg:justify-between
+gap-10
+">
+
+            <div>
+
+              <div className="
+inline-flex
+items-center
+gap-2
+bg-blue-500/10
+border
+border-blue-500/20
+text-blue-300
+px-4
+py-2
+rounded-full
+mb-5
+">
+
+                <PiggyBank
+                  className="
+w-5
+h-5
+"
+                />
+
+                Retirement Income Planner
+
+              </div>
+
+              <h1 className="
+text-5xl
+lg:text-6xl
+font-bold
+leading-tight
+mb-5
+">
+
+                SWP Calculator
+
+              </h1>
+
+              <p className="
+text-slate-300
+text-lg
+leading-8
+max-w-3xl
+">
+
+                Estimate how long your investment corpus
+                can survive while generating regular
+                monthly income through SWP withdrawals.
+
+              </p>
+
+            </div>
+
+            {/* QUICK SUMMARY */}
+            <div className="
+w-full
+lg:w-[380px]
+bg-slate-900/80
+backdrop-blur-xl
+border
+border-slate-700
+rounded-3xl
+p-6
+shrink-0
+">
+
+              <p className="
+text-slate-400
+mb-2
+">
+
+                Remaining Corpus
+
+              </p>
+
+              <h2 className="
+text-4xl
+font-bold
+text-blue-400
+break-words
+mb-6
+">
+
+                ₹{
+                  formatIndianCurrency(
+                    swpData.corpusLeft
+                  )
+                }
+
+              </h2>
+
+              <div className="
+space-y-4
+">
+
+                <div className="
+flex
+justify-between
+text-sm
+">
+
+                  <span className="text-slate-400">
+                    Monthly Withdrawal
+                  </span>
+
+                  <span>
+                    ₹{
+                      formatIndianCurrency(
+                        monthlyWithdrawal
+                      )
+                    }
+                  </span>
+
+                </div>
+
+                <div className="
+flex
+justify-between
+text-sm
+">
+
+                  <span className="text-slate-400">
+                    Survival
+                  </span>
+
+                  <span className="text-green-400">
+                    {
+                      swpData.survivedMonths
+                    } Months
+                  </span>
+
+                </div>
+
+                <div className="
+flex
+justify-between
+text-sm
+">
+
+                  <span className="text-slate-400">
+                    Status
+                  </span>
+
+                  <span
+                    className={
+                      swpData.depleted
+                        ? "text-red-400"
+                        : "text-green-400"
+                    }
+                  >
+                    {
+                      swpData.depleted
+                        ? "Corpus Depleted"
+                        : "Corpus Survived"
+                    }
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* INPUTS */}
+        <div className="
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-8
+mb-10
+">
+
+          <h2 className="
+text-3xl
+font-bold
+mb-8
+">
+
+            SWP Details
+
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="
+grid
+md:grid-cols-2
+xl:grid-cols-3
+gap-6
+">
 
-            {/* INITIAL CORPUS */}
+            {/* CORPUS */}
             <div>
 
-              <label className="block mb-3 text-slate-300 text-lg">
+              <label className="
+block
+mb-3
+text-slate-300
+">
+
                 Initial Corpus (₹)
+
               </label>
 
-              <input
-                type="number"
-                value={initialCorpus}
-                onChange={(e) =>
-                  setInitialCorpus(
-                    Number(
-                      e.target.value
+              <div className="relative">
+
+                <Wallet
+                  className="
+absolute
+left-4
+top-4
+w-5
+h-5
+text-slate-500
+"
+                />
+
+                <input
+                  type="number"
+                  value={initialCorpus}
+                  onChange={(e) =>
+                    setInitialCorpus(
+                      Number(
+                        e.target.value
+                      )
                     )
-                  )
-                }
-                className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
-              />
+                  }
+                  className="
+w-full
+pl-12
+bg-slate-800
+border
+border-slate-700
+rounded-2xl
+p-4
+outline-none
+focus:border-blue-500
+"
+                />
+
+              </div>
 
             </div>
 
-            {/* MONTHLY WITHDRAWAL */}
+            {/* WITHDRAWAL */}
             <div>
 
-              <label className="block mb-3 text-slate-300 text-lg">
+              <label className="
+block
+mb-3
+text-slate-300
+">
+
                 Monthly Withdrawal (₹)
+
               </label>
 
-              <input
-                type="number"
-                value={monthlyWithdrawal}
-                onChange={(e) =>
-                  setMonthlyWithdrawal(
-                    Number(
-                      e.target.value
+              <div className="relative">
+
+                <TrendingUp
+                  className="
+absolute
+left-4
+top-4
+w-5
+h-5
+text-slate-500
+"
+                />
+
+                <input
+                  type="number"
+                  value={monthlyWithdrawal}
+                  onChange={(e) =>
+                    setMonthlyWithdrawal(
+                      Number(
+                        e.target.value
+                      )
                     )
-                  )
-                }
-                className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
-              />
+                  }
+                  className="
+w-full
+pl-12
+bg-slate-800
+border
+border-slate-700
+rounded-2xl
+p-4
+outline-none
+focus:border-blue-500
+"
+                />
+
+              </div>
 
             </div>
 
-            {/* EXPECTED RETURN */}
+            {/* RETURN */}
             <div>
 
-              <label className="block mb-3 text-slate-300 text-lg">
+              <label className="
+block
+mb-3
+text-slate-300
+">
+
                 Expected Return (%)
+
               </label>
 
               <input
@@ -140,7 +529,16 @@ export default function SwpCalculator() {
                     )
                   )
                 }
-                className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
+                className="
+w-full
+bg-slate-800
+border
+border-slate-700
+rounded-2xl
+p-4
+outline-none
+focus:border-blue-500
+"
               />
 
             </div>
@@ -148,8 +546,14 @@ export default function SwpCalculator() {
             {/* INFLATION */}
             <div>
 
-              <label className="block mb-3 text-slate-300 text-lg">
+              <label className="
+block
+mb-3
+text-slate-300
+">
+
                 Inflation Rate (%)
+
               </label>
 
               <input
@@ -162,7 +566,16 @@ export default function SwpCalculator() {
                     )
                   )
                 }
-                className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
+                className="
+w-full
+bg-slate-800
+border
+border-slate-700
+rounded-2xl
+p-4
+outline-none
+focus:border-blue-500
+"
               />
 
             </div>
@@ -170,8 +583,14 @@ export default function SwpCalculator() {
             {/* YEARS */}
             <div>
 
-              <label className="block mb-3 text-slate-300 text-lg">
+              <label className="
+block
+mb-3
+text-slate-300
+">
+
                 Duration (Years)
+
               </label>
 
               <input
@@ -184,7 +603,16 @@ export default function SwpCalculator() {
                     )
                   )
                 }
-                className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
+                className="
+w-full
+bg-slate-800
+border
+border-slate-700
+rounded-2xl
+p-4
+outline-none
+focus:border-blue-500
+"
               />
 
             </div>
@@ -193,280 +621,516 @@ export default function SwpCalculator() {
 
         </div>
 
-        {/* RESULT SECTION */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        {/* RESULT CARDS */}
+        <div className="
+grid
+grid-cols-1
+md:grid-cols-2
+xl:grid-cols-4
+gap-6
+mb-10
+">
 
           {/* CORPUS LEFT */}
-          <div className="bg-blue-100 text-slate-900 rounded-3xl p-8 shadow-xl">
+          <div className="
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-6
+">
 
-            <h2 className="text-xl font-semibold mb-4">
-              Corpus Left
-            </h2>
+            <div className="
+flex
+items-start
+justify-between
+gap-4
+mb-5
+">
 
-            <p className="text-4xl font-bold break-words">
-              ₹
-              {
-                formatIndianCurrency(
-                  swpData.corpusLeft
-                )
-              }
-            </p>
+              <div>
+
+                <p className="
+text-slate-400
+mb-2
+">
+
+                  Corpus Left
+
+                </p>
+
+                <h2 className="
+text-3xl
+font-bold
+text-blue-400
+break-words
+leading-tight
+">
+
+                  ₹{
+                    formatIndianCurrency(
+                      swpData.corpusLeft
+                    )
+                  }
+
+                </h2>
+
+              </div>
+
+              <div className="
+shrink-0
+bg-blue-500/10
+p-4
+rounded-2xl
+">
+
+
+              </div>
+
+            </div>
 
           </div>
 
-          {/* INFLATION ADJUSTED */}
-          <div className="bg-purple-100 text-slate-900 rounded-3xl p-8 shadow-xl">
+          {/* INFLATION */}
+          <div className="
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-6
+">
 
-            <h2 className="text-xl font-semibold mb-4">
-              Inflation Adjusted Corpus
-            </h2>
+            <div className="
+flex
+items-start
+justify-between
+gap-4
+mb-5
+">
 
-            <p className="text-4xl font-bold text-purple-700 break-words">
-              ₹
-              {
-                formatIndianCurrency(
-                  inflationAdjustedCorpus
-                )
-              }
-            </p>
+              <div>
 
-            <p className="text-sm mt-3 text-slate-700">
-              (Today's purchasing power)
-            </p>
+                <p className="
+text-slate-400
+mb-2
+">
+
+                  Inflation Adjusted
+
+                </p>
+
+                <h2 className="
+text-3xl
+font-bold
+text-purple-400
+break-words
+leading-tight
+">
+
+                  ₹{
+                    formatIndianCurrency(
+                      inflationAdjustedCorpus
+                    )
+                  }
+
+                </h2>
+
+              </div>
+
+              <div className="
+shrink-0
+bg-purple-500/10
+p-4
+rounded-2xl
+">
+
+
+              </div>
+
+            </div>
 
           </div>
 
-          {/* SURVIVAL DURATION */}
-          <div className="bg-green-100 text-slate-900 rounded-3xl p-8 shadow-xl">
+          {/* SURVIVAL */}
+          <div className="
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-6
+">
 
-            <h2 className="text-xl font-semibold mb-4">
-              Survival Duration
-            </h2>
+            <div className="
+flex
+items-start
+justify-between
+gap-4
+mb-5
+">
 
-            <p className="text-4xl font-bold text-green-700 break-words">
-              {
-                swpData.survivedYears
-              } Years
-            </p>
+              <div>
+
+                <p className="
+text-slate-400
+mb-2
+">
+
+                  Survival Duration
+
+                </p>
+
+                <h2 className="
+text-3xl
+font-bold
+text-green-400
+break-words
+leading-tight
+">
+
+                  {
+                    swpData.survivedMonths
+                  } Months
+
+                </h2>
+
+              </div>
+
+              <div className="
+shrink-0
+bg-green-500/10
+p-4
+rounded-2xl
+">
+
+              </div>
+
+            </div>
 
           </div>
 
           {/* STATUS */}
-          <div className="bg-yellow-100 text-slate-900 rounded-3xl p-8 shadow-xl">
+          <div className="
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-6
+">
 
-            <h2 className="text-xl font-semibold mb-4">
-              Status
-            </h2>
+            <div className="
+flex
+items-start
+justify-between
+gap-4
+mb-5
+">
 
-            <p
-              className={`text-4xl font-bold break-words ${
-                swpData.depleted
-                  ? "text-red-600"
-                  : "text-green-700"
-              }`}
-            >
-              {
-                swpData.depleted
-                  ? "Corpus Depleted"
-                  : "Corpus Survived"
-              }
-            </p>
+              <div>
+
+                <p className="
+text-slate-400
+mb-2
+">
+
+                  Status
+
+                </p>
+
+                <h2
+                  className={`text-3xl font-bold leading-tight ${swpData.depleted
+                      ? "text-red-400"
+                      : "text-green-400"
+                    }`}
+                >
+
+                  {
+                    swpData.depleted
+                      ? "Depleted"
+                      : "Healthy"
+                  }
+
+                </h2>
+
+              </div>
+
+              <div className="
+shrink-0
+bg-red-500/10
+p-4
+rounded-2xl
+">
+
+
+              </div>
+
+            </div>
 
           </div>
 
         </div>
 
-        {/* PIE CHART */}
-        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 mb-10 shadow-xl">
+        {/* CHARTS */}
+        <div className="
+grid
+lg:grid-cols-2
+gap-6
+mb-10
+">
 
-          <h2 className="text-3xl font-bold mb-8">
-            Corpus Breakdown
-          </h2>
+          {/* PIE CHART */}
+          <div className="
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-6
+">
 
-          <InvestmentPieChart
-            invested={
-              initialCorpus
-            }
-            wealth={
-              swpData.corpusLeft
-            }
-            investedLabel="Initial Corpus"
-            wealthLabel="Remaining Corpus"
-          />
+            <h2 className="
+text-2xl
+font-bold
+mb-8
+">
 
-        </div>
+              Corpus Breakdown
 
-        {/* COMPOUNDING CURVE */}
-        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 mb-10 shadow-xl">
+            </h2>
 
-          <h2 className="text-3xl font-bold mb-8">
-            Corpus Survival Curve
-          </h2>
+            <InvestmentPieChart
+              invested={
+                initialCorpus
+              }
+              wealth={
+                swpData.corpusLeft
+              }
+              investedLabel="Initial Corpus"
+              wealthLabel="Remaining Corpus"
+            />
 
-          <CompoundingChart
-            data={
-              swpData.yearlyData.map(
-                (item) => ({
-                  year:
-                    item.year,
+          </div>
 
-                  nominalValue:
-                    item.corpus,
+          {/* CURVE */}
+          <div className="
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-6
+">
 
-                  realValue:
-                    item.corpus /
-                    Math.pow(
-                      1 + inflation / 100,
-                      item.year
-                    ),
-                })
-              )
-            }
-          />
+            <h2 className="
+text-2xl
+font-bold
+mb-8
+">
+
+              Corpus Survival Curve
+
+            </h2>
+
+            <CompoundingChart
+              data={
+                swpData.yearlyData.map(
+                  (item) => ({
+                    year:
+                      item.year,
+
+                    nominalValue:
+                      item.corpus,
+
+                    realValue:
+                      item.corpus /
+                      Math.pow(
+                        1 + inflation / 100,
+                        item.year
+                      ),
+                  })
+                )
+              }
+            />
+
+          </div>
 
         </div>
 
         {/* INFO SECTION */}
-        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 shadow-xl">
+        <div className="
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-8
+">
 
-          <h2 className="text-4xl font-bold mb-8">
-            Understanding SWP Calculator
+          <h2 className="
+text-4xl
+font-bold
+mb-10
+">
+
+            Understanding SWP
+
           </h2>
 
-          <div className="space-y-8 text-slate-300 leading-8">
+          <div className="
+grid
+lg:grid-cols-2
+gap-8
+">
 
-            {/* WHAT IS SWP */}
-            <div>
+            <div className="
+bg-blue-500/10
+border
+border-blue-500/20
+rounded-3xl
+p-6
+">
 
-              <h3 className="text-2xl font-semibold text-white mb-3">
+              <h3 className="
+text-2xl
+font-semibold
+mb-4
+">
+
                 What is SWP?
+
               </h3>
 
-              <p>
+              <p className="
+text-slate-300
+leading-8
+">
+
                 SWP (Systematic Withdrawal Plan)
                 allows investors to withdraw
-                a fixed amount regularly from
-                investments while the remaining
-                corpus continues compounding.
+                fixed monthly income while
+                remaining investments continue
+                compounding over time.
+
               </p>
 
             </div>
 
-            {/* WHY SWP */}
-            <div>
+            <div className="
+bg-green-500/10
+border
+border-green-500/20
+rounded-3xl
+p-6
+">
 
-              <h3 className="text-2xl font-semibold text-white mb-3">
-                Why SWP is Useful
+              <h3 className="
+text-2xl
+font-semibold
+mb-4
+">
+
+                Why SWP is Powerful
+
               </h3>
 
-              <ul className="list-disc ml-8 space-y-3">
+              <ul className="
+list-disc
+ml-6
+space-y-3
+text-slate-300
+leading-7
+">
 
                 <li>
-                  Creates passive retirement income
+                  Creates retirement cash flow
                 </li>
 
                 <li>
-                  Helps manage monthly cash flow
+                  Remaining corpus still compounds
                 </li>
 
                 <li>
-                  Remaining corpus continues growing
+                  Better withdrawal discipline
                 </li>
 
                 <li>
-                  Can be tax efficient in some cases
+                  Useful for passive income
                 </li>
 
               </ul>
 
             </div>
 
-            {/* IMPORTANT INSIGHTS */}
-            <div className="bg-blue-500/10 p-6 rounded-2xl">
+            <div className="
+bg-orange-500/10
+border
+border-orange-500/20
+rounded-3xl
+p-6
+">
 
-              <h3 className="text-2xl font-semibold text-white mb-3">
-                Important SWP Insights
+              <h3 className="
+text-2xl
+font-semibold
+mb-4
+">
+
+                Important Insights
+
               </h3>
 
-              <ul className="list-disc ml-8 space-y-3">
+              <ul className="
+list-disc
+ml-6
+space-y-3
+text-slate-300
+leading-7
+">
 
                 <li>
-                  Higher withdrawals can exhaust corpus quickly
+                  Higher withdrawals reduce survival
                 </li>
 
                 <li>
-                  Inflation-adjusted withdrawals are important
+                  Inflation reduces purchasing power
                 </li>
 
                 <li>
-                  Portfolio return should ideally exceed withdrawal rate
+                  Returns should exceed withdrawals
                 </li>
 
                 <li>
-                  Market crashes impact SWP sustainability
+                  Market crashes affect sustainability
                 </li>
 
               </ul>
 
             </div>
 
-            {/* USE CASES */}
-            <div className="bg-green-500/10 p-6 rounded-2xl">
+            <div className="
+bg-yellow-500/10
+border
+border-yellow-500/20
+rounded-3xl
+p-6
+">
 
-              <h3 className="text-2xl font-semibold text-white mb-3">
-                Common SWP Use Cases
-              </h3>
+              <h3 className="
+text-2xl
+font-semibold
+mb-4
+">
 
-              <ul className="list-disc ml-8 space-y-3">
-
-                <li>
-                  Retirement income
-                </li>
-
-                <li>
-                  Monthly passive cash flow
-                </li>
-
-                <li>
-                  Parents' income planning
-                </li>
-
-                <li>
-                  Temporary salary replacement
-                </li>
-
-              </ul>
-
-            </div>
-
-            {/* INFLATION */}
-            <div className="bg-orange-500/10 p-6 rounded-2xl">
-
-              <h3 className="text-2xl font-semibold text-white mb-3">
-                Inflation Impact
-              </h3>
-
-              <p>
-                Inflation slowly reduces purchasing power.
-                Inflation-adjusted corpus shows the real
-                value of remaining money in today's terms.
-              </p>
-
-            </div>
-
-            {/* DISCLAIMER */}
-            <div className="bg-yellow-500/10 p-6 rounded-2xl">
-
-              <h3 className="text-2xl font-semibold text-white mb-3">
                 Disclaimer
+
               </h3>
 
-              <p>
-                SWP projections are estimates based on
-                assumed returns and withdrawals.
-                Actual portfolio survival depends on
-                market returns, inflation, taxes,
-                and withdrawal discipline.
+              <p className="
+text-slate-300
+leading-8
+">
+
+                This calculator provides estimated
+                projections only. Actual SWP survival
+                depends on market returns, taxes,
+                inflation, and withdrawal behavior.
+
               </p>
 
             </div>

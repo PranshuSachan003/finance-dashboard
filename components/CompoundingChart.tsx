@@ -52,17 +52,51 @@ export default function CompoundingChart({
 
                 <LineChart data={data}>
 
-                    <CartesianGrid strokeDasharray="3 3" />
+                    <CartesianGrid
+                        strokeDasharray="3 3"
+                        stroke="#334155"
+                    />
 
-                    <XAxis dataKey="year" />
+                    <XAxis
+                        dataKey="year"
+                        stroke="#94A3B8"
+                        tickFormatter={(value) =>
+                            `${value}Y`
+                        }
+                    />
 
                     <YAxis
+                        stroke="#94A3B8"
                         tickFormatter={
                             formatCurrency
                         }
                     />
 
                     <Tooltip
+                        contentStyle={{
+                            backgroundColor:
+                                "#0F172A",
+                            border:
+                                "1px solid #334155",
+                            borderRadius:
+                                "24px",
+                            color: "white",
+                            padding:
+                                "18px 22px",
+                        }}
+                        labelStyle={{
+                            color: "white",
+                            fontWeight: 700,
+                            fontSize: 18,
+                            marginBottom: 10,
+                        }}
+                        itemStyle={{
+                            fontSize: 16,
+                            fontWeight: 600,
+                        }}
+                        labelFormatter={(label) =>
+                            `${label} Yr`
+                        }
                         formatter={(value) =>
                             formatCurrency(
                                 Number(value)
@@ -70,20 +104,36 @@ export default function CompoundingChart({
                         }
                     />
 
+                    {/* PORTFOLIO VALUE FIRST */}
                     <Line
                         type="monotone"
                         dataKey="nominalValue"
                         stroke="#2563eb"
-                        strokeWidth={3}
+                        strokeWidth={4}
                         name="Portfolio Value"
+                        dot={{
+                            r: 5,
+                            strokeWidth: 3,
+                        }}
+                        activeDot={{
+                            r: 10,
+                        }}
                     />
 
+                    {/* INFLATION ADJUSTED SECOND */}
                     <Line
                         type="monotone"
                         dataKey="realValue"
-                        stroke="#dc2626"
-                        strokeWidth={3}
+                        stroke="#ef4444"
+                        strokeWidth={4}
                         name="Inflation Adjusted"
+                        dot={{
+                            r: 5,
+                            strokeWidth: 3,
+                        }}
+                        activeDot={{
+                            r: 10,
+                        }}
                     />
 
                 </LineChart>
