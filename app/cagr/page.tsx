@@ -6,6 +6,13 @@ import {
   formatIndianCurrency,
 } from "../../utils/formatCurrency";
 
+import {
+  TrendingUp,
+  IndianRupee,
+  Percent,
+  BarChart3,
+} from "lucide-react";
+
 export default function CAGRCalculator() {
 
   const [
@@ -19,307 +26,1017 @@ export default function CAGRCalculator() {
   ] = useState(250);
 
   const [
+    quantity,
+    setQuantity,
+  ] = useState(100);
+
+  const [
     years,
     setYears,
   ] = useState(5);
 
+  // CALCULATIONS
+  const investedAmount =
+    buyPrice * quantity;
+
+  const currentValue =
+    sellPrice * quantity;
+
+  const gain =
+    currentValue -
+    investedAmount;
+
   const absoluteReturn =
     (
-      (
-        sellPrice - buyPrice
-      ) / buyPrice
+      gain /
+      investedAmount
     ) * 100;
 
   const cagr =
     (
       Math.pow(
-        sellPrice / buyPrice,
+        currentValue /
+        investedAmount,
         1 / years
       ) - 1
     ) * 100;
 
-  const gain =
-    sellPrice - buyPrice;
+  const yearlyGrowth =
+    Array.from(
+      { length: years },
+      (_, index) => {
+
+        const year =
+          index + 1;
+
+        const value =
+          investedAmount *
+          Math.pow(
+            1 + cagr / 100,
+            year
+          );
+
+        return {
+          year,
+          value,
+        };
+      }
+    );
 
   return (
 
     <main className="
 min-h-screen
-bg-gray-100
-dark:bg-black
-p-8
-text-black
-dark:text-white
+bg-[#020817]
+text-white
+p-6
 ">
 
-      <div className="max-w-3xl mx-auto bg-white dark:bg-gray-900 p-6 rounded-2xl shadow">
+      <div className="
+max-w-6xl
+mx-auto
+">
 
-        <h1 className="text-4xl font-bold text-black dark:text-white mb-8">
-          Stock CAGR Calculator
-        </h1>
-
-        {/* BUY PRICE */}
-        <div className="mb-5">
-
-          <label className="block mb-2 font-medium">
-            Buy Price (₹)
-          </label>
-
-          <input
-            type="number"
-            value={buyPrice}
-            onChange={(e) =>
-              setBuyPrice(
-                Number(
-                  e.target.value
-                )
-              )
-            }
-            className="
-w-full
+        {/* HERO */}
+        <div className="
+mb-10
+bg-gradient-to-br
+from-green-900/40
+via-slate-900
+to-slate-950
 border
-p-3
-rounded-lg
-bg-white
-text-black
-dark:bg-gray-800
-dark:text-white
-dark:border-gray-700
-"
-          />
+border-slate-800
+rounded-3xl
+p-8
+">
 
-        </div>
+          <div className="
+flex
+flex-col
+lg:flex-row
+lg:items-center
+lg:justify-between
+gap-8
+">
 
-        {/* SELL PRICE */}
-        <div className="mb-5">
+            <div>
 
-          <label className="block mb-2 font-medium">
-            Current / Sell Price (₹)
-          </label>
+              <div className="
+inline-flex
+items-center
+gap-2
+bg-green-500/10
+text-green-400
+px-4
+py-2
+rounded-full
+mb-5
+">
 
-          <input
-            type="number"
-            value={sellPrice}
-            onChange={(e) =>
-              setSellPrice(
-                Number(
-                  e.target.value
-                )
-              )
-            }
-            className="
-w-full
+                <TrendingUp
+                  className="w-5 h-5"
+                />
+
+                CAGR Analysis
+              </div>
+
+              <h1 className="
+text-4xl
+md:text-5xl
+font-bold
+leading-tight
+mb-4
+">
+
+                Stock CAGR
+                Calculator
+
+              </h1>
+
+              <p className="
+text-slate-400
+text-lg
+leading-8
+max-w-2xl
+">
+
+                Analyze long-term stock performance
+                using CAGR, total returns,
+                and compounding growth analysis.
+
+              </p>
+
+            </div>
+
+            {/* QUICK RESULT */}
+            <div className="
+bg-slate-900/80
 border
-p-3
-rounded-lg
-bg-white
-text-black
-dark:bg-gray-800
-dark:text-white
-dark:border-gray-700
-"
-          />
+border-slate-700
+rounded-3xl
+p-6
+min-w-[280px]
+">
 
-        </div>
+              <p className="
+text-slate-400
+mb-2
+">
 
-        {/* YEARS */}
-        <div className="mb-8">
+                CAGR
 
-          <label className="block mb-2 font-medium">
-            Holding Period (Years)
-          </label>
+              </p>
 
-          <input
-            type="number"
-            value={years}
-            onChange={(e) =>
-              setYears(
-                Number(
-                  e.target.value
-                )
-              )
-            }
-            className="
-w-full
-border
-p-3
-rounded-lg
-bg-white
-text-black
-dark:bg-gray-800
-dark:text-white
-dark:border-gray-700
-"
-          />
+              <h2 className="
+text-5xl
+font-bold
+text-green-400
+mb-5
+">
 
-        </div>
+                {
+                  cagr.toFixed(2)
+                }%
 
-        {/* RESULTS */}
-        <div className="bg-green-50 dark:bg-green-950 p-6 rounded-2xl space-y-5">
+              </h2>
 
-          <div>
+              <div className="
+space-y-3
+text-sm
+">
 
-            <h2 className="text-gray-600 dark:text-gray-300">
-              Absolute Gain
-            </h2>
+                <div className="
+flex
+justify-between
+">
 
-            <p className="text-3xl font-bold">
-              ₹{
-                formatIndianCurrency(
-                  gain
-                )
-              }
-            </p>
+                  <span className="text-slate-400">
+                    Invested
+                  </span>
+
+                  <span>
+                    ₹{
+                      formatIndianCurrency(
+                        investedAmount
+                      )
+                    }
+                  </span>
+
+                </div>
+
+                <div className="
+flex
+justify-between
+">
+
+                  <span className="text-slate-400">
+                    Current Value
+                  </span>
+
+                  <span>
+                    ₹{
+                      formatIndianCurrency(
+                        currentValue
+                      )
+                    }
+                  </span>
+
+                </div>
+
+                <div className="
+flex
+justify-between
+">
+
+                  <span className="text-slate-400">
+                    Profit
+                  </span>
+
+                  <span className="text-green-400">
+                    ₹{
+                      formatIndianCurrency(
+                        gain
+                      )
+                    }
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
 
           </div>
 
-          <div>
+        </div>
 
-            <h2 className="text-gray-600 dark:text-gray-300">
-              Total Return
+        {/* INPUT + RESULT */}
+        <div className="
+grid
+grid-cols-1
+lg:grid-cols-5
+gap-6
+">
+
+          {/* INPUTS */}
+          <div className="
+lg:col-span-2
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-6
+">
+
+            <h2 className="
+text-2xl
+font-bold
+mb-8
+">
+
+              Investment Details
+
             </h2>
 
-            <p className="text-3xl font-bold text-blue-700">
-              {
-                absoluteReturn.toFixed(2)
-              }%
-            </p>
+            <div className="
+space-y-6
+">
+
+              {/* BUY PRICE */}
+              <div>
+
+                <label className="
+block
+mb-2
+text-slate-300
+font-medium
+">
+
+                  Buy Price (₹)
+
+                </label>
+
+                <input
+                  type="number"
+                  value={buyPrice}
+                  onChange={(e) =>
+                    setBuyPrice(
+                      Number(
+                        e.target.value
+                      )
+                    )
+                  }
+                  className="
+w-full
+bg-slate-800
+border
+border-slate-700
+rounded-2xl
+p-4
+outline-none
+focus:border-green-500
+"
+                />
+
+              </div>
+
+              {/* SELL PRICE */}
+              <div>
+
+                <label className="
+block
+mb-2
+text-slate-300
+font-medium
+">
+
+                  Current / Sell Price (₹)
+
+                </label>
+
+                <input
+                  type="number"
+                  value={sellPrice}
+                  onChange={(e) =>
+                    setSellPrice(
+                      Number(
+                        e.target.value
+                      )
+                    )
+                  }
+                  className="
+w-full
+bg-slate-800
+border
+border-slate-700
+rounded-2xl
+p-4
+outline-none
+focus:border-green-500
+"
+                />
+
+              </div>
+
+              {/* QUANTITY */}
+              <div>
+
+                <label className="
+block
+mb-2
+text-slate-300
+font-medium
+">
+
+                  Quantity
+
+                </label>
+
+                <input
+                  type="number"
+                  value={quantity}
+                  onChange={(e) =>
+                    setQuantity(
+                      Number(
+                        e.target.value
+                      )
+                    )
+                  }
+                  className="
+w-full
+bg-slate-800
+border
+border-slate-700
+rounded-2xl
+p-4
+outline-none
+focus:border-green-500
+"
+                />
+
+              </div>
+
+              {/* YEARS */}
+              <div>
+
+                <label className="
+block
+mb-2
+text-slate-300
+font-medium
+">
+
+                  Holding Period (Years)
+
+                </label>
+
+                <input
+                  type="number"
+                  value={years}
+                  onChange={(e) =>
+                    setYears(
+                      Number(
+                        e.target.value
+                      )
+                    )
+                  }
+                  className="
+w-full
+bg-slate-800
+border
+border-slate-700
+rounded-2xl
+p-4
+outline-none
+focus:border-green-500
+"
+                />
+
+              </div>
+
+            </div>
 
           </div>
 
-          <div>
+          {/* RESULTS */}
+          <div className="
+lg:col-span-3
+space-y-6
+">
 
-            <h2 className="text-gray-600 dark:text-gray-300">
-              CAGR
-            </h2>
+            {/* RESULT CARDS */}
+            <div className="
+grid
+grid-cols-1
+md:grid-cols-2
+gap-6
+">
 
-            <p className="text-5xl font-bold text-green-700">
-              {
-                cagr.toFixed(2)
-              }%
-            </p>
+              {/* INVESTED */}
+              <div className="
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-6
+">
+
+                <div className="
+flex
+items-center
+justify-between
+mb-5
+">
+
+                  <div>
+
+                    <p className="
+text-slate-400
+mb-2
+">
+
+                      Invested Amount
+
+                    </p>
+
+                    <h2 className="
+text-3xl
+font-bold
+">
+
+                      ₹{
+                        formatIndianCurrency(
+                          investedAmount
+                        )
+                      }
+
+                    </h2>
+
+                  </div>
+
+                  <div className="
+bg-blue-500/10
+p-4
+rounded-2xl
+">
+
+                    <IndianRupee
+                      className="
+w-7
+h-7
+text-blue-400
+"
+                    />
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              {/* CURRENT VALUE */}
+              <div className="
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-6
+">
+
+                <div className="
+flex
+items-center
+justify-between
+mb-5
+">
+
+                  <div>
+
+                    <p className="
+text-slate-400
+mb-2
+">
+
+                      Current Value
+
+                    </p>
+
+                    <h2 className="
+text-3xl
+font-bold
+text-green-400
+">
+
+                      ₹{
+                        formatIndianCurrency(
+                          currentValue
+                        )
+                      }
+
+                    </h2>
+
+                  </div>
+
+                  <div className="
+bg-green-500/10
+p-4
+rounded-2xl
+">
+
+                    <TrendingUp
+                      className="
+w-7
+h-7
+text-green-400
+"
+                    />
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              {/* ABSOLUTE RETURN */}
+              <div className="
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-6
+">
+
+                <div className="
+flex
+items-center
+justify-between
+mb-5
+">
+
+                  <div>
+
+                    <p className="
+text-slate-400
+mb-2
+">
+
+                      Total Return
+
+                    </p>
+
+                    <h2 className="
+text-3xl
+font-bold
+text-blue-400
+">
+
+                      {
+                        absoluteReturn.toFixed(2)
+                      }%
+
+                    </h2>
+
+                  </div>
+
+                  <div className="
+bg-purple-500/10
+p-4
+rounded-2xl
+">
+
+                    <Percent
+                      className="
+w-7
+h-7
+text-purple-400
+"
+                    />
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              {/* CAGR */}
+              <div className="
+bg-gradient-to-br
+from-green-900/30
+to-slate-900
+border
+border-green-500/20
+rounded-3xl
+p-6
+">
+
+                <div className="
+flex
+items-center
+justify-between
+mb-5
+">
+
+                  <div>
+
+                    <p className="
+text-slate-400
+mb-2
+">
+
+                      CAGR
+
+                    </p>
+
+                    <h2 className="
+text-5xl
+font-bold
+text-green-400
+">
+
+                      {
+                        cagr.toFixed(2)
+                      }%
+
+                    </h2>
+
+                  </div>
+
+                  <div className="
+bg-green-500/10
+p-4
+rounded-2xl
+">
+
+                    <BarChart3
+                      className="
+w-8
+h-8
+text-green-400
+"
+                    />
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* GROWTH TABLE */}
+            <div className="
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-6
+overflow-x-auto
+">
+
+              <h2 className="
+text-2xl
+font-bold
+mb-6
+">
+
+                Yearly Compounding Growth
+
+              </h2>
+
+              <table className="
+w-full
+border-collapse
+">
+
+                <thead>
+
+                  <tr className="
+bg-slate-800
+">
+
+                    <th className="
+text-left
+p-4
+rounded-l-2xl
+">
+
+                      Year
+
+                    </th>
+
+                    <th className="
+text-left
+p-4
+">
+
+                      Portfolio Value
+
+                    </th>
+
+                    <th className="
+text-left
+p-4
+rounded-r-2xl
+">
+
+                      Growth
+
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+                  {
+                    yearlyGrowth.map(
+                      (
+                        item,
+                        index
+                      ) => {
+
+                        const growth =
+                          item.value -
+                          investedAmount;
+
+                        return (
+
+                          <tr
+                            key={index}
+                            className="
+border-b
+border-slate-800
+"
+                          >
+
+                            <td className="p-4">
+                              Year {item.year}
+                            </td>
+
+                            <td className="p-4">
+                              ₹{
+                                formatIndianCurrency(
+                                  item.value
+                                )
+                              }
+                            </td>
+
+                            <td className="
+p-4
+text-green-400
+font-semibold
+">
+
+                              ₹{
+                                formatIndianCurrency(
+                                  growth
+                                )
+                              }
+
+                            </td>
+
+                          </tr>
+                        );
+                      }
+                    )
+                  }
+
+                </tbody>
+
+              </table>
+
+            </div>
 
           </div>
 
         </div>
 
         {/* INFO SECTION */}
+        <div className="
+mt-14
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-8
+">
 
-        <div className="mt-14 card">
+          <h2 className="
+text-4xl
+font-bold
+mb-10
+">
 
-          <h2 className="text-4xl font-bold mb-8">
-            Understanding Stock CAGR Calculator
+            Understanding CAGR
+
           </h2>
 
-          <div className="space-y-10">
+          <div className="
+space-y-10
+">
 
             <div>
 
-              <h3 className="text-2xl font-semibold mb-3">
+              <h3 className="
+text-2xl
+font-semibold
+mb-4
+">
+
                 What is CAGR?
+
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                CAGR (Compound Annual Growth Rate) measures
-                the average annual growth rate of an investment
-                over a period of time assuming compounding.
+              <p className="
+text-slate-300
+leading-8
+text-lg
+">
+
+                CAGR (Compound Annual Growth Rate)
+                measures the average annual growth
+                rate of an investment assuming
+                profits are reinvested every year.
+
               </p>
 
             </div>
 
-            <div className="bg-blue-500/10 rounded-2xl p-6">
+            <div className="
+bg-blue-500/10
+border
+border-blue-500/20
+rounded-3xl
+p-6
+">
 
-              <h3 className="text-2xl font-semibold mb-3">
+              <h3 className="
+text-2xl
+font-semibold
+mb-4
+">
+
                 CAGR Formula
+
               </h3>
 
-              <div className="text-lg font-medium">
-                CAGR = (Final Value / Initial Value)
+              <div className="
+text-xl
+font-medium
+text-blue-300
+leading-10
+">
+
+                CAGR =
+                (Final Value / Initial Value)
                 ^ (1 / Years) − 1
+
               </div>
 
             </div>
 
             <div>
 
-              <h3 className="text-2xl font-semibold mb-3">
-                Why CAGR is Useful?
+              <h3 className="
+text-2xl
+font-semibold
+mb-4
+">
+
+                Why CAGR Matters?
+
               </h3>
 
-              <ul className="list-disc ml-8 space-y-4 text-gray-700 dark:text-gray-300">
+              <ul className="
+list-disc
+ml-8
+space-y-4
+text-slate-300
+leading-8
+">
 
                 <li>
-                  Compares investment performance consistently
+                  Helps compare investment performance fairly
                 </li>
 
                 <li>
-                  Measures long-term growth quality
+                  Removes short-term volatility noise
                 </li>
 
                 <li>
-                  Helps compare stocks and mutual funds
+                  Shows long-term compounding efficiency
                 </li>
 
                 <li>
-                  Simplifies multi-year return analysis
+                  Useful for stocks, mutual funds, and portfolios
                 </li>
 
               </ul>
 
             </div>
 
-            <div>
+            <div className="
+bg-green-500/10
+border
+border-green-500/20
+rounded-3xl
+p-6
+">
 
-              <h3 className="text-2xl font-semibold mb-3">
-                Important CAGR Insights
+              <h3 className="
+text-2xl
+font-semibold
+mb-4
+">
+
+                Important Insight
+
               </h3>
 
-              <ul className="list-disc ml-8 space-y-4 text-gray-700 dark:text-gray-300">
+              <p className="
+text-slate-300
+leading-8
+text-lg
+">
 
-                <li>
-                  CAGR smoothens yearly volatility.
-                </li>
+                Even a small difference in CAGR can create
+                massive wealth differences over long periods
+                because compounding accelerates exponentially.
 
-                <li>
-                  High CAGR over long periods is rare and powerful.
-                </li>
-
-                <li>
-                  Long-term compounding creates exponential wealth.
-                </li>
-
-                <li>
-                  Consistency matters more than short-term spikes.
-                </li>
-
-              </ul>
-
-            </div>
-
-            <div className="bg-green-500/10 rounded-2xl p-6">
-
-              <h3 className="text-2xl font-semibold mb-3">
-                Example
-              </h3>
-
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                If ₹1 lakh grows to ₹4 lakhs in 10 years,
-                CAGR helps determine the equivalent annual
-                compounded return generated during the period.
               </p>
 
             </div>
 
-            <div className="bg-yellow-500/10 rounded-2xl p-6">
+            <div className="
+bg-yellow-500/10
+border
+border-yellow-500/20
+rounded-3xl
+p-6
+">
 
-              <h3 className="text-2xl font-semibold mb-3">
+              <h3 className="
+text-2xl
+font-semibold
+mb-4
+">
+
                 Disclaimer
+
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                CAGR does not represent future returns and
-                cannot capture volatility, drawdowns,
-                or investment risk.
+              <p className="
+text-slate-300
+leading-8
+text-lg
+">
+
+                CAGR is a historical performance metric and
+                does not guarantee future returns. Markets
+                are volatile and actual investment outcomes
+                may differ significantly.
+
               </p>
 
             </div>

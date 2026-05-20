@@ -49,11 +49,6 @@ const calculatorCards = [
     description: "Rebalance investment allocation intelligently.",
   },
   {
-    title: "Net Worth Tracker",
-    href: "/networth",
-    description: "Track assets and liabilities over time.",
-  },
-  {
     title: "Monte Carlo",
     href: "/montecarlo",
     description: "Run market simulations for future outcomes.",
@@ -62,11 +57,6 @@ const calculatorCards = [
     title: "Stock CAGR",
     href: "/cagr",
     description: "Calculate long-term stock growth rate.",
-  },
-  {
-    title: "Tax Calculator",
-    href: "/tax",
-    description: "Estimate income tax under different regimes.",
   },
   {
     title: "Real Estate vs SIP",

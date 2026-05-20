@@ -43,6 +43,7 @@ export default function GoalPlanner() {
     setInflation,
   ] = useState(6);
 
+  // GOAL DATA
   const goalData =
     calculateGoalSip(
       targetAmount,
@@ -52,181 +53,306 @@ export default function GoalPlanner() {
     );
 
   return (
-    <main className="
-min-h-screen
-bg-gray-100
-dark:bg-black
-p-8
-text-black
-dark:text-white
-">
+    <main className="min-h-screen bg-[#020817] text-white p-6">
 
-      <div className="max-w-4xl mx-auto bg-white dark:bg-gray-900 p-6 rounded-xl shadow">
+      <div className="max-w-7xl mx-auto">
 
-        <h1 className="text-3xl font-bold mb-6">
+        {/* PAGE TITLE */}
+        <h1 className="text-5xl font-bold mb-10">
           Goal Planner
         </h1>
 
-        {/* GOAL NAME */}
-        <div className="mb-4">
-          <label className="block mb-2">
-            Goal Name
-          </label>
+        {/* INPUT SECTION */}
+        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 mb-10 shadow-xl">
 
-          <input
-            type="text"
-            value={goalName}
-            onChange={(e) =>
-              setGoalName(
-                e.target.value
-              )
-            }
-            className="w-full border p-3 rounded"
-          />
+          <h2 className="text-3xl font-bold mb-8">
+            Goal Details
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+
+            {/* GOAL NAME */}
+            <div>
+
+              <label className="block mb-3 text-slate-300 text-lg">
+                Goal Name
+              </label>
+
+              <input
+                type="text"
+                value={goalName}
+                onChange={(e) =>
+                  setGoalName(
+                    e.target.value
+                  )
+                }
+                className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
+              />
+
+            </div>
+
+            {/* TARGET AMOUNT */}
+            <div>
+
+              <label className="block mb-3 text-slate-300 text-lg">
+                Target Amount (Today)
+              </label>
+
+              <input
+                type="number"
+                value={targetAmount}
+                onChange={(e) =>
+                  setTargetAmount(
+                    Number(
+                      e.target.value
+                    )
+                  )
+                }
+                className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
+              />
+
+            </div>
+
+            {/* YEARS */}
+            <div>
+
+              <label className="block mb-3 text-slate-300 text-lg">
+                Years To Goal
+              </label>
+
+              <input
+                type="number"
+                value={years}
+                onChange={(e) =>
+                  setYears(
+                    Number(
+                      e.target.value
+                    )
+                  )
+                }
+                className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
+              />
+
+            </div>
+
+            {/* EXPECTED RETURN */}
+            <div>
+
+              <label className="block mb-3 text-slate-300 text-lg">
+                Expected Return (%)
+              </label>
+
+              <input
+                type="number"
+                value={expectedReturn}
+                onChange={(e) =>
+                  setExpectedReturn(
+                    Number(
+                      e.target.value
+                    )
+                  )
+                }
+                className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
+              />
+
+            </div>
+
+            {/* INFLATION */}
+            <div>
+
+              <label className="block mb-3 text-slate-300 text-lg">
+                Inflation Rate (%)
+              </label>
+
+              <input
+                type="number"
+                value={inflation}
+                onChange={(e) =>
+                  setInflation(
+                    Number(
+                      e.target.value
+                    )
+                  )
+                }
+                className="w-full bg-slate-800 border border-slate-600 text-white p-4 rounded-2xl outline-none"
+              />
+
+            </div>
+
+          </div>
+
         </div>
 
-        {/* TARGET */}
-        <div className="mb-4">
-          <label className="block mb-2">
-            Target Amount (Today)
-          </label>
+        {/* RESULT SECTION */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
 
-          <input
-            type="number"
-            value={targetAmount}
-            onChange={(e) =>
-              setTargetAmount(
-                Number(e.target.value)
-              )
-            }
-            className="w-full border p-3 rounded"
-          />
-        </div>
+          {/* GOAL */}
+          <div className="bg-blue-100 text-slate-900 rounded-3xl p-8 shadow-xl">
 
-        {/* YEARS */}
-        <div className="mb-4">
-          <label className="block mb-2">
-            Years To Goal
-          </label>
-
-          <input
-            type="number"
-            value={years}
-            onChange={(e) =>
-              setYears(
-                Number(e.target.value)
-              )
-            }
-            className="w-full border p-3 rounded"
-          />
-        </div>
-
-        {/* RETURN */}
-        <div className="mb-4">
-          <label className="block mb-2">
-            Expected Return (%)
-          </label>
-
-          <input
-            type="number"
-            value={expectedReturn}
-            onChange={(e) =>
-              setExpectedReturn(
-                Number(e.target.value)
-              )
-            }
-            className="w-full border p-3 rounded"
-          />
-        </div>
-
-        {/* INFLATION */}
-        <div className="mb-6">
-          <label className="block mb-2">
-            Inflation (%)
-          </label>
-
-          <input
-            type="number"
-            value={inflation}
-            onChange={(e) =>
-              setInflation(
-                Number(e.target.value)
-              )
-            }
-            className="w-full border p-3 rounded"
-          />
-        </div>
-
-        {/* RESULTS */}
-        <div className="bg-green-50 dark:bg-green-950 p-6 rounded-xl space-y-4">
-
-          <div>
-            <h2 className="text-gray-600 dark:text-gray-300">
+            <h2 className="text-xl font-semibold mb-4">
               Goal
             </h2>
 
-            <p className="text-2xl font-bold">
+            <p className="text-3xl font-bold break-words">
               {goalName}
             </p>
+
           </div>
 
-          <div>
-            <h2 className="text-gray-600 dark:text-gray-300">
+          {/* FUTURE TARGET */}
+          <div className="bg-yellow-100 text-slate-900 rounded-3xl p-8 shadow-xl">
+
+            <h2 className="text-xl font-semibold mb-4">
               Inflation Adjusted Target
             </h2>
 
-            <p className="text-3xl font-bold">
-              ₹{
-                formatIndianCurrency(
-                  goalData.futureTarget
-                )
-              }
+            <p className="text-4xl font-bold break-words">
+              ₹
+              {formatIndianCurrency(
+                goalData.futureTarget
+              )}
             </p>
+
           </div>
 
-          <div>
-            <h2 className="text-gray-600 dark:text-gray-300">
+          {/* REQUIRED SIP */}
+          <div className="bg-green-100 text-slate-900 rounded-3xl p-8 shadow-xl">
+
+            <h2 className="text-xl font-semibold mb-4">
               Required Monthly SIP
             </h2>
 
-            <p className="text-3xl font-bold text-blue-700">
-              ₹{
-                formatIndianCurrency(
-                  goalData.requiredSip
-                )
-              }
+            <p className="text-4xl font-bold text-green-700 break-words">
+              ₹
+              {formatIndianCurrency(
+                goalData.requiredSip
+              )}
             </p>
+
           </div>
 
-          <div>
-            <h2 className="text-gray-600 dark:text-gray-300">
-              Total Invested
-            </h2>
+          {/* WEALTH GENERATED */}
+          <div className="bg-purple-100 text-slate-900 rounded-3xl p-8 shadow-xl">
 
-            <p className="text-2xl font-bold">
-              ₹{
-                formatIndianCurrency(
-                  goalData.totalInvested
-                )
-              }
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-gray-600 dark:text-gray-300">
+            <h2 className="text-xl font-semibold mb-4">
               Wealth Generated
             </h2>
 
-            <p className="text-2xl font-bold text-green-700">
-              ₹{
-                formatIndianCurrency(
-                  goalData.wealthGained
-                )
-              }
+            <p className="text-4xl font-bold text-purple-700 break-words">
+              ₹
+              {formatIndianCurrency(
+                goalData.wealthGained
+              )}
             </p>
+
           </div>
 
-          {/* PIE CHART */}
+        </div>
+
+        {/* SECOND RESULT SECTION */}
+        <div className="grid md:grid-cols-2 gap-8 mb-10">
+
+          {/* TOTAL INVESTED */}
+          <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 shadow-xl">
+
+            <h2 className="text-2xl font-bold mb-6">
+              Investment Summary
+            </h2>
+
+            <div className="space-y-6">
+
+              <div>
+
+                <p className="text-slate-400 text-lg">
+                  Total Invested
+                </p>
+
+                <p className="text-4xl font-bold mt-2">
+                  ₹
+                  {formatIndianCurrency(
+                    goalData.totalInvested
+                  )}
+                </p>
+
+              </div>
+
+              <div>
+
+                <p className="text-slate-400 text-lg">
+                  Expected Return
+                </p>
+
+                <p className="text-4xl font-bold text-green-400 mt-2">
+                  {expectedReturn}%
+                </p>
+
+              </div>
+
+              <div>
+
+                <p className="text-slate-400 text-lg">
+                  Inflation Rate
+                </p>
+
+                <p className="text-4xl font-bold text-orange-400 mt-2">
+                  {inflation}%
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* GOAL SUMMARY */}
+          <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 shadow-xl">
+
+            <h2 className="text-2xl font-bold mb-6">
+              Goal Summary
+            </h2>
+
+            <div className="space-y-6">
+
+              <div>
+
+                <p className="text-slate-400 text-lg">
+                  Years To Goal
+                </p>
+
+                <p className="text-4xl font-bold mt-2">
+                  {years} Years
+                </p>
+
+              </div>
+
+              <div>
+
+                <p className="text-slate-400 text-lg">
+                  Future Goal Value
+                </p>
+
+                <p className="text-4xl font-bold text-yellow-400 mt-2 break-words">
+                  ₹
+                  {formatIndianCurrency(
+                    goalData.futureTarget
+                  )}
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* PIE CHART */}
+        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 mb-10 shadow-xl">
+
+          <h2 className="text-3xl font-bold mb-8">
+            Investment Breakdown
+          </h2>
+
           <InvestmentPieChart
             invested={
               goalData.totalInvested
@@ -238,7 +364,15 @@ dark:text-white
             wealthLabel="Growth"
           />
 
-          {/* COMPOUNDING CHART */}
+        </div>
+
+        {/* COMPOUNDING CURVE */}
+        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 mb-10 shadow-xl">
+
+          <h2 className="text-3xl font-bold mb-8">
+            Goal Growth Projection
+          </h2>
+
           <CompoundingChart
             data={
               goalData.yearlyData
@@ -248,25 +382,26 @@ dark:text-white
         </div>
 
         {/* INFO SECTION */}
-
-        <div className="mt-14 card">
+        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 shadow-xl">
 
           <h2 className="text-4xl font-bold mb-8">
             Understanding Goal Planner
           </h2>
 
-          <div className="space-y-10">
+          <div className="space-y-8 text-slate-300 leading-8">
 
             <div>
 
-              <h3 className="text-2xl font-semibold mb-3">
+              <h3 className="text-2xl font-semibold text-white mb-3">
                 What is Goal-Based Investing?
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                Goal-based investing helps you invest for
-                specific future goals such as retirement,
-                home purchase, child education, travel,
+              <p>
+                Goal-based investing helps
+                you invest for specific
+                future goals such as
+                retirement, home purchase,
+                child education, travel,
                 or wealth creation.
               </p>
 
@@ -274,52 +409,54 @@ dark:text-white
 
             <div>
 
-              <h3 className="text-2xl font-semibold mb-3">
+              <h3 className="text-2xl font-semibold text-white mb-3">
                 Goal Amount
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                This is the future amount required to achieve
-                your financial goal after accounting for inflation.
+              <p>
+                This is the future amount
+                required to achieve your
+                financial goal after
+                accounting for inflation.
               </p>
 
             </div>
 
             <div>
 
-              <h3 className="text-2xl font-semibold mb-3">
+              <h3 className="text-2xl font-semibold text-white mb-3">
                 Important Goal Planning Insights
               </h3>
 
-              <ul className="list-disc ml-8 space-y-4 text-gray-700 dark:text-gray-300">
+              <ul className="list-disc ml-8 space-y-3">
 
                 <li>
-                  Inflation significantly increases future goal cost.
+                  Inflation significantly increases future goal cost
                 </li>
 
                 <li>
-                  Starting early reduces monthly SIP burden.
+                  Starting early reduces monthly SIP burden
                 </li>
 
                 <li>
-                  Long-term goals can take higher equity exposure.
+                  Long-term goals can take higher equity exposure
                 </li>
 
                 <li>
-                  Delaying investments increases required SIP dramatically.
+                  Delaying investments increases required SIP dramatically
                 </li>
 
               </ul>
 
             </div>
 
-            <div className="bg-green-500/10 rounded-2xl p-6">
+            <div className="bg-green-500/10 p-6 rounded-2xl">
 
-              <h3 className="text-2xl font-semibold mb-3">
+              <h3 className="text-2xl font-semibold text-white mb-3">
                 Popular Financial Goals
               </h3>
 
-              <ul className="list-disc ml-8 space-y-3 text-gray-700 dark:text-gray-300">
+              <ul className="list-disc ml-8 space-y-3">
 
                 <li>
                   Retirement planning
@@ -345,16 +482,35 @@ dark:text-white
 
             </div>
 
-            <div className="bg-yellow-500/10 rounded-2xl p-6">
+            <div className="bg-blue-500/10 p-6 rounded-2xl">
 
-              <h3 className="text-2xl font-semibold mb-3">
+              <h3 className="text-2xl font-semibold text-white mb-3">
+                Why Early Investing Matters
+              </h3>
+
+              <p>
+                The earlier you start,
+                the lower your required
+                SIP becomes because
+                compounding gets more
+                time to work.
+              </p>
+
+            </div>
+
+            <div className="bg-yellow-500/10 p-6 rounded-2xl">
+
+              <h3 className="text-2xl font-semibold text-white mb-3">
                 Disclaimer
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                Goal projections are estimates based on assumed
-                returns and inflation rates. Actual investment
-                performance and future goal costs may vary.
+              <p>
+                Goal projections are
+                estimates based on assumed
+                returns and inflation
+                rates. Actual investment
+                performance and future
+                goal costs may vary.
               </p>
 
             </div>

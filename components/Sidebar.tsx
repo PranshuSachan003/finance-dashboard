@@ -59,11 +59,6 @@ const calculatorItems = [
   },
 
   {
-    label: "Net Worth Tracker",
-    href: "/networth",
-  },
-
-  {
     label: "Monte Carlo Simulation",
     href: "/montecarlo",
   },
@@ -71,11 +66,6 @@ const calculatorItems = [
   {
     label: "Stock CAGR Calculator",
     href: "/cagr",
-  },
-
-  {
-    label: "Tax Calculator",
-    href: "/tax",
   },
 
   {
@@ -297,18 +287,6 @@ export default function Sidebar() {
               );
             })
           }
-
-        </div>
-
-        {/* SMALL FOOTER TEXT */}
-        <div className="mt-6 px-3">
-
-          <p className="text-xs leading-6 text-slate-500">
-
-            Wealth is built slowly through discipline,
-            patience, and consistency.
-
-          </p>
 
         </div>
 

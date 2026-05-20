@@ -2,6 +2,16 @@
 
 import { useState } from "react";
 
+import {
+  Home,
+  Wallet,
+  Percent,
+  CalendarDays,
+  TrendingUp,
+  AlertTriangle,
+  IndianRupee,
+} from "lucide-react";
+
 import InvestmentPieChart
   from "../../components/InvestmentPieChart";
 
@@ -26,10 +36,7 @@ export default function EMICalculator() {
     setTenure,
   ] = useState(20);
 
-  // -------------------
   // EMI CALCULATION
-  // -------------------
-
   const monthlyRate =
     interestRate / 12 / 100;
 
@@ -59,315 +66,1070 @@ export default function EMICalculator() {
     totalPayment -
     loanAmount;
 
+  // INTEREST %
+  const interestBurden =
+    (
+      totalInterest /
+      totalPayment
+    ) * 100;
+
+  // YEARLY TABLE
+  const yearlyData =
+    Array.from(
+      { length: tenure },
+      (_, index) => {
+
+        const year =
+          index + 1;
+
+        const paid =
+          emi * 12 * year;
+
+        return {
+          year,
+          paid,
+        };
+      }
+    );
+
   return (
 
     <main className="
 min-h-screen
-bg-gray-100
-dark:bg-black
-p-8
-text-black
-dark:text-white
+bg-gradient-to-b
+from-[#020817]
+via-[#081225]
+to-black
+text-white
+p-6
 ">
 
-      <div className="max-w-5xl mx-auto bg-white dark:bg-gray-900 p-6 rounded-2xl shadow">
+      <div className="
+max-w-7xl
+mx-auto
+">
 
-        <h1 className="text-4xl font-bold text-black dark:text-white mb-8">
-          EMI Calculator
-        </h1>
-
-        {/* LOAN AMOUNT */}
-        <div className="mb-5">
-
-          <label className="block mb-2 font-medium">
-            Loan Amount (₹)
-          </label>
-
-          <input
-            type="number"
-            value={loanAmount}
-            onChange={(e) =>
-              setLoanAmount(
-                Number(
-                  e.target.value
-                )
-              )
-            }
-            className="
-w-full
+        {/* HERO */}
+        <div className="
+bg-gradient-to-br
+from-blue-950
+via-slate-900
+to-slate-950
 border
-p-3
-rounded-lg
-bg-white
-text-black
-dark:bg-gray-800
-dark:text-white
-dark:border-gray-700
-"
-          />
+border-slate-800
+rounded-[32px]
+p-8
+lg:p-12
+mb-10
+overflow-hidden
+relative
+">
 
-        </div>
+          <div className="
+absolute
+top-0
+right-0
+w-72
+h-72
+bg-blue-500/10
+blur-3xl
+rounded-full
+" />
 
-        {/* INTEREST */}
-        <div className="mb-5">
+          <div className="
+relative
+z-10
+max-w-3xl
+">
 
-          <label className="block mb-2 font-medium">
-            Interest Rate (%)
-          </label>
-
-          <input
-            type="number"
-            value={interestRate}
-            onChange={(e) =>
-              setInterestRate(
-                Number(
-                  e.target.value
-                )
-              )
-            }
-            className="
-w-full
+            <div className="
+inline-flex
+items-center
+gap-2
+bg-blue-500/10
+text-blue-400
+px-4
+py-2
+rounded-full
+mb-5
 border
-p-3
-rounded-lg
-bg-white
-text-black
-dark:bg-gray-800
-dark:text-white
-dark:border-gray-700
-"
-          />
+border-blue-500/20
+">
 
-        </div>
+              <Home className="w-5 h-5" />
 
-        {/* TENURE */}
-        <div className="mb-8">
+              Smart Loan Planning
 
-          <label className="block mb-2 font-medium">
-            Loan Tenure (Years)
-          </label>
+            </div>
 
-          <input
-            type="number"
-            value={tenure}
-            onChange={(e) =>
-              setTenure(
-                Number(
-                  e.target.value
-                )
-              )
-            }
-            className="
-w-full
-border
-p-3
-rounded-lg
-bg-white
-text-black
-dark:bg-gray-800
-dark:text-white
-dark:border-gray-700
-"
-          />
+            <h1 className="
+text-5xl
+lg:text-6xl
+font-bold
+leading-tight
+mb-6
+bg-gradient-to-r
+from-white
+to-slate-400
+bg-clip-text
+text-transparent
+">
 
-        </div>
+              EMI Calculator
 
-        {/* RESULTS */}
-        <div className="bg-blue-50 dark:bg-blue-950 p-6 rounded-2xl space-y-6">
+            </h1>
 
-          <div>
+            <p className="
+text-slate-400
+text-lg
+leading-8
+max-w-2xl
+">
 
-            <h2 className="text-gray-600 dark:text-gray-300">
-              Monthly EMI
-            </h2>
+              Calculate your monthly EMI,
+              interest payable, and total
+              repayment instantly with
+              beautiful financial insights.
 
-            <p className="text-5xl font-bold text-blue-700">
-              ₹{
-                formatIndianCurrency(
-                  emi
-                )
-              }
-            </p>
-
-          </div>
-
-          <div>
-
-            <h2 className="text-gray-600 dark:text-gray-300">
-              Total Interest
-            </h2>
-
-            <p className="text-3xl font-bold text-red-600">
-              ₹{
-                formatIndianCurrency(
-                  totalInterest
-                )
-              }
-            </p>
-
-          </div>
-
-          <div>
-
-            <h2 className="text-gray-600 dark:text-gray-300">
-              Total Payment
-            </h2>
-
-            <p className="text-4xl font-bold text-black dark:text-white">
-              ₹{
-                formatIndianCurrency(
-                  totalPayment
-                )
-              }
             </p>
 
           </div>
 
         </div>
 
-        {/* PIE CHART */}
-        <div className="mt-10">
+        {/* MAIN GRID */}
+        <div className="
+grid
+grid-cols-1
+lg:grid-cols-5
+gap-6
+">
 
-          <InvestmentPieChart
-            invested={loanAmount}
-            wealth={totalInterest}
-            investedLabel={"Loan Amount"}
-            wealthLabel={"Interest Amount"}
-          />
+          {/* INPUT PANEL */}
+          <div className="
+lg:col-span-2
+bg-slate-900/80
+backdrop-blur-xl
+border
+border-slate-800
+rounded-[32px]
+p-6
+">
+
+            <h2 className="
+text-2xl
+font-bold
+mb-8
+">
+
+              Loan Details
+
+            </h2>
+
+            <div className="space-y-8">
+
+              {/* LOAN */}
+              <div>
+
+                <label className="
+block
+mb-3
+text-slate-300
+font-medium
+">
+
+                  Loan Amount
+
+                </label>
+
+                <div className="relative">
+
+                  <Wallet
+                    className="
+absolute
+left-4
+top-4
+w-5
+h-5
+text-slate-500
+"
+                  />
+
+                  <input
+                    type="number"
+                    value={loanAmount}
+                    onChange={(e) =>
+                      setLoanAmount(
+                        Number(
+                          e.target.value
+                        )
+                      )
+                    }
+                    className="
+w-full
+pl-12
+bg-slate-950/70
+border
+border-slate-700
+rounded-2xl
+p-4
+outline-none
+transition-all
+duration-300
+focus:border-blue-500
+focus:ring-4
+focus:ring-blue-500/10
+hover:border-slate-500
+"
+                  />
+
+                </div>
+
+                <input
+                  type="range"
+                  min="100000"
+                  max="50000000"
+                  step="100000"
+                  value={loanAmount}
+                  onChange={(e) =>
+                    setLoanAmount(
+                      Number(
+                        e.target.value
+                      )
+                    )
+                  }
+                  className="
+w-full
+mt-4
+accent-blue-500
+"
+                />
+
+              </div>
+
+              {/* INTEREST */}
+              <div>
+
+                <label className="
+block
+mb-3
+text-slate-300
+font-medium
+">
+
+                  Interest Rate (%)
+
+                </label>
+
+                <div className="relative">
+
+                  <Percent
+                    className="
+absolute
+left-4
+top-4
+w-5
+h-5
+text-slate-500
+"
+                  />
+
+                  <input
+                    type="number"
+                    value={interestRate}
+                    onChange={(e) =>
+                      setInterestRate(
+                        Number(
+                          e.target.value
+                        )
+                      )
+                    }
+                    className="
+w-full
+pl-12
+bg-slate-950/70
+border
+border-slate-700
+rounded-2xl
+p-4
+outline-none
+transition-all
+duration-300
+focus:border-blue-500
+focus:ring-4
+focus:ring-blue-500/10
+hover:border-slate-500
+"
+                  />
+
+                </div>
+
+                <input
+                  type="range"
+                  min="1"
+                  max="20"
+                  step="0.1"
+                  value={interestRate}
+                  onChange={(e) =>
+                    setInterestRate(
+                      Number(
+                        e.target.value
+                      )
+                    )
+                  }
+                  className="
+w-full
+mt-4
+accent-blue-500
+"
+                />
+
+              </div>
+
+              {/* TENURE */}
+              <div>
+
+                <label className="
+block
+mb-3
+text-slate-300
+font-medium
+">
+
+                  Loan Tenure (Years)
+
+                </label>
+
+                <div className="relative">
+
+                  <CalendarDays
+                    className="
+absolute
+left-4
+top-4
+w-5
+h-5
+text-slate-500
+"
+                  />
+
+                  <input
+                    type="number"
+                    value={tenure}
+                    onChange={(e) =>
+                      setTenure(
+                        Number(
+                          e.target.value
+                        )
+                      )
+                    }
+                    className="
+w-full
+pl-12
+bg-slate-950/70
+border
+border-slate-700
+rounded-2xl
+p-4
+outline-none
+transition-all
+duration-300
+focus:border-blue-500
+focus:ring-4
+focus:ring-blue-500/10
+hover:border-slate-500
+"
+                  />
+
+                </div>
+
+                <input
+                  type="range"
+                  min="1"
+                  max="35"
+                  step="1"
+                  value={tenure}
+                  onChange={(e) =>
+                    setTenure(
+                      Number(
+                        e.target.value
+                      )
+                    )
+                  }
+                  className="
+w-full
+mt-4
+accent-blue-500
+"
+                />
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* RIGHT SECTION */}
+          <div className="
+lg:col-span-3
+space-y-6
+">
+
+            {/* RESULT CARDS */}
+            <div className="
+grid
+grid-cols-1
+md:grid-cols-2
+xl:grid-cols-3
+gap-6
+">
+
+              {/* EMI */}
+              <div className="
+bg-slate-900/80
+border
+border-slate-800
+rounded-[32px]
+p-6
+hover:border-blue-500/30
+transition-all
+duration-300
+">
+
+                <div className="
+flex
+items-start
+justify-between
+gap-4
+">
+
+                  <div className="flex-1">
+
+                    <p className="
+text-slate-400
+mb-3
+">
+
+                      Monthly EMI
+
+                    </p>
+
+                    <h2 className="
+text-2xl
+lg:text-3xl
+font-bold
+text-blue-400
+break-words
+leading-tight
+">
+
+                      ₹{
+                        formatIndianCurrency(
+                          emi
+                        )
+                      }
+
+                    </h2>
+
+                  </div>
+
+                  <div className="
+bg-blue-500/10
+p-4
+rounded-2xl
+shrink-0
+">
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              {/* INTEREST */}
+              <div className="
+bg-slate-900/80
+border
+border-slate-800
+rounded-[32px]
+p-6
+hover:border-red-500/30
+transition-all
+duration-300
+">
+
+                <div className="
+flex
+items-start
+justify-between
+gap-4
+">
+
+                  <div className="flex-1">
+
+                    <p className="
+text-slate-400
+mb-3
+">
+
+                      Total Interest
+
+                    </p>
+
+                    <h2 className="
+text-2xl
+lg:text-3xl
+font-bold
+text-red-400
+break-words
+leading-tight
+">
+
+                      ₹{
+                        formatIndianCurrency(
+                          totalInterest
+                        )
+                      }
+
+                    </h2>
+
+                  </div>
+
+                  <div className="
+bg-red-500/10
+p-4
+rounded-2xl
+shrink-0
+">
+
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              {/* TOTAL PAYMENT */}
+              <div className="
+bg-gradient-to-br
+from-green-900/30
+to-slate-900
+border
+border-green-500/20
+rounded-[32px]
+p-6
+hover:border-green-500/40
+transition-all
+duration-300
+">
+
+                <div className="
+flex
+items-start
+justify-between
+gap-4
+">
+
+                  <div className="flex-1">
+
+                    <p className="
+text-slate-400
+mb-3
+">
+
+                      Total Payment
+
+                    </p>
+
+                    <h2 className="
+text-2xl
+lg:text-3xl
+font-bold
+text-green-400
+break-words
+leading-tight
+">
+
+                      ₹{
+                        formatIndianCurrency(
+                          totalPayment
+                        )
+                      }
+
+                    </h2>
+
+                  </div>
+
+                  <div className="
+bg-green-500/10
+p-4
+rounded-2xl
+shrink-0
+">
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* INTEREST BURDEN */}
+            <div className="
+bg-slate-900/80
+border
+border-slate-800
+rounded-[32px]
+p-6
+">
+
+              <div className="
+flex
+justify-between
+items-center
+mb-5
+">
+
+                <div>
+
+                  <h3 className="
+text-2xl
+font-bold
+mb-1
+">
+
+                    Interest Burden
+
+                  </h3>
+
+                  <p className="text-slate-400">
+                    Percentage of interest in total repayment
+                  </p>
+
+                </div>
+
+                <div className="
+text-4xl
+font-bold
+text-red-400
+">
+
+                  {
+                    interestBurden.toFixed(1)
+                  }%
+
+                </div>
+
+              </div>
+
+              <div className="
+w-full
+bg-slate-800
+rounded-full
+h-5
+overflow-hidden
+">
+
+                <div
+                  style={{
+                    width: `${interestBurden}%`,
+                  }}
+                  className="
+bg-gradient-to-r
+from-red-500
+to-orange-500
+h-full
+rounded-full
+transition-all
+duration-500
+"
+                />
+
+              </div>
+
+            </div>
+
+            {/* CHART */}
+            <div className="
+bg-slate-900/80
+border
+border-slate-800
+rounded-[32px]
+p-6
+">
+
+              <h2 className="
+text-2xl
+font-bold
+mb-8
+">
+
+                Principal vs Interest
+
+              </h2>
+
+              <InvestmentPieChart
+                invested={loanAmount}
+                wealth={totalInterest}
+                investedLabel={"Principal"}
+                wealthLabel={"Interest"}
+              />
+
+              {/* PROGRESS BAR */}
+              <div className="mt-8">
+
+                <div className="
+flex
+justify-between
+mb-3
+text-sm
+">
+
+                  <span className="text-blue-400">
+                    Principal
+                  </span>
+
+                  <span className="text-red-400">
+                    Interest
+                  </span>
+
+                </div>
+
+                <div className="
+flex
+h-5
+rounded-full
+overflow-hidden
+">
+
+                  <div
+                    style={{
+                      width: `${(
+                          loanAmount /
+                          totalPayment
+                        ) * 100
+                        }%`,
+                    }}
+                    className="
+bg-blue-500
+"
+                  />
+
+                  <div
+                    style={{
+                      width: `${(
+                          totalInterest /
+                          totalPayment
+                        ) * 100
+                        }%`,
+                    }}
+                    className="
+bg-red-500
+"
+                  />
+
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* TIMELINE */}
+            <div className="
+bg-slate-900/80
+border
+border-slate-800
+rounded-[32px]
+p-6
+overflow-x-auto
+">
+
+              <h2 className="
+text-2xl
+font-bold
+mb-6
+">
+
+                Repayment Timeline
+
+              </h2>
+
+              <table className="
+w-full
+border-collapse
+">
+
+                <thead>
+
+                  <tr className="
+bg-slate-800
+">
+
+                    <th className="
+text-left
+p-4
+rounded-l-2xl
+">
+
+                      Year
+
+                    </th>
+
+                    <th className="
+text-left
+p-4
+rounded-r-2xl
+">
+
+                      Total Paid
+
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+                  {
+                    yearlyData.map(
+                      (
+                        item,
+                        index
+                      ) => (
+
+                        <tr
+                          key={index}
+                          className={`
+border-b
+border-slate-800
+${index % 2 === 0
+                              ? "bg-slate-900/40"
+                              : "bg-slate-950/40"
+                            }
+`}
+                        >
+
+                          <td className="p-4">
+                            Year {item.year}
+                          </td>
+
+                          <td className="
+p-4
+font-semibold
+text-blue-400
+">
+
+                            ₹{
+                              formatIndianCurrency(
+                                item.paid
+                              )
+                            }
+
+                          </td>
+
+                        </tr>
+                      )
+                    )
+                  }
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+          </div>
 
         </div>
 
         {/* INFO SECTION */}
+        <div className="
+mt-14
+bg-slate-900/80
+border
+border-slate-800
+rounded-[32px]
+p-8
+">
 
-        <div className="mt-14 card">
+          <h2 className="
+text-4xl
+font-bold
+mb-10
+">
 
-          <h2 className="text-4xl font-bold mb-8">
-            Understanding EMI Calculator
+            Understanding EMI
+
           </h2>
 
-          <div className="space-y-10">
+          <div className="
+grid
+md:grid-cols-2
+gap-6
+">
 
-            <div>
+            <div className="
+bg-slate-950/60
+border
+border-slate-800
+rounded-3xl
+p-6
+">
 
-              <h3 className="text-2xl font-semibold mb-3">
+              <IndianRupee
+                className="
+w-10
+h-10
+text-blue-400
+mb-4
+"
+              />
+
+              <h3 className="
+text-2xl
+font-bold
+mb-4
+">
+
                 What is EMI?
+
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                EMI (Equated Monthly Installment) is the fixed
-                monthly payment made towards repayment of a loan.
+              <p className="
+text-slate-300
+leading-8
+">
+
+                EMI is the fixed monthly
+                payment made towards loan
+                repayment including both
+                principal and interest.
+
               </p>
 
             </div>
 
-            <div className="bg-blue-500/10 rounded-2xl p-6">
+            <div className="
+bg-slate-950/60
+border
+border-slate-800
+rounded-3xl
+p-6
+">
 
-              <h3 className="text-2xl font-semibold mb-3">
-                EMI Formula
+              <TrendingUp
+                className="
+w-10
+h-10
+text-green-400
+mb-4
+"
+              />
+
+              <h3 className="
+text-2xl
+font-bold
+mb-4
+">
+
+                Pro Tip
+
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                EMI depends on:
+              <p className="
+text-slate-300
+leading-8
+">
+
+                Increasing EMI slightly every
+                year can dramatically reduce
+                loan tenure and save lakhs
+                in interest payments.
+
               </p>
 
-              <ul className="list-disc ml-8 mt-4 space-y-3 text-gray-700 dark:text-gray-300">
+            </div>
+
+            <div className="
+bg-slate-950/60
+border
+border-slate-800
+rounded-3xl
+p-6
+">
+
+              <AlertTriangle
+                className="
+w-10
+h-10
+text-yellow-400
+mb-4
+"
+              />
+
+              <h3 className="
+text-2xl
+font-bold
+mb-4
+">
+
+                Important Insights
+
+              </h3>
+
+              <ul className="
+space-y-3
+text-slate-300
+leading-7
+">
 
                 <li>
-                  Loan amount
+                  • Longer tenure lowers EMI but increases interest
                 </li>
 
                 <li>
-                  Interest rate
+                  • Small rate changes create huge cost impact
                 </li>
 
                 <li>
-                  Loan tenure
+                  • Prepayments reduce interest significantly
                 </li>
 
               </ul>
 
             </div>
 
-            <div>
+            <div className="
+bg-yellow-500/10
+border
+border-yellow-500/20
+rounded-3xl
+p-6
+">
 
-              <h3 className="text-2xl font-semibold mb-3">
-                Why EMI Planning Matters?
-              </h3>
+              <h3 className="
+text-2xl
+font-bold
+mb-4
+text-yellow-300
+">
 
-              <ul className="list-disc ml-8 space-y-4 text-gray-700 dark:text-gray-300">
-
-                <li>
-                  Prevents excessive debt burden
-                </li>
-
-                <li>
-                  Helps manage monthly cash flow
-                </li>
-
-                <li>
-                  Reduces long-term interest cost
-                </li>
-
-                <li>
-                  Supports better financial planning
-                </li>
-
-              </ul>
-
-            </div>
-
-            <div>
-
-              <h3 className="text-2xl font-semibold mb-3">
-                Important EMI Insights
-              </h3>
-
-              <ul className="list-disc ml-8 space-y-4 text-gray-700 dark:text-gray-300">
-
-                <li>
-                  Longer tenure reduces EMI but increases total interest.
-                </li>
-
-                <li>
-                  Higher down payment reduces loan burden.
-                </li>
-
-                <li>
-                  Small interest rate differences can create large cost differences.
-                </li>
-
-                <li>
-                  Prepayments can significantly reduce interest costs.
-                </li>
-
-              </ul>
-
-            </div>
-
-            <div className="bg-green-500/10 rounded-2xl p-6">
-
-              <h3 className="text-2xl font-semibold mb-3">
-                Good Financial Practice
-              </h3>
-
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                Ideally, total EMIs should remain within a
-                manageable percentage of monthly income to
-                maintain financial stability.
-              </p>
-
-            </div>
-
-            <div className="bg-yellow-500/10 rounded-2xl p-6">
-
-              <h3 className="text-2xl font-semibold mb-3">
                 Disclaimer
+
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                EMI calculations are estimates and may vary
-                depending on lender charges, processing fees,
-                floating interest rates, and loan terms.
+              <p className="
+text-slate-300
+leading-8
+">
+
+                EMI calculations are estimates.
+                Actual repayment may vary due
+                to floating rates, lender fees,
+                and prepayments.
+
               </p>
 
             </div>
@@ -375,6 +1137,7 @@ dark:border-gray-700
           </div>
 
         </div>
+
       </div>
 
     </main>

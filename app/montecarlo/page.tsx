@@ -18,6 +18,7 @@ import {
   Tooltip,
   CartesianGrid,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 
 export default function MonteCarloPage() {
@@ -57,241 +58,637 @@ export default function MonteCarloPage() {
       simulations
     );
 
+  const totalInvested =
+    monthlyInvestment * 12 * years;
+
   return (
     <main className="
 min-h-screen
 bg-gray-100
 dark:bg-black
-p-8
 text-black
 dark:text-white
 ">
 
-      <div className="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-6 rounded-xl shadow">
+      {/* HERO SECTION */}
+      <section className="
+relative
+overflow-hidden
+border-b
+border-gray-200
+dark:border-gray-800
+bg-gradient-to-br
+from-purple-100
+via-white
+to-pink-100
+dark:from-purple-950/40
+dark:via-black
+dark:to-pink-950/20
+">
 
-        <h1 className="text-4xl font-bold text-black dark:text-white mb-8">
-          Monte Carlo Simulation
-        </h1>
+        <div className="
+absolute
+inset-0
+bg-[radial-gradient(circle_at_top_right,rgba(168,85,247,0.15),transparent_30%)]
+dark:bg-[radial-gradient(circle_at_top_right,rgba(168,85,247,0.25),transparent_30%)]
+" />
 
-        {/* INPUTS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="
+relative
+max-w-7xl
+mx-auto
+px-6
+lg:px-10
+py-16
+lg:py-24
+">
 
-          {/* SIP */}
-          <div>
-            <label className="block mb-2 font-medium">
-              Monthly SIP (₹)
-            </label>
+          <div className="
+inline-flex
+items-center
+gap-2
+bg-purple-500/10
+text-purple-700
+dark:text-purple-300
+px-4
+py-2
+rounded-full
+text-sm
+font-semibold
+mb-6
+">
 
-            <input
-              type="number"
-              value={monthlyInvestment}
-              onChange={(e) =>
-                setMonthlyInvestment(
-                  Number(
-                    e.target.value
-                  )
-                )
-              }
-              className="
-w-full
-border
-p-3
-rounded-lg
-bg-white
-text-black
-dark:bg-gray-800
-dark:text-white
-dark:border-gray-700
-"
-            />
+            📈 Probability Based Investing
+
           </div>
 
-          {/* YEARS */}
-          <div>
-            <label className="block mb-2 font-medium">
-              Investment Duration
-            </label>
+          <h1 className="
+text-5xl
+lg:text-7xl
+font-black
+leading-tight
+tracking-tight
+max-w-4xl
+">
 
-            <input
-              type="number"
-              value={years}
-              onChange={(e) =>
-                setYears(
-                  Number(
-                    e.target.value
-                  )
-                )
-              }
-              className="
-w-full
+            Monte Carlo
+            <span className="
+block
+bg-gradient-to-r
+from-purple-600
+to-pink-600
+bg-clip-text
+text-transparent
+">
+              Simulation
+            </span>
+
+          </h1>
+
+          <p className="
+mt-6
+text-lg
+lg:text-xl
+text-gray-700
+dark:text-gray-300
+max-w-3xl
+leading-9
+">
+
+            Simulate thousands of possible market outcomes to
+            understand best-case, worst-case, and median
+            investment scenarios under market volatility.
+
+          </p>
+
+          {/* HERO CARDS */}
+          <div className="
+grid
+grid-cols-1
+md:grid-cols-3
+gap-5
+mt-12
+">
+
+            <div className="
+bg-white/70
+dark:bg-gray-900/70
+backdrop-blur-xl
 border
-p-3
-rounded-lg
-bg-white
-text-black
-dark:bg-gray-800
-dark:text-white
-dark:border-gray-700
-"
-            />
-          </div>
+border-white/20
+dark:border-gray-800
+rounded-3xl
+p-6
+shadow-xl
+">
 
-          {/* RETURN */}
-          <div>
-            <label className="block mb-2 font-medium">
-              Expected Return (%)
-            </label>
+              <p className="
+text-sm
+text-gray-500
+dark:text-gray-400
+mb-2
+">
+                Monthly Investment
+              </p>
 
-            <input
-              type="number"
-              value={expectedReturn}
-              onChange={(e) =>
-                setExpectedReturn(
-                  Number(
-                    e.target.value
+              <h2 className="
+text-3xl
+font-black
+">
+                ₹{
+                  formatIndianCurrency(
+                    monthlyInvestment
                   )
-                )
-              }
-              className="
-w-full
+                }
+              </h2>
+
+            </div>
+
+            <div className="
+bg-white/70
+dark:bg-gray-900/70
+backdrop-blur-xl
 border
-p-3
-rounded-lg
-bg-white
-text-black
-dark:bg-gray-800
-dark:text-white
-dark:border-gray-700
-"
-            />
-          </div>
+border-white/20
+dark:border-gray-800
+rounded-3xl
+p-6
+shadow-xl
+">
 
-          {/* VOLATILITY */}
-          <div>
-            <label className="block mb-2 font-medium">
-              Volatility (%)
-            </label>
+              <p className="
+text-sm
+text-gray-500
+dark:text-gray-400
+mb-2
+">
+                Investment Horizon
+              </p>
 
-            <input
-              type="number"
-              value={volatility}
-              onChange={(e) =>
-                setVolatility(
-                  Number(
-                    e.target.value
+              <h2 className="
+text-3xl
+font-black
+">
+                {years} Years
+              </h2>
+
+            </div>
+
+            <div className="
+bg-white/70
+dark:bg-gray-900/70
+backdrop-blur-xl
+border
+border-white/20
+dark:border-gray-800
+rounded-3xl
+p-6
+shadow-xl
+">
+
+              <p className="
+text-sm
+text-gray-500
+dark:text-gray-400
+mb-2
+">
+                Total Invested
+              </p>
+
+              <h2 className="
+text-3xl
+font-black
+">
+                ₹{
+                  formatIndianCurrency(
+                    totalInvested
                   )
-                )
-              }
-              className="
-w-full
-border
-p-3
-rounded-lg
-bg-white
-text-black
-dark:bg-gray-800
-dark:text-white
-dark:border-gray-700
-"
-            />
-          </div>
+                }
+              </h2>
 
-          {/* SIMULATIONS */}
-          <div>
-            <label className="block mb-2 font-medium">
-              Simulations
-            </label>
+            </div>
 
-            <input
-              type="number"
-              value={simulations}
-              onChange={(e) =>
-                setSimulations(
-                  Number(
-                    e.target.value
-                  )
-                )
-              }
-              className="
-w-full
-border
-p-3
-rounded-lg
-bg-white
-text-black
-dark:bg-gray-800
-dark:text-white
-dark:border-gray-700
-"
-            />
           </div>
 
         </div>
 
-        {/* RESULTS */}
-        <div className="grid grid-cols-1 md:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      </section>
 
-          {/* BEST */}
-          <div className="bg-green-50 dark:bg-green-950 p-5 rounded-xl">
+      {/* MAIN SECTION */}
+      <section className="
+max-w-7xl
+mx-auto
+px-6
+lg:px-10
+py-14
+">
 
-            <h2 className="text-gray-600 dark:text-gray-300 mb-2">
-              Best Case
+        {/* INPUTS */}
+        <div className="
+grid
+grid-cols-1
+lg:grid-cols-2
+gap-8
+">
+
+          {/* LEFT */}
+          <div className="
+bg-white
+dark:bg-gray-900
+border
+border-gray-200
+dark:border-gray-800
+rounded-3xl
+p-8
+shadow-sm
+">
+
+            <h2 className="
+text-3xl
+font-bold
+mb-8
+">
+              Simulation Inputs
             </h2>
 
-            <p className="text-3xl font-bold text-green-700">
-              ₹{
-                formatIndianCurrency(
-                  simulationData.bestCase.finalValue
-                )
-              }
-            </p>
+            <div className="space-y-7">
+
+              {/* SIP */}
+              <div>
+
+                <div className="
+flex
+justify-between
+mb-3
+">
+
+                  <label className="font-semibold">
+                    Monthly SIP
+                  </label>
+
+                  <span className="
+text-purple-600
+font-bold
+">
+                    ₹{
+                      formatIndianCurrency(
+                        monthlyInvestment
+                      )
+                    }
+                  </span>
+
+                </div>
+
+                <input
+                  type="range"
+                  min="1000"
+                  max="500000"
+                  step="1000"
+                  value={monthlyInvestment}
+                  onChange={(e) =>
+                    setMonthlyInvestment(
+                      Number(e.target.value)
+                    )
+                  }
+                  className="w-full"
+                />
+
+              </div>
+
+              {/* YEARS */}
+              <div>
+
+                <div className="
+flex
+justify-between
+mb-3
+">
+
+                  <label className="font-semibold">
+                    Duration
+                  </label>
+
+                  <span className="
+text-purple-600
+font-bold
+">
+                    {years} Years
+                  </span>
+
+                </div>
+
+                <input
+                  type="range"
+                  min="1"
+                  max="40"
+                  step="1"
+                  value={years}
+                  onChange={(e) =>
+                    setYears(
+                      Number(e.target.value)
+                    )
+                  }
+                  className="w-full"
+                />
+
+              </div>
+
+              {/* RETURN */}
+              <div>
+
+                <div className="
+flex
+justify-between
+mb-3
+">
+
+                  <label className="font-semibold">
+                    Expected Return
+                  </label>
+
+                  <span className="
+text-purple-600
+font-bold
+">
+                    {expectedReturn}%
+                  </span>
+
+                </div>
+
+                <input
+                  type="range"
+                  min="1"
+                  max="25"
+                  step="1"
+                  value={expectedReturn}
+                  onChange={(e) =>
+                    setExpectedReturn(
+                      Number(e.target.value)
+                    )
+                  }
+                  className="w-full"
+                />
+
+              </div>
+
+              {/* VOLATILITY */}
+              <div>
+
+                <div className="
+flex
+justify-between
+mb-3
+">
+
+                  <label className="font-semibold">
+                    Volatility
+                  </label>
+
+                  <span className="
+text-purple-600
+font-bold
+">
+                    {volatility}%
+                  </span>
+
+                </div>
+
+                <input
+                  type="range"
+                  min="1"
+                  max="50"
+                  step="1"
+                  value={volatility}
+                  onChange={(e) =>
+                    setVolatility(
+                      Number(e.target.value)
+                    )
+                  }
+                  className="w-full"
+                />
+
+              </div>
+
+              {/* SIMULATIONS */}
+              <div>
+
+                <div className="
+flex
+justify-between
+mb-3
+">
+
+                  <label className="font-semibold">
+                    Simulations
+                  </label>
+
+                  <span className="
+text-purple-600
+font-bold
+">
+                    {simulations}
+                  </span>
+
+                </div>
+
+                <input
+                  type="range"
+                  min="10"
+                  max="1000"
+                  step="10"
+                  value={simulations}
+                  onChange={(e) =>
+                    setSimulations(
+                      Number(e.target.value)
+                    )
+                  }
+                  className="w-full"
+                />
+
+              </div>
+
+            </div>
 
           </div>
 
-          {/* MEDIAN */}
-          <div className="bg-blue-50 dark:bg-blue-950 p-5 rounded-xl">
+          {/* RIGHT */}
+          <div className="
+grid
+grid-cols-1
+gap-6
+">
 
-            <h2 className="text-gray-600 dark:text-gray-300 mb-2">
-              Median Case
-            </h2>
+            {/* BEST */}
+            <div className="
+bg-gradient-to-br
+from-green-500
+to-emerald-700
+rounded-3xl
+p-7
+text-white
+shadow-xl
+">
 
-            <p className="text-3xl font-bold text-blue-700">
-              ₹{
-                formatIndianCurrency(
-                  simulationData.medianCase.finalValue
-                )
-              }
-            </p>
+              <p className="
+text-green-100
+mb-2
+">
+                Best Case Scenario
+              </p>
 
-          </div>
+              <h2 className="
+text-4xl
+font-black
+mb-4
+">
+                ₹{
+                  formatIndianCurrency(
+                    simulationData.bestCase.finalValue
+                  )
+                }
+              </h2>
 
-          {/* WORST */}
-          <div className="bg-red-50 p-5 rounded-xl">
+              <p className="
+text-green-100
+leading-7
+">
+                Represents optimistic market performance
+                over the selected investment period.
+              </p>
 
-            <h2 className="text-gray-600 dark:text-gray-300 mb-2">
-              Worst Case
-            </h2>
+            </div>
 
-            <p className="text-3xl font-bold text-red-700">
-              ₹{
-                formatIndianCurrency(
-                  simulationData.worstCase.finalValue
-                )
-              }
-            </p>
+            {/* MEDIAN */}
+            <div className="
+bg-gradient-to-br
+from-blue-500
+to-indigo-700
+rounded-3xl
+p-7
+text-white
+shadow-xl
+">
+
+              <p className="
+text-blue-100
+mb-2
+">
+                Median Scenario
+              </p>
+
+              <h2 className="
+text-4xl
+font-black
+mb-4
+">
+                ₹{
+                  formatIndianCurrency(
+                    simulationData.medianCase.finalValue
+                  )
+                }
+              </h2>
+
+              <p className="
+text-blue-100
+leading-7
+">
+                Represents the most probable investment
+                outcome based on simulation assumptions.
+              </p>
+
+            </div>
+
+            {/* WORST */}
+            <div className="
+bg-gradient-to-br
+from-red-500
+to-rose-700
+rounded-3xl
+p-7
+text-white
+shadow-xl
+">
+
+              <p className="
+text-red-100
+mb-2
+">
+                Worst Case Scenario
+              </p>
+
+              <h2 className="
+text-4xl
+font-black
+mb-4
+">
+                ₹{
+                  formatIndianCurrency(
+                    simulationData.worstCase.finalValue
+                  )
+                }
+              </h2>
+
+              <p className="
+text-red-100
+leading-7
+">
+                Represents unfavorable market conditions
+                and prolonged volatility periods.
+              </p>
+
+            </div>
 
           </div>
 
         </div>
 
         {/* CHART */}
-        <div className="mt-12">
+        <div className="
+mt-12
+bg-white
+dark:bg-gray-900
+border
+border-gray-200
+dark:border-gray-800
+rounded-3xl
+p-8
+shadow-sm
+">
 
-          <h2 className="text-2xl font-bold mb-6">
-            Simulation Curves
-          </h2>
+          <div className="
+flex
+flex-col
+lg:flex-row
+lg:items-center
+lg:justify-between
+mb-10
+gap-4
+">
 
-          <div className="h-[500px]">
+            <div>
+
+              <h2 className="
+text-3xl
+font-bold
+mb-2
+">
+                Simulation Curves
+              </h2>
+
+              <p className="
+text-gray-600
+dark:text-gray-400
+leading-7
+">
+                Compare how different market conditions
+                can impact long-term wealth creation.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div className="h-[520px]">
 
             <ResponsiveContainer
               width="100%"
@@ -319,34 +716,45 @@ dark:border-gray-700
                   }
                 />
 
+                <Legend />
+
                 {/* BEST */}
                 <Line
+                  name="Best Case"
                   data={
                     simulationData.bestCase.yearlyData
                   }
                   type="monotone"
                   dataKey="value"
+                  strokeWidth={3}
                   dot={false}
+                  stroke="#16a34a"
                 />
 
                 {/* MEDIAN */}
                 <Line
+                  name="Median Case"
                   data={
                     simulationData.medianCase.yearlyData
                   }
                   type="monotone"
                   dataKey="value"
+                  strokeWidth={3}
                   dot={false}
+                  stroke="#2563eb"
                 />
 
                 {/* WORST */}
                 <Line
+                  name="Worst Case"
                   data={
                     simulationData.worstCase.yearlyData
                   }
                   type="monotone"
                   dataKey="value"
+                  strokeWidth={3}
                   dot={false}
+                  stroke="#dc2626"
                 />
 
               </LineChart>
@@ -356,11 +764,26 @@ dark:border-gray-700
           </div>
 
         </div>
+
         {/* INFO SECTION */}
+        <div className="
+mt-14
+bg-white
+dark:bg-gray-900
+border
+border-gray-200
+dark:border-gray-800
+rounded-3xl
+p-8
+lg:p-12
+shadow-sm
+">
 
-        <div className="mt-14 card">
-
-          <h2 className="text-4xl font-bold mb-8">
+          <h2 className="
+text-4xl
+font-black
+mb-10
+">
             Understanding Monte Carlo Simulation
           </h2>
 
@@ -368,135 +791,234 @@ dark:border-gray-700
 
             <div>
 
-              <h3 className="text-2xl font-semibold mb-3">
+              <h3 className="
+text-2xl
+font-bold
+mb-4
+">
                 What is Monte Carlo Simulation?
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
+              <p className="
+text-gray-700
+dark:text-gray-300
+leading-9
+text-lg
+">
                 Monte Carlo simulation models thousands of
-                possible market outcomes using random returns
-                to estimate the probability of investment success.
+                possible market outcomes using random return
+                assumptions to estimate future investment
+                performance under uncertainty.
               </p>
 
             </div>
 
             <div>
 
-              <h3 className="text-2xl font-semibold mb-3">
-                Why Monte Carlo Matters?
+              <h3 className="
+text-2xl
+font-bold
+mb-4
+">
+                Why It Matters?
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                Real markets do not generate fixed returns
-                every year. Monte Carlo simulation helps
-                understand uncertainty, volatility, and
-                risk in long-term investing.
+              <p className="
+text-gray-700
+dark:text-gray-300
+leading-9
+text-lg
+">
+                Real-world investing is unpredictable.
+                Markets rarely generate fixed returns every
+                year. Monte Carlo analysis helps investors
+                understand risk, volatility, uncertainty,
+                and possible long-term outcomes.
               </p>
 
             </div>
 
+            {/* INSIGHTS */}
+            <div className="
+grid
+grid-cols-1
+md:grid-cols-2
+gap-6
+">
+
+              <div className="
+bg-purple-500/10
+rounded-3xl
+p-6
+">
+
+                <h3 className="
+text-2xl
+font-bold
+mb-4
+">
+                  What It Helps Analyze
+                </h3>
+
+                <ul className="
+space-y-3
+text-gray-700
+dark:text-gray-300
+leading-8
+">
+
+                  <li>• Best-case outcomes</li>
+                  <li>• Worst-case outcomes</li>
+                  <li>• Median probabilities</li>
+                  <li>• Portfolio survival chances</li>
+                  <li>• Retirement success rates</li>
+
+                </ul>
+
+              </div>
+
+              <div className="
+bg-blue-500/10
+rounded-3xl
+p-6
+">
+
+                <h3 className="
+text-2xl
+font-bold
+mb-4
+">
+                  Key Insight
+                </h3>
+
+                <p className="
+text-gray-700
+dark:text-gray-300
+leading-8
+">
+
+                  Two portfolios with the same average
+                  return can generate very different
+                  outcomes depending on volatility and
+                  sequence of returns.
+
+                </p>
+
+              </div>
+
+            </div>
+
+            {/* USE CASES */}
             <div>
 
-              <h3 className="text-2xl font-semibold mb-3">
-                What the Simulation Shows
+              <h3 className="
+text-2xl
+font-bold
+mb-5
+">
+                Common Use Cases
               </h3>
 
-              <ul className="list-disc ml-8 space-y-4 text-gray-700 dark:text-gray-300">
+              <div className="
+grid
+grid-cols-1
+md:grid-cols-2
+gap-5
+">
 
-                <li>
-                  Best-case outcomes
-                </li>
+                {
+                  [
+                    "Retirement Planning",
+                    "FIRE Analysis",
+                    "Portfolio Risk Analysis",
+                    "Goal Probability Planning",
+                    "Withdrawal Sustainability",
+                    "Long-Term Wealth Forecasting",
+                  ].map((item) => (
 
-                <li>
-                  Worst-case outcomes
-                </li>
+                    <div
+                      key={item}
+                      className="
+bg-gray-100
+dark:bg-gray-800
+rounded-2xl
+p-5
+font-medium
+"
+                    >
 
-                <li>
-                  Average expected outcomes
-                </li>
+                      {item}
 
-                <li>
-                  Probability of reaching goals
-                </li>
+                    </div>
 
-                <li>
-                  Risk of portfolio failure
-                </li>
+                  ))
+                }
 
-              </ul>
+              </div>
 
             </div>
 
-            <div className="bg-blue-500/10 rounded-2xl p-6">
+            {/* PRO TIP */}
+            <div className="
+bg-green-500/10
+rounded-3xl
+p-8
+">
 
-              <h3 className="text-2xl font-semibold mb-3">
-                Important Insight
-              </h3>
-
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                Two portfolios with the same average return
-                can produce very different outcomes depending
-                on volatility and sequence of returns.
-              </p>
-
-            </div>
-
-            <div>
-
-              <h3 className="text-2xl font-semibold mb-3">
-                Common Uses of Monte Carlo Simulation
-              </h3>
-
-              <ul className="list-disc ml-8 space-y-4 text-gray-700 dark:text-gray-300">
-
-                <li>
-                  Retirement planning
-                </li>
-
-                <li>
-                  FIRE analysis
-                </li>
-
-                <li>
-                  Portfolio risk analysis
-                </li>
-
-                <li>
-                  Financial goal probability analysis
-                </li>
-
-                <li>
-                  Safe withdrawal testing
-                </li>
-
-              </ul>
-
-            </div>
-
-            <div className="bg-green-500/10 rounded-2xl p-6">
-
-              <h3 className="text-2xl font-semibold mb-3">
+              <h3 className="
+text-2xl
+font-bold
+mb-4
+">
                 Pro Tip
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                Long investment horizons and diversified
-                portfolios generally improve the probability
-                of successful outcomes.
+              <p className="
+text-gray-700
+dark:text-gray-300
+leading-8
+text-lg
+">
+
+                Long investment horizons, diversified
+                portfolios, and disciplined SIP investing
+                generally improve the probability of
+                successful investment outcomes.
+
               </p>
 
             </div>
 
-            <div className="bg-yellow-500/10 rounded-2xl p-6">
+            {/* DISCLAIMER */}
+            <div className="
+bg-yellow-500/10
+rounded-3xl
+p-8
+border
+border-yellow-500/20
+">
 
-              <h3 className="text-2xl font-semibold mb-3">
+              <h3 className="
+text-2xl
+font-bold
+mb-4
+">
                 Disclaimer
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-300 leading-8">
-                Monte Carlo simulations are based on probabilistic
-                assumptions and historical-style volatility.
-                Actual market outcomes may differ significantly.
+              <p className="
+text-gray-700
+dark:text-gray-300
+leading-8
+text-lg
+">
+
+                Monte Carlo simulations are based on
+                probabilistic assumptions and modeled
+                market volatility. Actual investment
+                performance may differ significantly
+                from simulated outcomes.
+
               </p>
 
             </div>
@@ -505,7 +1027,7 @@ dark:border-gray-700
 
         </div>
 
-      </div>
+      </section>
 
     </main>
   );
