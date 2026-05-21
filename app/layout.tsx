@@ -32,6 +32,10 @@ export const metadata = {
     "Real Estate vs SIP",
   ],
 
+  verification: {
+    google: "rYMGDvdPSZiI1Upg1g8FeRahjJJzXY4X_CN6esWfjZM",
+  },
+
   authors: [
     {
       name: "Pranshu Sachan",
