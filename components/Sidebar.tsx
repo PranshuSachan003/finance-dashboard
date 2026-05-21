@@ -94,7 +94,7 @@ const calculatorItems = [
 const educationItems = [
 
   {
-    label: "Wealth Stories",
+    label: "Stories",
     href: "/wealth-stories",
   },
 ];
