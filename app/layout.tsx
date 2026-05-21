@@ -2,6 +2,8 @@ import "./globals.css";
 
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import GoogleAnalytics
+from "../components/GoogleAnalytics";
 
 export const metadata = {
 
@@ -106,7 +108,7 @@ export default function RootLayout({
           </main>
 
         </div>
-
+        <GoogleAnalytics />
       </body>
 
     </html>
