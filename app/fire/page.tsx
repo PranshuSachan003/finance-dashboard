@@ -411,11 +411,10 @@ export default function FireCalculator() {
 
           {/* GAP / SURPLUS */}
           <div
-            className={`rounded-3xl p-8 shadow-xl ${
-              shortfall > 0
+            className={`rounded-3xl p-8 shadow-xl ${shortfall > 0
                 ? "bg-red-100 text-slate-900"
                 : "bg-green-100 text-slate-900"
-            }`}
+              }`}
           >
 
             <h2 className="text-xl font-semibold mb-4">
@@ -423,11 +422,10 @@ export default function FireCalculator() {
             </h2>
 
             <p
-              className={`text-4xl font-bold break-words ${
-                shortfall > 0
+              className={`text-4xl font-bold break-words ${shortfall > 0
                   ? "text-red-700"
                   : "text-green-700"
-              }`}
+                }`}
             >
               ₹
               {
@@ -778,6 +776,369 @@ export default function FireCalculator() {
           </div>
 
         </div>
+
+        {/* SEO CONTENT SECTION */}
+        <section className="
+mt-14
+bg-slate-900/80
+border
+border-slate-800
+rounded-[32px]
+p-8
+">
+
+          <div className="
+max-w-5xl
+">
+
+            <h2 className="
+text-4xl
+font-bold
+mb-8
+leading-tight
+">
+              FIRE Calculator – Plan Financial Independence & Early Retirement
+            </h2>
+
+            <div className="
+space-y-8
+text-slate-300
+leading-8
+text-lg
+">
+
+              <p>
+                Our FIRE Calculator helps you estimate how much money you need
+                to achieve Financial Independence and Retire Early (FIRE).
+                By considering inflation, expected returns, withdrawal rate,
+                SIP investments, and your current savings, this calculator
+                projects the retirement corpus required to sustain your lifestyle.
+              </p>
+
+              <p>
+                FIRE planning focuses on building sufficient investment wealth
+                so that passive income generated from investments can cover
+                your yearly expenses without depending on active employment.
+                This calculator helps investors understand whether their current
+                investment strategy is enough to reach early retirement goals.
+              </p>
+
+              {/* WHAT IS FIRE */}
+              <div>
+
+                <h3 className="
+text-2xl
+font-bold
+text-white
+mb-4
+">
+                  What is FIRE?
+                </h3>
+
+                <p>
+                  FIRE stands for Financial Independence, Retire Early.
+                  The concept encourages disciplined investing,
+                  aggressive savings, and long-term wealth compounding
+                  to achieve retirement much earlier than traditional retirement age.
+                </p>
+
+                <p className="mt-4">
+                  The FIRE movement has gained popularity among investors
+                  seeking freedom from traditional jobs and aiming for
+                  flexible lifestyles supported by passive income.
+                </p>
+
+              </div>
+
+              {/* HOW FIRE CALCULATOR WORKS */}
+              <div>
+
+                <h3 className="
+text-2xl
+font-bold
+text-white
+mb-4
+">
+                  How the FIRE Calculator Works
+                </h3>
+
+                <p>
+                  This FIRE retirement calculator estimates your future expenses
+                  using inflation-adjusted projections and calculates the
+                  retirement corpus needed based on your selected safe withdrawal rate.
+                </p>
+
+                <p className="mt-4">
+                  It also projects the future value of your current investments
+                  and SIP contributions using expected annual returns.
+                  The calculator then compares your projected wealth against
+                  the required FIRE corpus to identify any retirement gap or surplus.
+                </p>
+
+              </div>
+
+              {/* KEY FEATURES */}
+              <div>
+
+                <h3 className="
+text-2xl
+font-bold
+text-white
+mb-4
+">
+                  Key Features of This FIRE Calculator
+                </h3>
+
+                <ul className="
+list-disc
+ml-8
+space-y-3
+">
+
+                  <li>
+                    Inflation-adjusted retirement planning
+                  </li>
+
+                  <li>
+                    FIRE corpus estimation using withdrawal rate
+                  </li>
+
+                  <li>
+                    SIP and existing investment growth projection
+                  </li>
+
+                  <li>
+                    Wealth growth charts and compounding analysis
+                  </li>
+
+                  <li>
+                    Retirement shortfall and surplus calculation
+                  </li>
+
+                  <li>
+                    FIRE planning insights for long-term investors
+                  </li>
+
+                </ul>
+
+              </div>
+
+              {/* TYPES OF FIRE */}
+              <div>
+
+                <h3 className="
+text-2xl
+font-bold
+text-white
+mb-4
+">
+                  Types of FIRE
+                </h3>
+
+                <p>
+                  FIRE planning can vary based on lifestyle expectations
+                  and retirement spending goals:
+                </p>
+
+                <ul className="
+list-disc
+ml-8
+space-y-3
+mt-4
+">
+
+                  <li>
+                    Lean FIRE – Minimalist lifestyle with lower expenses
+                  </li>
+
+                  <li>
+                    Regular FIRE – Balanced retirement lifestyle
+                  </li>
+
+                  <li>
+                    Fat FIRE – Luxury retirement with higher spending
+                  </li>
+
+                  <li>
+                    Coast FIRE – Investments grow while reducing future contributions
+                  </li>
+
+                </ul>
+
+              </div>
+
+              {/* IMPORTANT FIRE FACTORS */}
+              <div>
+
+                <h3 className="
+text-2xl
+font-bold
+text-white
+mb-4
+">
+                  Important Factors in FIRE Planning
+                </h3>
+
+                <ul className="
+list-disc
+ml-8
+space-y-3
+">
+
+                  <li>
+                    Inflation significantly increases future living expenses
+                  </li>
+
+                  <li>
+                    Higher savings rates accelerate financial independence
+                  </li>
+
+                  <li>
+                    Long-term compounding is the biggest wealth creator
+                  </li>
+
+                  <li>
+                    Conservative withdrawal rates improve portfolio sustainability
+                  </li>
+
+                  <li>
+                    Healthcare and emergency expenses must be planned carefully
+                  </li>
+
+                  <li>
+                    Market volatility can impact retirement success
+                  </li>
+
+                </ul>
+
+              </div>
+
+              {/* FIRE FORMULA */}
+              <div>
+
+                <h3 className="
+text-2xl
+font-bold
+text-white
+mb-4
+">
+                  Popular FIRE Formula
+                </h3>
+
+                <p>
+                  One commonly used approach in FIRE planning is the 4% Rule.
+                  According to this rule:
+                </p>
+
+                <div className="
+bg-blue-500/10
+border
+border-blue-500/20
+rounded-2xl
+p-6
+mt-5
+">
+
+                  <p className="
+text-xl
+font-semibold
+text-white
+">
+                    FIRE Corpus = Annual Expenses ÷ Withdrawal Rate
+                  </p>
+
+                  <p className="
+mt-4
+">
+                    Example:
+                  </p>
+
+                  <ul className="
+list-disc
+ml-8
+space-y-2
+mt-3
+">
+
+                    <li>
+                      Annual Expense = ₹12,00,000
+                    </li>
+
+                    <li>
+                      Withdrawal Rate = 4%
+                    </li>
+
+                    <li>
+                      Required FIRE Corpus ≈ ₹3 Crore
+                    </li>
+
+                  </ul>
+
+                </div>
+
+              </div>
+
+              {/* WHY USE */}
+              <div>
+
+                <h3 className="
+text-2xl
+font-bold
+text-white
+mb-4
+">
+                  Why Use a FIRE Calculator?
+                </h3>
+
+                <p>
+                  A FIRE calculator provides clarity on how much wealth
+                  you need for retirement and whether your current savings
+                  strategy is sufficient. It helps investors make informed
+                  decisions regarding SIP investments, retirement planning,
+                  asset allocation, and long-term financial goals.
+                </p>
+
+                <p className="mt-4">
+                  Whether your goal is early retirement, passive income,
+                  or achieving financial freedom, this calculator helps
+                  estimate the investment corpus required to sustain
+                  your lifestyle over decades.
+                </p>
+
+              </div>
+
+              {/* DISCLAIMER */}
+              <div className="
+bg-yellow-500/10
+border
+border-yellow-500/20
+rounded-2xl
+p-6
+">
+
+                <h3 className="
+text-2xl
+font-bold
+text-yellow-300
+mb-4
+">
+                  Disclaimer
+                </h3>
+
+                <p>
+                  FIRE projections are based on estimated returns,
+                  inflation assumptions, SIP investments, and withdrawal rates.
+                  Actual outcomes may vary depending on market performance,
+                  taxes, lifestyle changes, healthcare costs, and future economic conditions.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
 
       </div>
 

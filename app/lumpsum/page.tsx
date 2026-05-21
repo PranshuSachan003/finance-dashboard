@@ -408,6 +408,261 @@ export default function LumpsumPage() {
 
         </div>
 
+        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 shadow-xl">
+
+          {/* FAQ + SEO SECTION */}
+
+          <div className="mt-16 space-y-12">
+
+            {/* FAQ */}
+
+            <div>
+
+              <h2 className="text-4xl font-bold mb-8">
+                Frequently Asked Questions
+              </h2>
+
+              <div className="space-y-8">
+
+                <div>
+
+                  <h3 className="text-2xl font-semibold text-white mb-3">
+                    Is lumpsum investment better than SIP?
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Lumpsum investing can generate higher returns if invested
+                    during attractive market valuations and held for long durations.
+                    SIPs, however, reduce timing risk by investing gradually.
+                  </p>
+
+                </div>
+
+                <div>
+
+                  <h3 className="text-2xl font-semibold text-white mb-3">
+                    When is lumpsum investing suitable?
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Lumpsum investing is commonly suitable when investors receive
+                    bonuses, inheritance, business proceeds, or large accumulated savings
+                    that can remain invested for long periods.
+                  </p>
+
+                </div>
+
+                <div>
+
+                  <h3 className="text-2xl font-semibold text-white mb-3">
+                    Can lumpsum investing create long-term wealth?
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Yes. Long-term compounding on a large initial investment
+                    can create substantial wealth over decades if investments
+                    remain disciplined and patient.
+                  </p>
+
+                </div>
+
+                <div>
+
+                  <h3 className="text-2xl font-semibold text-white mb-3">
+                    Does inflation impact lumpsum returns?
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Inflation reduces future purchasing power significantly over
+                    long durations. Inflation-adjusted returns are therefore
+                    important while evaluating actual wealth creation.
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* COMMON MISTAKES */}
+
+            <div>
+
+              <h2 className="text-4xl font-bold mb-8">
+                Common Lumpsum Investing Mistakes
+              </h2>
+
+              <div className="grid md:grid-cols-2 gap-6">
+
+                <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-6">
+
+                  <h3 className="text-2xl font-semibold text-red-300 mb-3">
+                    Investing Without Emergency Fund
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Investors should maintain sufficient emergency reserves
+                    before deploying large amounts into market-linked investments.
+                  </p>
+
+                </div>
+
+                <div className="bg-orange-500/10 border border-orange-500/20 rounded-2xl p-6">
+
+                  <h3 className="text-2xl font-semibold text-orange-300 mb-3">
+                    Panic Selling During Market Crash
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Short-term volatility often causes emotional decisions.
+                    Long-term investing generally rewards patience and discipline.
+                  </p>
+
+                </div>
+
+                <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-2xl p-6">
+
+                  <h3 className="text-2xl font-semibold text-yellow-300 mb-3">
+                    Ignoring Inflation
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Nominal returns can appear attractive, but inflation-adjusted
+                    purchasing power matters more for real wealth creation.
+                  </p>
+
+                </div>
+
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-6">
+
+                  <h3 className="text-2xl font-semibold text-blue-300 mb-3">
+                    Short-Term Investing Expectations
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Equity investments may remain volatile in the short term.
+                    Long holding periods generally improve compounding outcomes.
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* LUMPSUM VS SIP */}
+
+            <div className="bg-slate-800 rounded-3xl p-8">
+
+              <h2 className="text-4xl font-bold mb-8">
+                Lumpsum vs SIP Investing
+              </h2>
+
+              <div className="space-y-6 text-slate-300 leading-8">
+
+                <p>
+                  SIP investing spreads investments gradually over time,
+                  helping reduce timing risk and emotional investing decisions.
+                </p>
+
+                <p>
+                  Lumpsum investing deploys the entire capital immediately,
+                  allowing the full amount to benefit from long-term compounding.
+                </p>
+
+                <p>
+                  SIPs are generally preferred for salaried investors with
+                  regular income, while lumpsum investing may suit investors
+                  with large available capital and long investment horizons.
+                </p>
+
+                <ul className="list-disc ml-8 space-y-3">
+
+                  <li>SIP reduces timing risk</li>
+
+                  <li>Lumpsum maximizes compounding duration</li>
+
+                  <li>SIP builds investing discipline</li>
+
+                  <li>Lumpsum works well during market corrections</li>
+
+                </ul>
+
+              </div>
+
+            </div>
+
+            {/* MARKET INSIGHT */}
+
+            <div className="bg-green-500/10 border border-green-500/20 rounded-3xl p-8">
+
+              <h2 className="text-4xl font-bold mb-6">
+                Long-Term Investing Insight
+              </h2>
+
+              <p className="text-slate-300 leading-8 text-lg">
+
+                The biggest advantage of lumpsum investing is time.
+                Capital invested early gets more years to compound,
+                often leading to exponential wealth growth over decades.
+
+              </p>
+
+              <p className="text-slate-300 leading-8 text-lg mt-6">
+
+                Historically, long-term equity investing has rewarded
+                disciplined investors who remained patient during periods
+                of market volatility and economic uncertainty.
+
+              </p>
+
+            </div>
+
+            {/* RELATED CALCULATORS */}
+
+            <div>
+
+              <h2 className="text-4xl font-bold mb-8">
+                Explore More Calculators
+              </h2>
+
+              <div className="flex flex-wrap gap-4">
+
+                <a
+                  href="/sip"
+                  className="bg-slate-800 hover:bg-slate-700 px-6 py-4 rounded-2xl transition-colors"
+                >
+                  SIP Calculator
+                </a>
+
+                <a
+                  href="/fire"
+                  className="bg-slate-800 hover:bg-slate-700 px-6 py-4 rounded-2xl transition-colors"
+                >
+                  FIRE Calculator
+                </a>
+
+                <a
+                  href="/goal-planner"
+                  className="bg-slate-800 hover:bg-slate-700 px-6 py-4 rounded-2xl transition-colors"
+                >
+                  Goal Planner
+                </a>
+
+                <a
+                  href="/retirement-stress"
+                  className="bg-slate-800 hover:bg-slate-700 px-6 py-4 rounded-2xl transition-colors"
+                >
+                  Retirement Stress Test
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
       </div>
 
     </main>

@@ -838,8 +838,8 @@ mb-2
 
                 <h2
                   className={`text-3xl font-bold leading-tight ${swpData.depleted
-                      ? "text-red-400"
-                      : "text-green-400"
+                    ? "text-red-400"
+                    : "text-green-400"
                     }`}
                 >
 
@@ -1139,6 +1139,375 @@ leading-8
 
         </div>
 
+        {/* SEO CONTENT SECTION */}
+
+        <div className="
+mt-12
+bg-slate-900
+border
+border-slate-800
+rounded-3xl
+p-8
+">
+
+          <h2 className="
+text-4xl
+font-bold
+mb-8
+">
+            SWP Calculator Guide
+          </h2>
+
+          <div className="
+space-y-10
+text-slate-300
+leading-8
+">
+
+            {/* WHAT IS SWP */}
+
+            <div>
+
+              <h3 className="
+text-2xl
+font-semibold
+text-white
+mb-4
+">
+                What is a Systematic Withdrawal Plan (SWP)?
+              </h3>
+
+              <p>
+                A Systematic Withdrawal Plan (SWP) allows investors
+                to withdraw a fixed amount of money regularly from
+                mutual funds or investment portfolios while the
+                remaining corpus continues growing through compounding.
+              </p>
+
+              <p className="mt-4">
+                SWP is commonly used for retirement income,
+                passive income generation, financial independence,
+                and maintaining monthly cash flow without selling
+                the entire investment portfolio at once.
+              </p>
+
+            </div>
+
+            {/* WHY SWP */}
+
+            <div>
+
+              <h3 className="
+text-2xl
+font-semibold
+text-white
+mb-4
+">
+                Why Investors Use SWP
+              </h3>
+
+              <ul className="
+list-disc
+ml-8
+space-y-3
+">
+
+                <li>
+                  Creates predictable monthly income
+                </li>
+
+                <li>
+                  Helps maintain retirement lifestyle
+                </li>
+
+                <li>
+                  Remaining corpus continues compounding
+                </li>
+
+                <li>
+                  Better tax efficiency compared to fixed deposits
+                </li>
+
+                <li>
+                  Useful for early retirement and FIRE planning
+                </li>
+
+                <li>
+                  Reduces emotional investing decisions
+                </li>
+
+              </ul>
+
+            </div>
+
+            {/* SAFE WITHDRAWAL */}
+
+            <div>
+
+              <h3 className="
+text-2xl
+font-semibold
+text-white
+mb-4
+">
+                What is a Safe Withdrawal Rate?
+              </h3>
+
+              <p>
+                A safe withdrawal rate refers to the percentage
+                of portfolio value that can be withdrawn annually
+                without exhausting the investment corpus too early.
+              </p>
+
+              <p className="mt-4">
+                Many long-term retirement studies suggest that
+                withdrawal rates between 3% to 4% annually are
+                relatively sustainable for diversified portfolios,
+                though actual results depend on market returns,
+                inflation, taxes, and investment allocation.
+              </p>
+
+            </div>
+
+            {/* INFLATION */}
+
+            <div>
+
+              <h3 className="
+text-2xl
+font-semibold
+text-white
+mb-4
+">
+                Impact of Inflation on SWP
+              </h3>
+
+              <p>
+                Inflation continuously reduces purchasing power
+                over time. Even if your investment corpus survives,
+                rising expenses may reduce your real standard of living.
+              </p>
+
+              <p className="mt-4">
+                This is why inflation-adjusted calculations are
+                critical while planning retirement income and
+                long-term withdrawals.
+              </p>
+
+            </div>
+
+            {/* SWP VS FD */}
+
+            <div>
+
+              <h3 className="
+text-2xl
+font-semibold
+text-white
+mb-4
+">
+                SWP vs Fixed Deposit (FD)
+              </h3>
+
+              <div className="
+overflow-x-auto
+">
+
+                <table className="
+w-full
+border
+border-slate-700
+rounded-2xl
+overflow-hidden
+">
+
+                  <thead className="bg-slate-800">
+
+                    <tr>
+
+                      <th className="p-4 text-left">
+                        Feature
+                      </th>
+
+                      <th className="p-4 text-left">
+                        SWP
+                      </th>
+
+                      <th className="p-4 text-left">
+                        Fixed Deposit
+                      </th>
+
+                    </tr>
+
+                  </thead>
+
+                  <tbody>
+
+                    <tr className="border-t border-slate-700">
+
+                      <td className="p-4">
+                        Growth Potential
+                      </td>
+
+                      <td className="p-4">
+                        Higher
+                      </td>
+
+                      <td className="p-4">
+                        Limited
+                      </td>
+
+                    </tr>
+
+                    <tr className="border-t border-slate-700">
+
+                      <td className="p-4">
+                        Inflation Protection
+                      </td>
+
+                      <td className="p-4">
+                        Better
+                      </td>
+
+                      <td className="p-4">
+                        Weak
+                      </td>
+
+                    </tr>
+
+                    <tr className="border-t border-slate-700">
+
+                      <td className="p-4">
+                        Market Risk
+                      </td>
+
+                      <td className="p-4">
+                        Moderate
+                      </td>
+
+                      <td className="p-4">
+                        Low
+                      </td>
+
+                    </tr>
+
+                    <tr className="border-t border-slate-700">
+
+                      <td className="p-4">
+                        Long-Term Wealth
+                      </td>
+
+                      <td className="p-4">
+                        Strong
+                      </td>
+
+                      <td className="p-4">
+                        Limited
+                      </td>
+
+                    </tr>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+            </div>
+
+            {/* FAQ */}
+
+            <div>
+
+              <h3 className="
+text-2xl
+font-semibold
+text-white
+mb-6
+">
+                Frequently Asked Questions
+              </h3>
+
+              <div className="space-y-6">
+
+                <div className="
+bg-slate-800/60
+rounded-2xl
+p-6
+">
+
+                  <h4 className="
+text-xl
+font-semibold
+mb-3
+text-white
+">
+                    Is SWP good for retirement?
+                  </h4>
+
+                  <p>
+                    Yes, SWP is widely used for retirement
+                    income because it provides regular cash flow
+                    while allowing the remaining investment corpus
+                    to continue compounding.
+                  </p>
+
+                </div>
+
+                <div className="
+bg-slate-800/60
+rounded-2xl
+p-6
+">
+
+                  <h4 className="
+text-xl
+font-semibold
+mb-3
+text-white
+">
+                    Can SWP beat inflation?
+                  </h4>
+
+                  <p>
+                    SWP invested in equity-oriented mutual funds
+                    has better chances of beating inflation over
+                    long periods compared to traditional fixed-income products.
+                  </p>
+
+                </div>
+
+                <div className="
+bg-slate-800/60
+rounded-2xl
+p-6
+">
+
+                  <h4 className="
+text-xl
+font-semibold
+mb-3
+text-white
+">
+                    What happens if market crashes during SWP?
+                  </h4>
+
+                  <p>
+                    Market crashes can reduce portfolio value
+                    significantly. Maintaining proper asset allocation,
+                    emergency cash buffers, and reasonable withdrawal
+                    rates helps improve portfolio survival.
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
       </div>
 
     </main>

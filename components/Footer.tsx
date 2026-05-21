@@ -69,6 +69,15 @@ export default function Footer() {
               </Link>
 
               <Link
+                href="/term-condition"
+                className="text-slate-400 hover:text-white transition-colors"
+              >
+
+                Terms & Conditions
+
+              </Link>
+
+              <Link
                 href="/wealth-stories"
                 className="text-slate-400 hover:text-white transition-colors"
               >
@@ -92,10 +101,16 @@ export default function Footer() {
 
             <p className="text-slate-400 leading-8">
 
-              This platform is intended for educational
-              purposes only and should not be considered
-              financial advice. Please consult a qualified
-              financial advisor before making investment decisions.
+              This platform is intended for educational and informational
+              purposes only and should not be considered financial,
+              investment, tax, or legal advice.
+
+              All calculators, projections, and financial tools provided
+              on this website are estimates based on assumptions and may
+              not reflect actual market conditions or future returns.
+
+              Please consult a qualified financial advisor before making
+              investment decisions.
 
             </p>
 
