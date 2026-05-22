@@ -8,6 +8,7 @@ import {
     Tooltip,
     ResponsiveContainer,
     CartesianGrid,
+    Legend,
 } from "recharts";
 
 type Props = {
@@ -23,18 +24,133 @@ function formatCurrency(
 ) {
 
     if (value >= 10000000) {
+
         return `₹${(
             value / 10000000
         ).toFixed(1)}Cr`;
+
     }
 
     if (value >= 100000) {
+
         return `₹${(
             value / 100000
         ).toFixed(1)}L`;
+
     }
 
     return `₹${value}`;
+}
+
+/* CUSTOM TOOLTIP */
+
+function CustomTooltip({
+    active,
+    payload,
+    label,
+}: any) {
+
+    if (
+        active &&
+        payload &&
+        payload.length
+    ) {
+
+        const portfolio =
+            payload.find(
+                (p: any) =>
+                    p.dataKey ===
+                    "nominalValue"
+            );
+
+        const inflation =
+            payload.find(
+                (p: any) =>
+                    p.dataKey ===
+                    "realValue"
+            );
+
+        return (
+
+            <div
+                className="
+                bg-[#020817]
+                border
+                border-slate-700
+                rounded-3xl
+                p-6
+                shadow-2xl
+                "
+            >
+
+                {/* YEAR */}
+
+                <p
+                    className="
+                    text-white
+                    text-2xl
+                    font-bold
+                    mb-5
+                    "
+                >
+
+                    {label} Yr
+
+                </p>
+
+                {/* PORTFOLIO VALUE */}
+
+                <div className="mb-4">
+
+                    <p
+                        className="
+                        text-blue-500
+                        text-xl
+                        font-bold
+                        "
+                    >
+
+                        Portfolio Value :
+                        {" "}
+                        {
+                            formatCurrency(
+                                portfolio?.value || 0
+                            )
+                        }
+
+                    </p>
+
+                </div>
+
+                {/* INFLATION ADJUSTED */}
+
+                <div>
+
+                    <p
+                        className="
+                        text-red-500
+                        text-xl
+                        font-bold
+                        "
+                    >
+
+                        Inflation Adjusted :
+                        {" "}
+                        {
+                            formatCurrency(
+                                inflation?.value || 0
+                            )
+                        }
+
+                    </p>
+
+                </div>
+
+            </div>
+        );
+    }
+
+    return null;
 }
 
 export default function CompoundingChart({
@@ -42,97 +158,115 @@ export default function CompoundingChart({
 }: Props) {
 
     return (
-        <div className="w-full h-[400px] mt-10">
+
+        <div className="w-full h-[500px] mt-10">
+
+            {/* TITLE */}
 
             <h2 className="text-2xl font-bold mb-4">
+
                 Compounding Growth
+
             </h2>
 
-            <ResponsiveContainer>
+            <ResponsiveContainer width="100%" height="100%">
 
-                <LineChart data={data}>
+                <LineChart
+                    data={data}
+                    margin={{
+                        top: 20,
+                        right: 20,
+                        left: 10,
+                        bottom: 20,
+                    }}
+                >
+
+                    {/* GRID */}
 
                     <CartesianGrid
-                        strokeDasharray="3 3"
+                        strokeDasharray="4 4"
                         stroke="#334155"
                     />
+
+                    {/* X AXIS */}
 
                     <XAxis
                         dataKey="year"
                         stroke="#94A3B8"
                         tickFormatter={(value) =>
-                            `${value}Y`
+                            `${value} Yr`
                         }
+                        tick={{
+                            fontSize: 14,
+                        }}
                     />
+
+                    {/* Y AXIS */}
 
                     <YAxis
                         stroke="#94A3B8"
                         tickFormatter={
                             formatCurrency
                         }
+                        tick={{
+                            fontSize: 14,
+                        }}
                     />
+
+                    {/* TOOLTIP */}
 
                     <Tooltip
-                        contentStyle={{
-                            backgroundColor:
-                                "#0F172A",
-                            border:
-                                "1px solid #334155",
-                            borderRadius:
-                                "24px",
-                            color: "white",
-                            padding:
-                                "18px 22px",
-                        }}
-                        labelStyle={{
-                            color: "white",
-                            fontWeight: 700,
-                            fontSize: 18,
-                            marginBottom: 10,
-                        }}
-                        itemStyle={{
-                            fontSize: 16,
-                            fontWeight: 600,
-                        }}
-                        labelFormatter={(label) =>
-                            `${label} Yr`
-                        }
-                        formatter={(value) =>
-                            formatCurrency(
-                                Number(value)
-                            )
+                        content={
+                            <CustomTooltip />
                         }
                     />
 
-                    {/* PORTFOLIO VALUE FIRST */}
+                    {/* LEGEND */}
+
+                    <Legend
+                        wrapperStyle={{
+                            paddingTop: "20px",
+                            fontSize: "18px",
+                        }}
+                    />
+
+                    {/* PORTFOLIO VALUE */}
+
                     <Line
                         type="monotone"
                         dataKey="nominalValue"
-                        stroke="#2563eb"
-                        strokeWidth={4}
                         name="Portfolio Value"
+                        stroke="#2563eb"
+                        strokeWidth={5}
                         dot={{
                             r: 5,
-                            strokeWidth: 3,
+                            fill: "#ffffff",
+                            strokeWidth: 4,
                         }}
                         activeDot={{
-                            r: 10,
+                            r: 12,
+                            stroke: "#ffffff",
+                            strokeWidth: 3,
                         }}
                     />
 
-                    {/* INFLATION ADJUSTED SECOND */}
+                    {/* INFLATION ADJUSTED */}
+
                     <Line
                         type="monotone"
                         dataKey="realValue"
-                        stroke="#ef4444"
-                        strokeWidth={4}
                         name="Inflation Adjusted"
+                        stroke="#ef4444"
+                        strokeWidth={5}
                         dot={{
                             r: 5,
-                            strokeWidth: 3,
+                            fill: "#ffffff",
+                            strokeWidth: 4,
                         }}
                         activeDot={{
-                            r: 10,
+                            r: 12,
+                            stroke: "#ffffff",
+                            strokeWidth: 3,
                         }}
                     />
 

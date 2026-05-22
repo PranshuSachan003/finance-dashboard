@@ -748,7 +748,10 @@ export function calculateSip(
     simulations: number
   ) {
   
-    const results = [];
+    const yearlyInvestment =
+      monthlyInvestment * 12;
+  
+    const allSimulations = [];
   
     for (
       let sim = 0;
@@ -756,7 +759,7 @@ export function calculateSip(
       sim++
     ) {
   
-      let portfolio = 0;
+      let value = 0;
   
       const yearlyData = [];
   
@@ -766,80 +769,129 @@ export function calculateSip(
         year++
       ) {
   
-        // RANDOM RETURN
         const randomReturn =
           expectedReturn +
           (
             (Math.random() - 0.5) *
-            volatility *
-            2
+            volatility
           );
   
-        // MONTHLY SIP
-        for (
-          let month = 0;
-          month < 12;
-          month++
-        ) {
-  
-          portfolio +=
-            monthlyInvestment;
-  
-          portfolio *=
-            (
-              1 +
-              randomReturn /
-              100 /
-              12
-            );
-        }
+        value =
+          (
+            value +
+            yearlyInvestment
+          ) *
+          (
+            1 +
+            randomReturn / 100
+          );
   
         yearlyData.push({
           year,
-          value:
-            Math.round(
-              portfolio
-            ),
+          value,
         });
       }
   
-      results.push({
-        finalValue:
-          Math.round(
-            portfolio
-          ),
-  
-        yearlyData,
-      });
+      allSimulations.push(yearlyData);
     }
   
-    // SORT RESULTS
-    results.sort(
-      (a, b) =>
-        a.finalValue -
-        b.finalValue
+    // FINAL VALUES
+    const finalValues =
+      allSimulations.map(
+        (
+          sim
+        ) =>
+          sim[
+            sim.length - 1
+          ].value
+      );
+  
+    finalValues.sort(
+      (a, b) => a - b
     );
   
-    const bestCase =
-      results[
-        results.length - 1
-      ];
-  
     const worstCase =
-      results[0];
-  
-    const medianCase =
-      results[
+      finalValues[
         Math.floor(
-          results.length / 2
+          simulations * 0.1
         )
       ];
   
+    const medianCase =
+      finalValues[
+        Math.floor(
+          simulations * 0.5
+        )
+      ];
+  
+    const bestCase =
+      finalValues[
+        Math.floor(
+          simulations * 0.9
+        )
+      ];
+  
+    // BUILD CHART DATA
+    const chartData = [];
+  
+    for (
+      let year = 0;
+      year < years;
+      year++
+    ) {
+  
+      const yearlyValues =
+        allSimulations.map(
+          (
+            sim
+          ) =>
+            sim[year].value
+        );
+  
+      yearlyValues.sort(
+        (a, b) => a - b
+      );
+  
+      chartData.push({
+        year: year + 1,
+  
+        worst:
+          yearlyValues[
+            Math.floor(
+              simulations * 0.1
+            )
+          ],
+  
+        median:
+          yearlyValues[
+            Math.floor(
+              simulations * 0.5
+            )
+          ],
+  
+        best:
+          yearlyValues[
+            Math.floor(
+              simulations * 0.9
+            )
+          ],
+      });
+    }
+  
     return {
-      bestCase,
-      worstCase,
-      medianCase,
-      simulations:
-        results,
+  
+      bestCase: {
+        finalValue: bestCase,
+      },
+  
+      medianCase: {
+        finalValue: medianCase,
+      },
+  
+      worstCase: {
+        finalValue: worstCase,
+      },
+  
+      chartData,
     };
   }

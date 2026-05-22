@@ -807,6 +807,226 @@ export default function MonteCarloPage() {
 
         </div>
 
+        {/* MONTE CARLO GRAPH */}
+
+        <div
+          className="
+  mt-14
+  bg-slate-900
+  border
+  border-slate-800
+  rounded-3xl
+  p-6
+  lg:p-10
+  shadow-2xl
+  overflow-hidden
+  "
+        >
+
+          {/* HEADER */}
+
+          <div className="mb-10">
+
+            <h2
+              className="
+      text-4xl
+      font-black
+      mb-3
+      "
+            >
+
+              Simulation Projection
+
+            </h2>
+
+            <p
+              className="
+      text-slate-400
+      text-lg
+      leading-8
+      "
+            >
+
+              Compare best-case, median, and worst-case
+              portfolio outcomes across different market
+              conditions and volatility scenarios.
+
+            </p>
+
+          </div>
+
+          {/* GRAPH */}
+
+          <div
+            className="
+    h-[500px]
+    w-full
+    rounded-3xl
+    overflow-hidden
+    bg-gradient-to-b
+    from-slate-950
+    to-slate-900
+    border
+    border-slate-800
+    p-4
+    "
+          >
+
+            <ResponsiveContainer
+              width="100%"
+              height="100%"
+            >
+
+              <LineChart
+                data={simulationData.chartData}
+                margin={{
+                  top: 20,
+                  right: 30,
+                  left: 20,
+                  bottom: 20,
+                }}
+              >
+
+                {/* GRID */}
+
+                <CartesianGrid
+                  strokeDasharray="5 5"
+                  stroke="#334155"
+                  opacity={0.5}
+                />
+
+                {/* X AXIS */}
+
+                <XAxis
+                  dataKey="year"
+                  tick={{
+                    fill: "#94a3b8",
+                    fontSize: 13,
+                  }}
+                  tickFormatter={(value) =>
+                    `${value} Yr`
+                  }
+                  axisLine={{
+                    stroke: "#475569",
+                  }}
+                  tickLine={false}
+                />
+
+                {/* Y AXIS */}
+
+                <YAxis
+                  tick={{
+                    fill: "#94a3b8",
+                    fontSize: 13,
+                  }}
+                  tickFormatter={(value) =>
+                    `₹${(
+                      Number(value) / 100000
+                    ).toFixed(0)}L`
+                  }
+                  axisLine={{
+                    stroke: "#475569",
+                  }}
+                  tickLine={false}
+                  width={80}
+                />
+
+                {/* TOOLTIP */}
+
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#020817",
+                    border: "1px solid #334155",
+                    borderRadius: "20px",
+                    padding: "18px",
+                  }}
+                  labelStyle={{
+                    color: "#ffffff",
+                    fontSize: "18px",
+                    fontWeight: "700",
+                    marginBottom: "10px",
+                  }}
+                  itemStyle={{
+                    fontSize: "16px",
+                    fontWeight: "600",
+                  }}
+                  formatter={(
+                    value: number,
+                    name?: string
+                  ) => {
+                  
+                    const labels: Record<string, string> = {
+                      bestCase: "Best Case",
+                      medianCase: "Median Case",
+                      worstCase: "Worst Case",
+                    };
+                  
+                    return [
+                      `₹${formatIndianCurrency(Number(value))}`,
+                      labels[name || ""] || name || "",
+                    ];
+                  }}
+                  labelFormatter={(label) => `${label} Yr`}
+                />
+
+                {/* LEGEND */}
+
+                <Legend
+                  wrapperStyle={{
+                    paddingTop: "20px",
+                  }}
+                />
+
+                {/* BEST CASE */}
+
+                <Line
+                  type="monotone"
+                  dataKey="best"
+                  name="Best Case"
+                  stroke="#22c55e"
+                  strokeWidth={4}
+                  dot={false}
+                  activeDot={{
+                    r: 7,
+                  }}
+                />
+
+                {/* MEDIAN */}
+
+                <Line
+                  type="monotone"
+                  dataKey="median"
+                  name="Median Case"
+                  stroke="#3b82f6"
+                  strokeWidth={4}
+                  dot={false}
+                  activeDot={{
+                    r: 7,
+                  }}
+                />
+
+                {/* WORST */}
+
+                <Line
+                  type="monotone"
+                  dataKey="worst"
+                  name="Worst Case"
+                  stroke="#ef4444"
+                  strokeWidth={4}
+                  dot={false}
+                  activeDot={{
+                    r: 7,
+                  }}
+                />
+
+              </LineChart>
+
+            </ResponsiveContainer>
+
+          </div>
+
+        </div>
+
         {/* INFO SECTION */}
         <div className=" mt-14 bg-slate-900 border border-slate-800 rounded-3xl p-8 lg:p-12 shadow-xl " > <h2 className=" text-4xl font-black mb-10 " > Understanding Monte Carlo Simulation </h2> <div className="space-y-10"> {/* WHAT IS IT */} <div> <h3 className=" text-2xl font-bold mb-4 " > What is Monte Carlo Simulation? </h3> <p className=" text-slate-300 leading-9 text-lg " > Monte Carlo simulation models thousands of possible market outcomes using random return assumptions to estimate future investment performance under uncertainty. </p> </div> {/* WHY IT MATTERS */} <div> <h3 className=" text-2xl font-bold mb-4 " > Why It Matters? </h3> <p className=" text-slate-300 leading-9 text-lg " > Real-world investing is unpredictable. Markets rarely generate fixed returns every year. Monte Carlo analysis helps investors understand risk, volatility, uncertainty, and possible long-term outcomes. </p> </div> {/* INSIGHTS */} <div className=" grid grid-cols-1 md:grid-cols-2 gap-6 " > <div className=" bg-purple-500/10 border border-purple-500/20 rounded-3xl p-6 " > <h3 className=" text-2xl font-bold mb-4 " > What It Helps Analyze </h3> <ul className=" space-y-3 text-slate-300 leading-8 " > <li>• Best-case outcomes</li> <li>• Worst-case outcomes</li> <li>• Median probabilities</li> <li>• Portfolio survival chances</li> <li>• Retirement success rates</li> </ul> </div> <div className=" bg-blue-500/10 border border-blue-500/20 rounded-3xl p-6 " > <h3 className=" text-2xl font-bold mb-4 " > Key Insight </h3> <p className=" text-slate-300 leading-8 " > Two portfolios with the same average return can generate very different outcomes depending on volatility and sequence of returns. </p> </div> </div> {/* USE CASES */} <div> <h3 className=" text-2xl font-bold mb-5 " > Common Use Cases </h3> <div className=" grid grid-cols-1 md:grid-cols-2 gap-5 " > {["Retirement Planning", "FIRE Analysis", "Portfolio Risk Analysis", "Goal Probability Planning", "Withdrawal Sustainability", "Long-Term Wealth Forecasting",].map((item) => (<div key={item} className=" bg-slate-800 border border-slate-700 rounded-2xl p-5 font-medium " > {item} </div>))} </div> </div> {/* PRO TIP */} <div className=" bg-green-500/10 border border-green-500/20 rounded-3xl p-8 " > <h3 className=" text-2xl font-bold mb-4 " > Pro Tip </h3> <p className=" text-slate-300 leading-8 text-lg " > Long investment horizons, diversified portfolios, and disciplined SIP investing generally improve the probability of successful investment outcomes. </p> </div> {/* DISCLAIMER */} <div className=" bg-yellow-500/10 rounded-3xl p-8 border border-yellow-500/20 " > <h3 className=" text-2xl font-bold mb-4 " > Disclaimer </h3> <p className=" text-slate-300 leading-8 text-lg " > Monte Carlo simulations are based on probabilistic assumptions and modeled market volatility. Actual investment performance may differ significantly from simulated outcomes. </p> </div> </div>
         </div>
