@@ -10,6 +10,10 @@ import {
   formatIndianCurrency,
 } from "../../utils/formatCurrency";
 
+import type {
+  TooltipProps,
+} from "recharts";
+
 import {
   LineChart,
   Line,
@@ -951,19 +955,19 @@ export default function MonteCarloPage() {
                     fontWeight: "600",
                   }}
                   formatter={(
-                    value: number,
-                    name?: string
+                    value: any,
+                    name: any
                   ) => {
                   
                     const labels: Record<string, string> = {
-                      bestCase: "Best Case",
-                      medianCase: "Median Case",
-                      worstCase: "Worst Case",
+                      best: "Best Case",
+                      median: "Median Case",
+                      worst: "Worst Case",
                     };
                   
                     return [
-                      `₹${formatIndianCurrency(Number(value))}`,
-                      labels[name || ""] || name || "",
+                      `₹${formatIndianCurrency(Number(value ?? 0))}`,
+                      labels[String(name)] || String(name),
                     ];
                   }}
                   labelFormatter={(label) => `${label} Yr`}
