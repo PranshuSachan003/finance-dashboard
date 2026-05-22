@@ -13,8 +13,11 @@ import {
   X,
 } from "lucide-react";
 
-const calculatorItems = [
+type SidebarProps = {
+  sidebarWidth: number;
+};
 
+const calculatorItems = [
   {
     label: "Dashboard",
     href: "/",
@@ -92,15 +95,43 @@ const calculatorItems = [
 ];
 
 const educationItems = [
+  {
+    label: "The Wall Street Crash",
+    href: "/wall-streat-1929",
+  },
 
   {
-    label: "Stories",
-    href: "/wealth-stories",
+    label: "Black Monday",
+    href: "/black-monday",
+  },
+
+  {
+    label: "The Dot-Com Bubble Burst",
+    href: "/dotcom",
+  },
+
+  {
+    label: "The Global Financial Crisis",
+    href: "/global-crisis",
+  },
+
+  {
+    label: "The COVID-19 Crash",
+    href: "/covid",
+  },
+
+  {
+    label: "Harshad Mehta Scam",
+    href: "/harshad-mehta-scam",
+  },
+
+  {
+    label: "Tulip Mania",
+    href: "/tulip-mania",
   },
 ];
 
 const footerItems = [
-
   {
     label: "About",
     href: "/about",
@@ -117,7 +148,9 @@ const footerItems = [
   },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({
+  sidebarWidth,
+}: SidebarProps) {
 
   const pathname =
     usePathname();
@@ -208,11 +241,13 @@ export default function Sidebar() {
       >
 
         {/* BRAND */}
-        <div className="
-        flex
-        items-center
-        gap-3
-        ">
+        <div
+          className="
+          flex
+          items-center
+          gap-3
+          "
+        >
 
           <Image
             src="/logo.png"
@@ -228,21 +263,29 @@ export default function Sidebar() {
 
           <div>
 
-            <h1 className="
-            text-lg
-            font-bold
-            text-white
-            leading-none
-            ">
+            <h1
+              className="
+              text-lg
+              font-bold
+              text-white
+              leading-none
+              "
+            >
+
               Finance
+
             </h1>
 
-            <p className="
-            text-xs
-            text-slate-400
-            mt-1
-            ">
+            <p
+              className="
+              text-xs
+              text-slate-400
+              mt-1
+              "
+            >
+
               Wealth Dashboard
+
             </p>
 
           </div>
@@ -267,16 +310,20 @@ export default function Sidebar() {
           {
             mobileOpen
               ? (
-                <X className="
-                w-6
-                h-6
-                " />
+                <X
+                  className="
+                  w-6
+                  h-6
+                  "
+                />
               )
               : (
-                <Menu className="
-                w-6
-                h-6
-                " />
+                <Menu
+                  className="
+                  w-6
+                  h-6
+                  "
+                />
               )
           }
 
@@ -307,12 +354,14 @@ export default function Sidebar() {
 
       {/* SIDEBAR */}
       <aside
+        style={{
+          width: `${sidebarWidth}px`,
+        }}
         className={`
         fixed
         top-0
         left-0
         h-screen
-        w-72
         bg-slate-950
         border-r
         border-slate-800
@@ -335,20 +384,24 @@ export default function Sidebar() {
       >
 
         {/* BRAND */}
-        <div className="
-        px-6
-        py-6
-        border-b
-        border-slate-800
-        hidden
-        md:block
-        ">
+        <div
+          className="
+          px-6
+          py-6
+          border-b
+          border-slate-800
+          hidden
+          md:block
+          "
+        >
 
-          <div className="
-          flex
-          items-center
-          gap-4
-          ">
+          <div
+            className="
+            flex
+            items-center
+            gap-4
+            "
+          >
 
             <Image
               src="/logo.png"
@@ -364,20 +417,28 @@ export default function Sidebar() {
 
             <div>
 
-              <h1 className="
-              text-2xl
-              font-bold
-              text-white
-              ">
+              <h1
+                className="
+                text-2xl
+                font-bold
+                text-white
+                "
+              >
+
                 Finance
+
               </h1>
 
-              <p className="
-              text-sm
-              text-slate-400
-              mt-1
-              ">
+              <p
+                className="
+                text-sm
+                text-slate-400
+                mt-1
+                "
+              >
+
                 Wealth Dashboard
+
               </p>
 
             </div>
@@ -387,43 +448,52 @@ export default function Sidebar() {
         </div>
 
         {/* MOBILE SPACING */}
-        <div className="
-        h-16
-        md:hidden
-        border-b
-        border-slate-800
-        " />
+        <div
+          className="
+          h-16
+          md:hidden
+          border-b
+          border-slate-800
+          "
+        />
 
         {/* CONTENT */}
-        <div className="
-        flex-1
-        overflow-y-auto
-        custom-scrollbar
-        ">
+        <div
+          className="
+          flex-1
+          overflow-y-auto
+          "
+        >
 
           {/* CALCULATORS */}
-          <div className="
-          px-4
-          py-6
-          ">
+          <div
+            className="
+            px-4
+            py-6
+            "
+          >
 
-            <h2 className="
-            px-3
-            mb-4
-            text-xs
-            font-semibold
-            tracking-widest
-            uppercase
-            text-slate-500
-            ">
+            <h2
+              className="
+              px-3
+              mb-4
+              text-xs
+              font-semibold
+              tracking-widest
+              uppercase
+              text-slate-500
+              "
+            >
 
               Financial Calculators
 
             </h2>
 
-            <nav className="
-            space-y-2
-            ">
+            <nav
+              className="
+              space-y-2
+              "
+            >
 
               {
                 calculatorItems.map(
@@ -436,28 +506,34 @@ export default function Sidebar() {
           </div>
 
           {/* EDUCATION */}
-          <div className="
-          px-4
-          pb-8
-          ">
+          <div
+            className="
+            px-4
+            pb-8
+            "
+          >
 
-            <h2 className="
-            px-3
-            mb-4
-            text-xs
-            font-semibold
-            tracking-widest
-            uppercase
-            text-slate-500
-            ">
+            <h2
+              className="
+              px-3
+              mb-4
+              text-xs
+              font-semibold
+              tracking-widest
+              uppercase
+              text-slate-500
+              "
+            >
 
               Learning & Insights
 
             </h2>
 
-            <nav className="
-            space-y-2
-            ">
+            <nav
+              className="
+              space-y-2
+              "
+            >
 
               {
                 educationItems.map(
@@ -472,16 +548,20 @@ export default function Sidebar() {
         </div>
 
         {/* FOOTER */}
-        <div className="
-        border-t
-        border-slate-800
-        px-4
-        py-5
-        ">
+        <div
+          className="
+          border-t
+          border-slate-800
+          px-4
+          py-5
+          "
+        >
 
-          <div className="
-          space-y-2
-          ">
+          <div
+            className="
+            space-y-2
+            "
+          >
 
             {
               footerItems.map(

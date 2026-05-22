@@ -1,9 +1,7 @@
 import "./globals.css";
 
-import Sidebar from "../components/Sidebar";
-import Footer from "../components/Footer";
-import GoogleAnalytics
-from "../components/GoogleAnalytics";
+import LayoutClient
+from "../components/LayoutClient";
 
 export const metadata = {
 
@@ -33,7 +31,8 @@ export const metadata = {
   ],
 
   verification: {
-    google: "rYMGDvdPSZiI1Upg1g8FeRahjJJzXY4X_CN6esWfjZM",
+    google:
+      "rYMGDvdPSZiI1Upg1g8FeRahjJJzXY4X_CN6esWfjZM",
   },
 
   authors: [
@@ -93,26 +92,19 @@ export default function RootLayout({
     <html lang="en">
 
       <body
-        className="bg-[#020817] text-white"
+        className="
+        bg-[#020817]
+        text-white
+        "
         suppressHydrationWarning
       >
 
-        <div className="flex">
+        <LayoutClient>
 
-          {/* SIDEBAR */}
-          <Sidebar />
+          {children}
 
-          {/* MAIN CONTENT */}
-          <main className="w-full min-h-screen md:ml-72">
+        </LayoutClient>
 
-            {children}
-
-            <Footer />
-
-          </main>
-
-        </div>
-        <GoogleAnalytics />
       </body>
 
     </html>
