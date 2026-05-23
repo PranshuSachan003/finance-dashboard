@@ -1,7 +1,6 @@
 import "./globals.css";
 
-import LayoutClient
-from "../components/LayoutClient";
+import LayoutClient from "../components/LayoutClient";
 
 export const metadata = {
 
@@ -92,18 +91,28 @@ export default function RootLayout({
     <html lang="en">
 
       <body
+        suppressHydrationWarning
         className="
         bg-[#020817]
         text-white
+        overflow-x-hidden
         "
-        suppressHydrationWarning
       >
 
-        <LayoutClient>
+        <div
+          className="
+          w-full
+          overflow-x-hidden
+          "
+        >
 
-          {children}
+          <LayoutClient>
 
-        </LayoutClient>
+            {children}
+
+          </LayoutClient>
+
+        </div>
 
       </body>
 
