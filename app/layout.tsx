@@ -36,11 +36,20 @@ export default function RootLayout({
         "
       >
 
-        <LayoutClient>
+        <div
+          className="
+          w-full
+          overflow-x-hidden
+          "
+        >
 
-          {children}
+          <LayoutClient>
 
-        </LayoutClient>
+            {children}
+
+          </LayoutClient>
+
+        </div>
 
       </body>
 

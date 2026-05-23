@@ -13,10 +13,6 @@ import {
   X,
 } from "lucide-react";
 
-type SidebarProps = {
-  sidebarWidth: number;
-};
-
 const calculatorItems = [
   {
     label: "Dashboard",
@@ -148,9 +144,7 @@ const footerItems = [
   },
 ];
 
-export default function Sidebar({
-  sidebarWidth,
-}: SidebarProps) {
+export default function Sidebar() {
 
   const pathname =
     usePathname();
@@ -246,6 +240,7 @@ export default function Sidebar({
           flex
           items-center
           gap-3
+          min-w-0
           "
         >
 
@@ -256,23 +251,22 @@ export default function Sidebar({
             height={40}
             className="
             rounded-xl
-            w-auto
-            h-auto
+            shrink-0
             "
           />
 
-          <div>
+          <div className="min-w-0">
 
             <h1
               className="
-              text-lg
+              text-base
               font-bold
               text-white
-              leading-none
+              truncate
               "
             >
 
-              Finance
+              Finance Dashboard
 
             </h1>
 
@@ -280,11 +274,11 @@ export default function Sidebar({
               className="
               text-xs
               text-slate-400
-              mt-1
+              truncate
               "
             >
 
-              Wealth Dashboard
+              Wealth Planning Tools
 
             </p>
 
@@ -304,6 +298,7 @@ export default function Sidebar({
           rounded-xl
           bg-slate-800
           text-white
+          shrink-0
           "
         >
 
@@ -354,14 +349,12 @@ export default function Sidebar({
 
       {/* SIDEBAR */}
       <aside
-        style={{
-          width: `${sidebarWidth}px`,
-        }}
         className={`
         fixed
         top-0
         left-0
         h-screen
+        w-[280px]
         bg-slate-950
         border-r
         border-slate-800
@@ -371,89 +364,73 @@ export default function Sidebar({
         transition-transform
         duration-300
 
-        md:translate-x-0
-
         ${
           mobileOpen
             ? "translate-x-0"
-            : "-translate-x-full"
+            : "-translate-x-full md:translate-x-0"
         }
-
-        md:flex
         `}
       >
 
-        {/* BRAND */}
+        {/* DESKTOP BRAND */}
         <div
           className="
+          hidden
+          md:flex
+          items-center
+          gap-4
           px-6
           py-6
           border-b
           border-slate-800
-          hidden
-          md:block
           "
         >
 
-          <div
+          <Image
+            src="/logo.png"
+            alt="Finance Dashboard"
+            width={48}
+            height={48}
             className="
-            flex
-            items-center
-            gap-4
+            rounded-2xl
             "
-          >
+          />
 
-            <Image
-              src="/logo.png"
-              alt="Finance Dashboard"
-              width={48}
-              height={48}
+          <div>
+
+            <h1
               className="
-              rounded-2xl
-              w-auto
-              h-auto
+              text-2xl
+              font-bold
+              text-white
               "
-            />
+            >
 
-            <div>
+              Finance
 
-              <h1
-                className="
-                text-2xl
-                font-bold
-                text-white
-                "
-              >
+            </h1>
 
-                Finance
+            <p
+              className="
+              text-sm
+              text-slate-400
+              mt-1
+              "
+            >
 
-              </h1>
+              Wealth Dashboard
 
-              <p
-                className="
-                text-sm
-                text-slate-400
-                mt-1
-                "
-              >
-
-                Wealth Dashboard
-
-              </p>
-
-            </div>
+            </p>
 
           </div>
 
         </div>
 
-        {/* MOBILE SPACING */}
+        {/* MOBILE TOP SPACING */}
         <div
           className="
           h-16
           md:hidden
-          border-b
-          border-slate-800
           "
         />
 
@@ -462,16 +439,13 @@ export default function Sidebar({
           className="
           flex-1
           overflow-y-auto
+          px-4
+          py-6
           "
         >
 
           {/* CALCULATORS */}
-          <div
-            className="
-            px-4
-            py-6
-            "
-          >
+          <div className="mb-8">
 
             <h2
               className="
@@ -489,11 +463,7 @@ export default function Sidebar({
 
             </h2>
 
-            <nav
-              className="
-              space-y-2
-              "
-            >
+            <nav className="space-y-2">
 
               {
                 calculatorItems.map(
@@ -506,12 +476,7 @@ export default function Sidebar({
           </div>
 
           {/* EDUCATION */}
-          <div
-            className="
-            px-4
-            pb-8
-            "
-          >
+          <div>
 
             <h2
               className="
@@ -529,11 +494,7 @@ export default function Sidebar({
 
             </h2>
 
-            <nav
-              className="
-              space-y-2
-              "
-            >
+            <nav className="space-y-2">
 
               {
                 educationItems.map(
@@ -557,11 +518,7 @@ export default function Sidebar({
           "
         >
 
-          <div
-            className="
-            space-y-2
-            "
-          >
+          <div className="space-y-2">
 
             {
               footerItems.map(
