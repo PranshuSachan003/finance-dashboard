@@ -15,69 +15,6 @@ export const metadata = {
 
   description:
     "Advanced investment, SIP, FIRE, EMI, retirement, and wealth planning calculators for long-term investors.",
-
-  keywords: [
-    "SIP Calculator",
-    "FIRE Calculator",
-    "Retirement Calculator",
-    "EMI Calculator",
-    "XIRR Calculator",
-    "Investment Calculator",
-    "Finance Dashboard",
-    "Monte Carlo Simulation",
-    "Stock CAGR Calculator",
-    "Real Estate vs SIP",
-  ],
-
-  verification: {
-    google:
-      "rYMGDvdPSZiI1Upg1g8FeRahjJJzXY4X_CN6esWfjZM",
-  },
-
-  authors: [
-    {
-      name: "Pranshu Sachan",
-    },
-  ],
-
-  creator: "Finance Dashboard",
-
-  openGraph: {
-
-    title: "Finance Dashboard",
-
-    description:
-      "Advanced finance and retirement planning tools for long-term wealth creation.",
-
-    url:
-      "https://ps-finance-dashboard.vercel.app",
-
-    siteName:
-      "Finance Dashboard",
-
-    locale: "en_US",
-
-    type: "website",
-  },
-
-  twitter: {
-
-    card: "summary_large_image",
-
-    title: "Finance Dashboard",
-
-    description:
-      "Investment and retirement calculators for wealth creation.",
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-  },
-
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
 export default function RootLayout({
@@ -99,20 +36,11 @@ export default function RootLayout({
         "
       >
 
-        <div
-          className="
-          w-full
-          overflow-x-hidden
-          "
-        >
+        <LayoutClient>
 
-          <LayoutClient>
+          {children}
 
-            {children}
-
-          </LayoutClient>
-
-        </div>
+        </LayoutClient>
 
       </body>
 
