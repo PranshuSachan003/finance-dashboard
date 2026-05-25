@@ -1,62 +1,80 @@
 export function calculateSip(
-    monthlyInvestment: number,
-    stepUp: number,
-    returnPhases: {
-      years: number;
-      returnRate: number;
-    }[]
+  investmentAmount: number,
+  stepUp: number,
+  returnPhases: {
+    years: number;
+    returnRate: number;
+  }[],
+  periodsPerYear: number = 12
+) {
+
+  let totalValue = 0;
+
+  let totalInvested = 0;
+
+  let currentInvestment =
+    investmentAmount;
+
+  for (
+    let phaseIndex = 0;
+    phaseIndex < returnPhases.length;
+    phaseIndex++
   ) {
-  
-    let totalValue = 0;
-    let totalInvested = 0;
-  
-    let currentSip =
-      monthlyInvestment;
-  
+
+    const phase =
+      returnPhases[phaseIndex];
+
+    // PERIODIC RETURN
+    const periodicRate =
+      phase.returnRate /
+      periodsPerYear /
+      100;
+
     for (
-      let phaseIndex = 0;
-      phaseIndex < returnPhases.length;
-      phaseIndex++
+      let year = 0;
+      year < phase.years;
+      year++
     ) {
-  
-      const phase =
-        returnPhases[phaseIndex];
-  
-      const monthlyRate =
-        phase.returnRate / 12 / 100;
-  
+
       for (
-        let year = 0;
-        year < phase.years;
-        year++
+        let period = 0;
+        period < periodsPerYear;
+        period++
       ) {
-  
-        for (
-          let month = 0;
-          month < 12;
-          month++
-        ) {
-  
-          totalValue =
-            (totalValue + currentSip) *
-            (1 + monthlyRate);
-  
-          totalInvested += currentSip;
-        }
-  
-        currentSip =
-          currentSip *
-          (1 + stepUp / 100);
+
+        totalValue =
+          (
+            totalValue +
+            currentInvestment
+          ) *
+          (
+            1 + periodicRate
+          );
+
+        totalInvested +=
+          currentInvestment;
       }
+
+      // STEP-UP YEARLY
+      currentInvestment =
+        currentInvestment *
+        (
+          1 + stepUp / 100
+        );
     }
-  
-    return {
-      totalValue,
-      totalInvested,
-      wealthGained:
-        totalValue - totalInvested,
-    };
   }
+
+  return {
+
+    totalValue,
+
+    totalInvested,
+
+    wealthGained:
+      totalValue -
+      totalInvested,
+  };
+}
   
   export function calculateLumpsum(
     lumpsumAmount: number,
@@ -94,21 +112,22 @@ export function calculateSip(
   }
 
   export function generateSipYearlyData(
-    monthlyInvestment: number,
+    investmentAmount: number,
     stepUp: number,
     inflation: number,
     returnPhases: {
       years: number;
       returnRate: number;
-    }[]
+    }[],
+    periodsPerYear: number = 12
   ) {
   
     const yearlyData = [];
   
     let totalValue = 0;
   
-    let currentSip =
-      monthlyInvestment;
+    let currentInvestment =
+      investmentAmount;
   
     let currentYear = 1;
   
@@ -121,8 +140,11 @@ export function calculateSip(
       const phase =
         returnPhases[phaseIndex];
   
-      const monthlyRate =
-        phase.returnRate / 12 / 100;
+      // PERIODIC RETURN
+      const periodicRate =
+        phase.returnRate /
+        periodsPerYear /
+        100;
   
       for (
         let year = 0;
@@ -131,14 +153,19 @@ export function calculateSip(
       ) {
   
         for (
-          let month = 0;
-          month < 12;
-          month++
+          let period = 0;
+          period < periodsPerYear;
+          period++
         ) {
   
           totalValue =
-            (totalValue + currentSip) *
-            (1 + monthlyRate);
+            (
+              totalValue +
+              currentInvestment
+            ) *
+            (
+              1 + periodicRate
+            );
         }
   
         // INFLATION ADJUSTED VALUE
@@ -150,6 +177,7 @@ export function calculateSip(
           );
   
         yearlyData.push({
+  
           year: currentYear,
   
           nominalValue:
@@ -161,9 +189,12 @@ export function calculateSip(
             ),
         });
   
-        currentSip =
-          currentSip *
-          (1 + stepUp / 100);
+        // STEP-UP YEARLY
+        currentInvestment =
+          currentInvestment *
+          (
+            1 + stepUp / 100
+          );
   
         currentYear++;
       }
