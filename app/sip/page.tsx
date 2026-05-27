@@ -625,6 +625,329 @@ export default function SipPage() {
 
         </div>
 
+        {/* INFO SECTION */}
+        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 shadow-xl">
+
+          <h2 className="text-4xl font-bold mb-8">
+            Understanding SIP Investing
+          </h2>
+
+          <div className="space-y-8 text-slate-300 leading-8">
+
+            <div>
+              <h3 className="text-2xl font-semibold text-white mb-3">
+                What is SIP?
+              </h3>
+              <p>
+                SIP (Systematic Investment Plan)
+                allows you to invest a fixed amount
+                regularly into mutual funds or market-linked investments.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-semibold text-white mb-3">
+                Why SIP Works Well
+              </h3>
+
+              <ul className="list-disc ml-8 space-y-3">
+                <li>Benefits from long-term compounding</li>
+                <li>Reduces timing risk</li>
+                <li>Builds investment discipline</li>
+                <li>Affordable for salaried investors</li>
+                <li>Creates large corpus over time</li>
+              </ul>
+
+            </div>
+
+            <div className="bg-blue-500/10 p-6 rounded-2xl">
+              <h3 className="text-2xl font-semibold text-white mb-3">
+                Step-Up SIP Power
+              </h3>
+              <p>
+                Increasing SIP annually significantly boosts long-term wealth.
+              </p>
+            </div>
+
+            <div className="bg-orange-500/10 p-6 rounded-2xl">
+              <h3 className="text-2xl font-semibold text-white mb-3">
+                Inflation Impact
+              </h3>
+              <p>
+                Inflation reduces purchasing power over time, making real returns important.
+              </p>
+            </div>
+
+            <div className="bg-yellow-500/10 p-6 rounded-2xl">
+              <h3 className="text-2xl font-semibold text-white mb-3">
+                Disclaimer
+              </h3>
+              <p>
+                Returns are assumptions and may vary with market conditions.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 shadow-xl">
+          {/* FAQ + SEO SECTION */}
+
+          <div className="mt-16 space-y-12">
+
+            {/* FAQ */}
+
+            <div>
+
+              <h2 className="text-4xl font-bold mb-8">
+                Frequently Asked Questions
+              </h2>
+
+              <div className="space-y-8">
+
+                <div>
+
+                  <h3 className="text-2xl font-semibold text-white mb-3">
+                    Is SIP safe for long-term investing?
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    SIPs invested into diversified mutual funds
+                    are generally considered suitable for long-term
+                    wealth creation. However, market-linked investments
+                    always carry risk and returns are never guaranteed.
+                  </p>
+
+                </div>
+
+                <div>
+
+                  <h3 className="text-2xl font-semibold text-white mb-3">
+                    Can SIP make you a crorepati?
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Yes. Consistent SIP investing over long periods
+                    combined with compounding can create substantial wealth.
+                    For example, a ₹10,000 monthly SIP with annual step-up
+                    can potentially grow into crores over 25-30 years.
+                  </p>
+
+                </div>
+
+                <div>
+
+                  <h3 className="text-2xl font-semibold text-white mb-3">
+                    What is the ideal SIP duration?
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Longer durations usually provide better compounding benefits.
+                    SIP investing for 10, 15, or 20+ years significantly improves
+                    wealth creation potential compared to short-term investing.
+                  </p>
+
+                </div>
+
+                <div>
+
+                  <h3 className="text-2xl font-semibold text-white mb-3">
+                    Does inflation affect SIP returns?
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Yes. Inflation reduces purchasing power over time.
+                    That is why inflation-adjusted returns are important
+                    while planning long-term financial goals.
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* COMMON MISTAKES */}
+
+            <div>
+
+              <h2 className="text-4xl font-bold mb-8">
+                Common SIP Investing Mistakes
+              </h2>
+
+              <div className="grid md:grid-cols-2 gap-6">
+
+                <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-6">
+
+                  <h3 className="text-2xl font-semibold text-red-300 mb-3">
+                    Stopping SIP During Market Crash
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Many investors stop investing during market falls.
+                    However, crashes often provide opportunities to accumulate
+                    more units at lower prices.
+                  </p>
+
+                </div>
+
+                <div className="bg-orange-500/10 border border-orange-500/20 rounded-2xl p-6">
+
+                  <h3 className="text-2xl font-semibold text-orange-300 mb-3">
+                    Expecting Quick Returns
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    SIP works best over long periods. Wealth creation through
+                    compounding takes time and patience.
+                  </p>
+
+                </div>
+
+                <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-2xl p-6">
+
+                  <h3 className="text-2xl font-semibold text-yellow-300 mb-3">
+                    Ignoring Inflation
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Future value alone can be misleading.
+                    Inflation-adjusted purchasing power matters more.
+                  </p>
+
+                </div>
+
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-6">
+
+                  <h3 className="text-2xl font-semibold text-blue-300 mb-3">
+                    Not Increasing SIP Amount
+                  </h3>
+
+                  <p className="text-slate-300 leading-8">
+                    Step-up SIPs can dramatically improve long-term corpus
+                    by increasing investments alongside salary growth.
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* SIP VS FD */}
+
+            <div className="bg-slate-800 rounded-3xl p-8">
+
+              <h2 className="text-4xl font-bold mb-8">
+                SIP vs Fixed Deposit (FD)
+              </h2>
+
+              <div className="space-y-6 text-slate-300 leading-8">
+
+                <p>
+                  Fixed Deposits provide stable and predictable returns,
+                  but long-term wealth creation may be limited because
+                  inflation reduces real purchasing power.
+                </p>
+
+                <p>
+                  SIP investments in equity mutual funds are market-linked
+                  and volatile in the short term, but historically they
+                  have generated higher long-term returns compared to
+                  traditional fixed-income instruments.
+                </p>
+
+                <p>
+                  SIPs are generally more suitable for long-term goals like:
+                </p>
+
+                <ul className="list-disc ml-8 space-y-3">
+
+                  <li>Retirement planning</li>
+
+                  <li>Children education</li>
+
+                  <li>Financial independence</li>
+
+                  <li>Long-term wealth creation</li>
+
+                </ul>
+
+              </div>
+
+            </div>
+
+            {/* COMPOUNDING INSIGHT */}
+
+            <div className="bg-green-500/10 border border-green-500/20 rounded-3xl p-8">
+
+              <h2 className="text-4xl font-bold mb-6">
+                Power of Long-Term Compounding
+              </h2>
+
+              <p className="text-slate-300 leading-8 text-lg">
+
+                Long-term investing is one of the most powerful wealth-building
+                strategies. Even modest monthly SIP amounts can grow significantly
+                over decades because returns themselves start generating additional returns.
+
+              </p>
+
+              <p className="text-slate-300 leading-8 text-lg mt-6">
+
+                Time in the market is usually more important than trying
+                to perfectly time market entries and exits.
+
+              </p>
+
+            </div>
+
+            {/* RELATED CALCULATORS */}
+
+            <div>
+
+              <h2 className="text-4xl font-bold mb-8">
+                Explore More Calculators
+              </h2>
+
+              <div className="flex flex-wrap gap-4">
+
+                <a
+                  href="/fire"
+                  className="bg-slate-800 hover:bg-slate-700 px-6 py-4 rounded-2xl transition-colors"
+                >
+                  FIRE Calculator
+                </a>
+
+                <a
+                  href="/xirr"
+                  className="bg-slate-800 hover:bg-slate-700 px-6 py-4 rounded-2xl transition-colors"
+                >
+                  XIRR Calculator
+                </a>
+
+                <a
+                  href="/goal-planner"
+                  className="bg-slate-800 hover:bg-slate-700 px-6 py-4 rounded-2xl transition-colors"
+                >
+                  Goal Planner
+                </a>
+
+                <a
+                  href="/retirement-stress"
+                  className="bg-slate-800 hover:bg-slate-700 px-6 py-4 rounded-2xl transition-colors"
+                >
+                  Retirement Stress Test
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
       </div>
 
     </main>
